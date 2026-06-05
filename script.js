@@ -608,3 +608,53 @@ backToTopBtn.addEventListener("click", () => {
     behavior: "smooth",
   });
 });
+
+// ── Veg / Non-Veg Filter ──────────────────────────────
+(function () {
+  const filterBtns = document.querySelectorAll('.diet-btn');
+  if (!filterBtns.length) return;
+
+  function applyDietFilter(diet) {
+    // Filter within whichever panel is currently active
+    const activePanels = document.querySelectorAll('.menu-panel.active');
+
+    activePanels.forEach(panel => {
+      const items = panel.querySelectorAll('.menu-item');
+      let visibleCount = 0;
+
+      items.forEach(item => {
+        const itemDiet = item.dataset.diet || 'all';
+        const show = diet === 'all' || itemDiet === diet;
+        item.classList.toggle('diet-hidden', !show);
+        if (show) visibleCount++;
+      });
+
+      // Show/hide no-results message
+      let noResults = panel.querySelector('.diet-no-results');
+      if (!noResults) {
+        noResults = document.createElement('p');
+        noResults.className = 'diet-no-results';
+        noResults.textContent = 'No items match the selected filter.';
+        panel.querySelector('.menu-items').appendChild(noResults);
+      }
+      noResults.classList.toggle('visible', visibleCount === 0);
+    });
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyDietFilter(btn.dataset.diet);
+    });
+  });
+
+  // Re-apply filter when menu tab changes
+  document.querySelectorAll('.menu-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const activeDiet = document.querySelector('.diet-btn.active')?.dataset.diet || 'all';
+      // slight delay to let the panel become active
+      setTimeout(() => applyDietFilter(activeDiet), 50);
+    });
+  });
+})();

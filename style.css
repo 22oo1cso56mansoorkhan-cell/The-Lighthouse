@@ -1323,3 +1323,71 @@ body.light-theme .nav-cta:hover {
   opacity: 1;
   visibility: visible;
 }
+
+/* =============================================
+   Veg / Non-Veg Diet Filter
+   ============================================= */
+.diet-filter {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 1.5rem 0 2rem;
+  flex-wrap: wrap;
+}
+
+.diet-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px 22px;
+  border: 1px solid var(--color-border);
+  background-color: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 30px;
+}
+
+.diet-btn:hover,
+.diet-btn.active {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  border-color: var(--color-primary);
+}
+
+.diet-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.veg-dot {
+  background: #4caf50;
+  border: 1.5px solid #388e3c;
+}
+
+.non-veg-dot {
+  background: #e53935;
+  border: 1.5px solid #b71c1c;
+}
+
+/* Hidden menu items during filter */
+.menu-item.diet-hidden {
+  display: none;
+}
+
+/* No results message */
+.diet-no-results {
+  text-align: center;
+  color: var(--color-primary, #c9a962);
+  font-style: italic;
+  padding: 2rem 0;
+  font-size: 1rem;
+  display: none;
+}
+
+.diet-no-results.visible {
+  display: block;
+}
