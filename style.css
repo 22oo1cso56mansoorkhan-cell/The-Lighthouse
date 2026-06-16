@@ -1323,3 +1323,32 @@ body.light-theme .nav-cta:hover {
   opacity: 1;
   visibility: visible;
 }
+/* Mobile menu card fix */
+@media (max-width: 768px) {
+  .food-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .food-image {
+    width: 100%;
+    height: 220px;
+  }
+
+  .food-content {
+    width: 100%;
+  }
+
+  .menu-item-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #backToTop {
+    right: 16px;
+    bottom: 16px;
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+}
