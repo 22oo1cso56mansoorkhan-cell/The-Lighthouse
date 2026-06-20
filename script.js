@@ -11,8 +11,11 @@ const dateInput = document.getElementById("reservation-date");
 const timeSelect = document.getElementById("time");
 const themeToggle = document.getElementById("themeToggle");
 if (dateInput) {
-  const today = new Date().toISOString().split("T")[0];
-  dateInput.setAttribute("min", today);
+  const tomorrow = new Date(Date.now() + 86400000);
+  const maxDate  = new Date(Date.now() + 90 * 86400000);
+
+  dateInput.setAttribute("min", tomorrow.toISOString().split("T")[0]);
+  dateInput.setAttribute("max", maxDate.toISOString().split("T")[0]);
 
   dateInput.addEventListener("change", updateAvailableTimes);
 }
@@ -226,10 +229,11 @@ function smoothScroll(e) {
   const targetSection = document.querySelector(targetId);
 
   if (targetSection) {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const offsetTop = targetSection.offsetTop - 80;
     window.scrollTo({
       top: offsetTop,
-      behavior: "smooth",
+      behavior: prefersReduced ? "auto" : "smooth",
     });
   }
 
@@ -269,6 +273,7 @@ function handleFormSubmit(e) {
     // Reset form after delay
     setTimeout(() => {
       reservationForm.reset();
+      updateAvailableTimes();
       submitBtn.textContent = originalText;
       submitBtn.style.backgroundColor = "";
       submitBtn.disabled = false;
@@ -588,21 +593,22 @@ if (reviewForm) {
 
 // Init
 renderReviews();
+
 // BackToTop
 const backToTopBtn = document.getElementById("backToTop");
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 300) {
-    backToTopBtn.classList.add("visible");
-  } else {
-    backToTopBtn.classList.remove("visible");
-  }
-});
-
-// Scroll to top on click
-backToTopBtn.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
+if (backToTopBtn) {
+  window.addEventListener("scroll", () => {
+    const past = window.scrollY > 300;
+    backToTopBtn.style.display = past ? "block" : "none";
+    backToTopBtn.classList.toggle("visible", past);
   });
-});
+
+  backToTopBtn.addEventListener("click", () => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReduced ? "auto" : "smooth",
+    });
+  });
+}
