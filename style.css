@@ -1700,9 +1700,10 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   }
 
   .food-image {
-    width: 100%;
-    height: 220px;
-  }
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
 
   .food-content {
     width: 100%;
