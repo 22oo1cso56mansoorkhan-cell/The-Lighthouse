@@ -3,34 +3,17 @@ const nav = document.getElementById("nav");
 const navToggle = document.getElementById("navToggle");
 const navMenu = document.getElementById("navMenu");
 const navLinks = document.querySelectorAll(".nav-link");
-// Menu tabs/panels removed — menu uses filter buttons and data-category items
 const heroBg = document.getElementById("heroBg");
 const reservationBg = document.getElementById("reservationBg");
 const reservationForm = document.getElementById("reservationForm");
 const dateInput = document.getElementById("reservation-date");
 const timeSelect = document.getElementById("time");
 const themeToggle = document.getElementById("themeToggle");
-if (dateInput) {
-  const tomorrow = new Date(Date.now() + 86400000);
-  const maxDate  = new Date(Date.now() + 90 * 86400000);
 
-  dateInput.setAttribute("min", tomorrow.toISOString().split("T")[0]);
-  dateInput.setAttribute("max", maxDate.toISOString().split("T")[0]);
-// ── Device detection (used by FIX #9 and FIX #14) ───
+// ── Device detection ────────────────────────────────────
 const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-//DOM ELEMENT
-const nav            = document.getElementById('nav');
-const navToggle      = document.getElementById('navToggle');
-const navMenu        = document.getElementById('navMenu');
-const navLinks       = document.querySelectorAll('.nav-link');
-const heroBg         = document.getElementById('heroBg');
-const reservationBg  = document.getElementById('reservationBg');
-const reservationForm= document.getElementById('reservationForm');
-const dateInput      = document.getElementById('date');
-const timeSelect     = document.getElementById('time');
-const themeToggle    = document.getElementById('themeToggle');
 
-// ── FIX #9 — show correct scroll hint based on input type ────────
+// ── FIX #9 — scroll hints ──────────────────────────────
 const scrollHintMouse = document.querySelector('.scroll-hint-mouse');
 const scrollHintTouch = document.querySelector('.scroll-hint-touch');
 
@@ -39,10 +22,10 @@ if (scrollHintMouse && scrollHintTouch) {
   scrollHintTouch.style.display = isTouchDevice ? '' : 'none';
 }
 
-// ── FIX #13 — Date validation: min = tomorrow, max = 90 days out ─────
+// ── Date validation ────────────────────────────────────
 if (dateInput) {
   const tomorrow = new Date(Date.now() + 86400000);
-  const maxDate  = new Date(Date.now() + 90 * 86400000);
+  const maxDate = new Date(Date.now() + 90 * 86400000);
 
   dateInput.setAttribute('min', tomorrow.toISOString().split('T')[0]);
   dateInput.setAttribute('max', maxDate.toISOString().split('T')[0]);
@@ -50,16 +33,14 @@ if (dateInput) {
   dateInput.addEventListener('change', updateAvailableTimes);
 }
 
-// ── FIX #11 — Disable past time slots when today is selected.
-// Original had no handler for this — users could pick 7AM at 10PM.
 function updateAvailableTimes() {
   if (!dateInput || !timeSelect) return;
 
   const selectedDate = dateInput.value;
-  const todayStr     = new Date().toISOString().split('T')[0];
-  const now          = new Date();
+  const todayStr = new Date().toISOString().split('T')[0];
+  const now = new Date();
   const currentHours = now.getHours();
-  const currentMins  = now.getMinutes();
+  const currentMins = now.getMinutes();
 
   timeSelect.querySelectorAll('option').forEach((option) => {
     if (!option.value) return;
@@ -67,11 +48,7 @@ function updateAvailableTimes() {
     const [optHours, optMins] = option.value.split(':').map(Number);
 
     if (selectedDate === todayStr) {
-      // Disable times already passed (30-min buffer for travel/prep)
-      const isPast =
-        optHours < currentHours ||
-        (optHours === currentHours && optMins <= currentMins + 30);
-
+      const isPast = optHours < currentHours || (optHours === currentHours && optMins <= currentMins + 30);
       option.disabled = isPast;
       if (isPast && option.selected) {
         timeSelect.value = '';
@@ -82,7 +59,7 @@ function updateAvailableTimes() {
   });
 }
 
-// ── Theme Toggle ──
+// ── Theme Toggle ──────────────────────────────────────
 const savedTheme = localStorage.getItem('theme');
 
 if (savedTheme === 'light') {
@@ -99,16 +76,11 @@ themeToggle.addEventListener('click', () => {
   themeToggle.textContent = isLight ? '☀️' : '🌙';
 });
 
-// ── Navigation scroll effect ──
+// ── Navigation scroll effect ──────────────────────────
 function handleScroll() {
   const currentScroll = window.scrollY;
-
-  // Sticky nav background
   nav.classList.toggle('scrolled', currentScroll > 50);
 
-  // FIX #14 — Parallax completely skipped on touch/iOS
-  // background-attachment:fixed doesn't work on iOS Safari and the JS
-  // translateY parallax causes severe jank on touch devices.
   if (!isTouchDevice) {
     if (heroBg) {
       heroBg.style.transform = `translateY(${currentScroll * 0.5}px)`;
@@ -123,15 +95,14 @@ function handleScroll() {
   updateActiveNavLink();
 }
 
-// ── Active nav link on scroll ───
 function updateActiveNavLink() {
-  const sections       = document.querySelectorAll('section[id]');
+  const sections = document.querySelectorAll('section[id]');
   const scrollPosition = window.scrollY + 150;
 
   sections.forEach((section) => {
-    const sectionTop    = section.offsetTop;
+    const sectionTop = section.offsetTop;
     const sectionHeight = section.offsetHeight;
-    const sectionId     = section.getAttribute('id');
+    const sectionId = section.getAttribute('id');
 
     if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
       navLinks.forEach((link) => {
@@ -144,7 +115,7 @@ function updateActiveNavLink() {
   });
 }
 
-// ── Mobile menu ───
+// ── Mobile menu ────────────────────────────────────────
 function toggleMobileMenu() {
   navToggle.classList.toggle('active');
   navMenu.classList.toggle('active');
@@ -157,7 +128,7 @@ function closeMobileMenu() {
   document.body.style.overflow = '';
 }
 
-// ── Menu search & filter ────
+// ── Menu search & filter ──────────────────────────────
 const filterBtns = document.querySelectorAll('.filter-btn');
 const menuSearch = document.getElementById('menu-search');
 
@@ -166,8 +137,8 @@ function filterMenuItems(filter = 'all', searchText = '') {
   let visibleCount = 0;
 
   menuItems.forEach((item) => {
-    const itemName      = item.querySelector('h3').textContent.toLowerCase();
-    const category      = item.dataset.category;
+    const itemName = item.querySelector('h3').textContent.toLowerCase();
+    const category = item.dataset.category;
     const matchesSearch = itemName.includes(searchText.toLowerCase());
     const matchesFilter = filter === 'all' || category === filter;
 
@@ -207,20 +178,14 @@ if (menuSearch) {
   });
 }
 
-// ── Smooth scroll ──
+// ── Smooth scroll ──────────────────────────────────────
 function smoothScroll(e) {
   e.preventDefault();
-  const targetId      = this.getAttribute('href');
+  const targetId = this.getAttribute('href');
   const targetSection = document.querySelector(targetId);
 
   if (targetSection) {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const offsetTop = targetSection.offsetTop - 80;
-    window.scrollTo({
-      top: offsetTop,
-      behavior: prefersReduced ? "auto" : "smooth",
-    // FIX #15 partial — respect reduced motion in smooth scroll too
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({
       top: targetSection.offsetTop - 80,
       behavior: prefersReduced ? 'auto' : 'smooth',
@@ -229,12 +194,12 @@ function smoothScroll(e) {
   closeMobileMenu();
 }
 
-// ── Reservation form submission ──
+// ── Reservation form submission ──────────────────────────
 function handleFormSubmit(e) {
   e.preventDefault();
 
-  const inputs  = reservationForm.querySelectorAll('input, select, textarea');
-  let isValid   = true;
+  const inputs = reservationForm.querySelectorAll('input, select, textarea');
+  let isValid = true;
 
   inputs.forEach((input) => {
     if (input.required && !input.value) {
@@ -244,48 +209,39 @@ function handleFormSubmit(e) {
       input.style.borderColor = '';
     }
   });
+
   const emailInput = document.getElementById('email');
-const phoneInput = document.getElementById('phone');
+  const phoneInput = document.getElementById('phone');
 
-// Remove old error messages if already present
-document.querySelectorAll('.error-message').forEach(el => el.remove());
+  document.querySelectorAll('.error-message').forEach(el => el.remove());
 
-// Email validation
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-if (emailInput && !emailRegex.test(emailInput.value.trim())) {
-  emailInput.style.borderColor = '#c94a4a';
-
-  const emailError = document.createElement('small');
-  emailError.className = 'error-message';
-  emailError.style.color = '#c94a4a';
-  emailError.textContent = 'Please enter a valid email address.';
-
-  emailInput.parentElement.appendChild(emailError);
-
-  isValid = false;
-}
-
-// Phone validation
-if (phoneInput) {
-  const phoneValue = phoneInput.value.replace(/\D/g, '');
-
-  if (phoneValue.length !== 10) {
-    phoneInput.style.borderColor = '#c94a4a';
-
-    const phoneError = document.createElement('small');
-    phoneError.className = 'error-message';
-    phoneError.style.color = '#c94a4a';
-    phoneError.textContent = 'Phone number must contain exactly 10 digits.';
-
-    phoneInput.parentElement.appendChild(phoneError);
-
+  if (emailInput && !emailRegex.test(emailInput.value.trim())) {
+    emailInput.style.borderColor = '#c94a4a';
+    const emailError = document.createElement('small');
+    emailError.className = 'error-message';
+    emailError.style.color = '#c94a4a';
+    emailError.textContent = 'Please enter a valid email address.';
+    emailInput.parentElement.appendChild(emailError);
     isValid = false;
   }
-}
-  
+
+  if (phoneInput) {
+    const phoneValue = phoneInput.value.replace(/\D/g, '');
+    if (phoneValue.length !== 10) {
+      phoneInput.style.borderColor = '#c94a4a';
+      const phoneError = document.createElement('small');
+      phoneError.className = 'error-message';
+      phoneError.style.color = '#c94a4a';
+      phoneError.textContent = 'Phone number must contain exactly 10 digits.';
+      phoneInput.parentElement.appendChild(phoneError);
+      isValid = false;
+    }
+  }
+
   if (isValid) {
-    const submitBtn  = reservationForm.querySelector('button[type="submit"]');
+    const submitBtn = reservationForm.querySelector('button[type="submit"]');
     const originalText = submitBtn.textContent;
     submitBtn.textContent = 'Reservation Requested!';
     submitBtn.style.backgroundColor = '#4a9c6a';
@@ -297,22 +253,17 @@ if (phoneInput) {
       submitBtn.textContent = originalText;
       submitBtn.style.backgroundColor = '';
       submitBtn.disabled = false;
-      // Re-run time filter after form reset in case date was today
       updateAvailableTimes();
     }, 3000);
   }
 }
 
-// ── FIX #15 — Intersection Observer with prefers-reduced-motion ──────
+// ── Intersection Observer ──────────────────────────────
 function setupIntersectionObserver() {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const animatedElements = document.querySelectorAll(
-    '.about-content, .menu-panel, .reservation-form, .location-info'
-  );
+  const animatedElements = document.querySelectorAll('.about-content, .menu-panel, .reservation-form, .location-info');
 
   if (prefersReduced) {
-    // Skip animation entirely — just show everything immediately
     animatedElements.forEach((el) => {
       el.style.opacity = '1';
       el.style.transform = 'none';
@@ -339,14 +290,11 @@ function setupIntersectionObserver() {
   });
 }
 
-// Inject .visible class styles
 const style = document.createElement('style');
 style.textContent = `.visible { opacity: 1 !important; transform: translateY(0) !important; }`;
 document.head.appendChild(style);
 
-// Scroll to Discover - Auto slow scroll
-const heroScroll = document.querySelector(".hero-scroll");
-// ── Auto-scroll on hero "Scroll To Discover" click ───
+// ── Auto-scroll on hero click ──────────────────────────
 const heroScroll = document.querySelector('.hero-scroll');
 let autoScrollInterval = null;
 
@@ -377,11 +325,10 @@ if (heroScroll) {
   window.addEventListener(event, stopAutoScroll);
 });
 
-// ── Back To Top ──
+// ── Back To Top ──────────────────────────────────────────
 const backToTopBtn = document.getElementById('backToTop');
 
 if (backToTopBtn) {
-  // Two scroll listeners in original were duplicated — merged into one
   window.addEventListener('scroll', () => {
     const past = window.scrollY > 300;
     backToTopBtn.style.display = past ? 'block' : 'none';
@@ -389,19 +336,17 @@ if (backToTopBtn) {
   });
 
   backToTopBtn.addEventListener('click', () => {
-    // FIX #15 partial — respect reduced motion on back-to-top too
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
   });
 }
 
-// ── Event Listeners ──
+// ── Event Listeners ──────────────────────────────────────
 window.addEventListener('scroll', handleScroll);
 navToggle.addEventListener('click', toggleMobileMenu);
 
 navLinks.forEach((link) => link.addEventListener('click', smoothScroll));
 
-// Menu tab listeners removed — menu uses filter buttons
 document.querySelectorAll('.nav-cta, .nav-cta-mobile, .hero-buttons a').forEach((link) => {
   link.addEventListener('click', smoothScroll);
 });
@@ -414,7 +359,7 @@ window.addEventListener('resize', () => {
   if (window.innerWidth > 768) closeMobileMenu();
 });
 
-// ── Reviews (localStorage) ──
+// ── Reviews (localStorage) ──────────────────────────────
 const STORAGE_KEY = 'lighthouse_reviews';
 
 const pinnedReview = {
@@ -440,52 +385,8 @@ function renderReviews() {
   if (!grid) return;
 
   const userReviews = getReviews();
-  const allReviews  = [pinnedReview, ...userReviews];
+  const allReviews = [pinnedReview, ...userReviews];
 
-  grid.innerHTML = "";
-
-  allReviews.forEach((r) => {
-    const card = document.createElement("div");
-    card.className = "review-card";
-
-    const stars = document.createElement("div");
-    stars.className = "review-stars";
-    stars.textContent =
-      "★".repeat(r.rating) + "☆".repeat(5 - r.rating);
-
-    const text = document.createElement("p");
-    text.className = "review-text";
-    text.textContent = r.text;
-
-    const author = document.createElement("div");
-    author.className = "review-author";
-
-    const avatar = document.createElement("div");
-    avatar.className = "review-avatar";
-    avatar.textContent = r.name.slice(0, 2).toUpperCase();
-
-    const info = document.createElement("div");
-
-    const name = document.createElement("span");
-    name.className = "review-name";
-    name.textContent = r.name;
-
-    const date = document.createElement("span");
-    date.className = "review-date";
-    date.textContent = r.date;
-
-    info.appendChild(name);
-    info.appendChild(date);
-
-    author.appendChild(avatar);
-    author.appendChild(info);
-
-    card.appendChild(stars);
-    card.appendChild(text);
-    card.appendChild(author);
-
-    grid.appendChild(card);
-  });
   grid.innerHTML = allReviews
     .map(
       (r) => `
@@ -504,7 +405,7 @@ function renderReviews() {
     .join('');
 }
 
-// Star rating widget
+// ── Star rating widget ──────────────────────────────────
 let selectedRating = 0;
 const starBtns = document.querySelectorAll('#star-input .star-btn');
 
@@ -523,7 +424,7 @@ starBtns.forEach((btn) => {
   });
 });
 
-// Review validation helpers
+// ── Review validation ──────────────────────────────────
 function isMeaningfulReview(text) {
   const words = text.trim().split(/\s+/);
   const randomPattern = /^(.)\1+$|^[a-zA-Z]{1,6}$/;
@@ -536,13 +437,13 @@ function isValidName(name) {
 }
 
 const reviewForm = document.getElementById('review-form');
-const reviewMsg  = document.getElementById('review-msg');
+const reviewMsg = document.getElementById('review-msg');
 
 if (reviewForm) {
   reviewForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const name       = document.getElementById('review-name').value.trim();
+    const name = document.getElementById('review-name').value.trim();
     const reviewText = document.getElementById('review-text').value.trim();
 
     reviewMsg.style.display = 'block';
@@ -573,7 +474,7 @@ if (reviewForm) {
     });
 
     const newReview = { id: Date.now(), name, rating: selectedRating, text: reviewText, date: dateStr };
-    const reviews   = getReviews();
+    const reviews = getReviews();
     reviews.unshift(newReview);
     saveReviews(reviews);
     renderReviews();
@@ -589,44 +490,13 @@ if (reviewForm) {
   });
 }
 
-// ── Initialise ───
-document.addEventListener('DOMContentLoaded', () => {
-  handleScroll();
-  setupIntersectionObserver();
-  updateAvailableTimes();
-  renderReviews();
-});
-
 // ── Veg / Non-Veg Filter ──────────────────────────────
 (function () {
-  const filterBtns = document.querySelectorAll('.diet-btn');
-  if (!filterBtns.length) return;
+  const dietBtns = document.querySelectorAll('.diet-btn');
+  if (!dietBtns.length) return;
 
   function applyDietFilter(diet) {
-    // Filter within whichever panel is currently active
     const activePanels = document.querySelectorAll('.menu-panel.active');
-
-// Init
-renderReviews();
-
-// BackToTop
-const backToTopBtn = document.getElementById("backToTop");
-
-if (backToTopBtn) {
-  window.addEventListener("scroll", () => {
-    const past = window.scrollY > 300;
-    backToTopBtn.style.display = past ? "block" : "none";
-    backToTopBtn.classList.toggle("visible", past);
-  });
-
-  backToTopBtn.addEventListener("click", () => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.scrollTo({
-      top: 0,
-      behavior: prefersReduced ? "auto" : "smooth",
-    });
-  });
-}
     activePanels.forEach(panel => {
       const items = panel.querySelectorAll('.menu-item');
       let visibleCount = 0;
@@ -638,7 +508,6 @@ if (backToTopBtn) {
         if (show) visibleCount++;
       });
 
-      // Show/hide no-results message
       let noResults = panel.querySelector('.diet-no-results');
       if (!noResults) {
         noResults = document.createElement('p');
@@ -650,20 +519,688 @@ if (backToTopBtn) {
     });
   }
 
-  filterBtns.forEach(btn => {
+  dietBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
+      dietBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       applyDietFilter(btn.dataset.diet);
     });
   });
 
-  // Re-apply filter when menu tab changes
   document.querySelectorAll('.menu-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       const activeDiet = document.querySelector('.diet-btn.active')?.dataset.diet || 'all';
-      // slight delay to let the panel become active
       setTimeout(() => applyDietFilter(activeDiet), 50);
     });
   });
 })();
+
+// ── Initialise ──────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  handleScroll();
+  setupIntersectionObserver();
+  updateAvailableTimes();
+  renderReviews();
+});
+
+// ============================================
+// SMART MEAL PAIRING ASSISTANT
+// ============================================
+
+// ── Pairing Data ────────────────────────────────────
+const PAIRING_DATA = {
+  "Masala Dosa": {
+    cuisine: "South Indian",
+    flavorProfile: ["Tangy", "Savory", "Light"],
+    weight: "Light",
+    season: "All",
+    recommended: {
+      appetizer: ["Sambar", "Coconut Chutney"],
+      drink: ["Masala Chai", "Fresh Lime Soda"],
+      dessert: ["Gulab Jamun", "Kulfi"]
+    },
+    alternatives: {
+      appetizer: ["Tomato Soup", "Veg Cutlet"],
+      drink: ["Mango Lassi", "Filter Coffee"],
+      dessert: ["Rasmalai", "Ice Cream"]
+    },
+    avoid: {
+      reason: "Too heavy",
+      items: ["Butter Chicken", "Biryani"]
+    },
+    flavorNotes: {
+      balance: "Add a spicy side for contrast",
+      spiceLevel: "Mild"
+    }
+  },
+  
+  "Idli Sambar": {
+    cuisine: "South Indian",
+    flavorProfile: ["Mild", "Comforting", "Light"],
+    weight: "Light",
+    season: "All",
+    recommended: {
+      appetizer: ["Vada", "Coconut Chutney"],
+      drink: ["Filter Coffee", "Masala Chai"],
+      dessert: ["Kesari", "Kulfi"]
+    },
+    alternatives: {
+      appetizer: ["Medu Vada", "Pongal"],
+      drink: ["Fresh Lime Soda", "Badam Milk"],
+      dessert: ["Gulab Jamun", "Rasmalai"]
+    },
+    avoid: {
+      reason: "Overpowering flavors",
+      items: ["Spicy Chicken Curry"]
+    },
+    flavorNotes: {
+      balance: "Perfect light meal",
+      spiceLevel: "Mild"
+    }
+  },
+  
+  "Chicken Keema Dosa": {
+    cuisine: "Fusion",
+    flavorProfile: ["Spicy", "Savory", "Hearty"],
+    weight: "Medium",
+    season: "All",
+    recommended: {
+      appetizer: ["Chicken 65", "Paneer Tikka"],
+      drink: ["Mango Lassi", "Masala Chai"],
+      dessert: ["Gulab Jamun", "Rasmalai"]
+    },
+    alternatives: {
+      appetizer: ["Spring Rolls", "Fish Fry"],
+      drink: ["Fresh Lime Soda", "Buttermilk"],
+      dessert: ["Kulfi", "Ice Cream"]
+    },
+    avoid: {
+      reason: "Too heavy together",
+      items: ["Butter Chicken", "Biryani"]
+    },
+    flavorNotes: {
+      balance: "Pair with a cooling drink",
+      spiceLevel: "High"
+    }
+  },
+  
+  "Paneer Butter Masala": {
+    cuisine: "North Indian",
+    flavorProfile: ["Creamy", "Rich", "Mild Spicy"],
+    weight: "Heavy",
+    season: "Winter",
+    recommended: {
+      appetizer: ["Paneer Tikka", "Mushroom"],
+      drink: ["Mango Lassi", "Masala Chai"],
+      dessert: ["Gulab Jamun", "Rasmalai"]
+    },
+    alternatives: {
+      appetizer: ["Spring Rolls", "Hara Bhara Kebab"],
+      drink: ["Fresh Lime Soda", "Buttermilk"],
+      dessert: ["Kulfi", "Ice Cream"]
+    },
+    avoid: {
+      reason: "Too heavy together",
+      items: ["Butter Chicken", "Biryani"]
+    },
+    flavorNotes: {
+      balance: "Pair with naan for best experience",
+      spiceLevel: "Medium"
+    }
+  },
+  
+  "Hyderabadi Chicken Biryani": {
+    cuisine: "North Indian",
+    flavorProfile: ["Spicy", "Aromatic", "Rich"],
+    weight: "Heavy",
+    season: "All",
+    recommended: {
+      appetizer: ["Paneer Tikka", "Chicken 65"],
+      drink: ["Mango Lassi", "Masala Chai"],
+      dessert: ["Gulab Jamun", "Rasmalai"]
+    },
+    alternatives: {
+      appetizer: ["Spring Rolls", "Fish Fry"],
+      drink: ["Fresh Lime Soda", "Buttermilk"],
+      dessert: ["Kulfi", "Ice Cream"]
+    },
+    avoid: {
+      reason: "Too heavy together",
+      items: ["Butter Chicken", "Fish Curry"]
+    },
+    flavorNotes: {
+      balance: "Add raita for cooling effect",
+      spiceLevel: "High"
+    }
+  },
+  
+  "Butter Chicken": {
+    cuisine: "North Indian",
+    flavorProfile: ["Creamy", "Rich", "Mild Spicy"],
+    weight: "Heavy",
+    season: "Winter",
+    recommended: {
+      appetizer: ["Paneer Tikka", "Chicken 65"],
+      drink: ["Mango Lassi", "Masala Chai"],
+      dessert: ["Gulab Jamun", "Rasmalai"]
+    },
+    alternatives: {
+      appetizer: ["Spring Rolls", "Mushroom"],
+      drink: ["Fresh Lime Soda", "Buttermilk"],
+      dessert: ["Kulfi", "Ice Cream"]
+    },
+    avoid: {
+      reason: "Too heavy together",
+      items: ["Biryani", "Fish Curry"]
+    },
+    flavorNotes: {
+      balance: "Pair with butter naan",
+      spiceLevel: "Medium"
+    }
+  },
+  
+  "Mango Lassi": {
+    cuisine: "North Indian",
+    flavorProfile: ["Sweet", "Creamy", "Cooling"],
+    weight: "Light",
+    season: "Summer",
+    recommended: {},
+    alternatives: {},
+    avoid: {
+      reason: "Already a drink",
+      items: []
+    },
+    flavorNotes: {
+      balance: "Perfect cooling drink",
+      spiceLevel: "None"
+    }
+  },
+  
+  "Masala Chai": {
+    cuisine: "Indian",
+    flavorProfile: ["Spiced", "Warm", "Sweet"],
+    weight: "Light",
+    season: "Winter",
+    recommended: {},
+    alternatives: {},
+    avoid: {
+      reason: "Already a drink",
+      items: []
+    },
+    flavorNotes: {
+      balance: "Perfect for cold weather",
+      spiceLevel: "None"
+    }
+  },
+  
+  "Fresh Lime Soda": {
+    cuisine: "Indian",
+    flavorProfile: ["Tangy", "Refreshing", "Light"],
+    weight: "Light",
+    season: "Summer",
+    recommended: {},
+    alternatives: {},
+    avoid: {
+      reason: "Already a drink",
+      items: []
+    },
+    flavorNotes: {
+      balance: "Great with spicy food",
+      spiceLevel: "None"
+    }
+  },
+  
+  "Gulab Jamun": {
+    cuisine: "Indian",
+    flavorProfile: ["Sweet", "Rich", "Indulgent"],
+    weight: "Medium",
+    season: "All",
+    recommended: {},
+    alternatives: {},
+    avoid: {
+      reason: "Already a dessert",
+      items: []
+    },
+    flavorNotes: {
+      balance: "Best served warm",
+      spiceLevel: "None"
+    }
+  },
+  
+  "Rasmalai": {
+    cuisine: "Indian",
+    flavorProfile: ["Sweet", "Creamy", "Light"],
+    weight: "Light",
+    season: "All",
+    recommended: {},
+    alternatives: {},
+    avoid: {
+      reason: "Already a dessert",
+      items: []
+    },
+    flavorNotes: {
+      balance: "Light and refreshing",
+      spiceLevel: "None"
+    }
+  },
+  
+  "Kulfi": {
+    cuisine: "Indian",
+    flavorProfile: ["Sweet", "Creamy", "Cold"],
+    weight: "Light",
+    season: "Summer",
+    recommended: {},
+    alternatives: {},
+    avoid: {
+      reason: "Already a dessert",
+      items: []
+    },
+    flavorNotes: {
+      balance: "Great summer dessert",
+      spiceLevel: "None"
+    }
+  }
+};
+
+
+
+
+// ── Pairing Engine ────────────────────────────────────
+class MealPairingEngine {
+  constructor() {
+    this.selectedMain = null;
+    this.selectedItems = {
+      appetizer: null,
+      drink: null,
+      dessert: null
+    };
+    this.mealItems = [];
+  }
+
+  selectMain(dishName) {
+    this.selectedMain = dishName;
+    this.selectedItems = { appetizer: null, drink: null, dessert: null };
+    this.mealItems = [dishName];
+    return this.getPairings(dishName);
+  }
+
+  getPairings(dishName) {
+    const data = PAIRING_DATA[dishName];
+    if (!data) return null;
+
+    const pairings = {
+      recommended: data.recommended || {},
+      alternatives: data.alternatives || {},
+      avoid: data.avoid || {},
+      flavorNotes: data.flavorNotes || {},
+      cuisine: data.cuisine || "",
+      weight: data.weight || "",
+      season: data.season || ""
+    };
+
+    return pairings;
+  }
+
+  addItem(category, itemName, price) {
+    if (category === 'main') {
+      this.selectedMain = itemName;
+      this.mealItems = [itemName];
+    } else {
+      // Remove existing item in same category
+      if (this.selectedItems[category]) {
+        const index = this.mealItems.indexOf(this.selectedItems[category]);
+        if (index > -1) this.mealItems.splice(index, 1);
+      }
+      this.selectedItems[category] = itemName;
+      this.mealItems.push(itemName);
+    }
+    return this.calculateTotal();
+  }
+
+  removeItem(category) {
+    if (this.selectedItems[category]) {
+      const index = this.mealItems.indexOf(this.selectedItems[category]);
+      if (index > -1) this.mealItems.splice(index, 1);
+      this.selectedItems[category] = null;
+    }
+    return this.calculateTotal();
+  }
+
+  calculateTotal() {
+    let total = 0;
+    if (this.selectedMain) {
+      const mainPrice = this.getDishPrice(this.selectedMain);
+      total += mainPrice;
+    }
+    for (const category of ['appetizer', 'drink', 'dessert']) {
+      if (this.selectedItems[category]) {
+        const price = this.getDishPrice(this.selectedItems[category]);
+        total += price;
+      }
+    }
+    return total;
+  }
+
+  getDishPrice(dishName) {
+    const menuItems = document.querySelectorAll('.menu-item');
+    for (const item of menuItems) {
+      const h3 = item.querySelector('h3');
+      const priceSpan = item.querySelector('.menu-price');
+      if (h3 && priceSpan && h3.textContent.trim() === dishName) {
+        return parseInt(priceSpan.textContent.replace(/[₹,]/g, '')) || 0;
+      }
+    }
+    const fallbackPrices = {
+      'Masala Dosa': 180, 'Idli Sambar': 120, 'Chicken Keema Dosa': 240,
+      'Paneer Butter Masala': 280, 'Hyderabadi Chicken Biryani': 320,
+      'Butter Chicken': 340, 'Gulab Jamun': 120, 'Rasmalai': 140,
+      'Kulfi': 130, 'Mango Lassi': 110, 'Masala Chai': 70,
+      'Fresh Lime Soda': 90
+    };
+    return fallbackPrices[dishName] || 0;
+  }
+
+  getCompatibilityScore() {
+    const totalItems = this.mealItems.length;
+    if (totalItems <= 1) return { stars: 1, text: 'Add more items for a balanced meal!' };
+    if (totalItems === 2) return { stars: 2, text: 'Good start! Add a drink or dessert.' };
+    if (totalItems === 3) return { stars: 3, text: 'Nice balance! One more item for perfection.' };
+    if (totalItems === 4) return { stars: 4, text: 'Great meal! Almost perfect balance.' };
+    if (totalItems >= 5) return { stars: 5, text: '⭐⭐⭐⭐⭐ Perfect balance! A complete feast!' };
+    return { stars: 0, text: 'Select a main dish to begin.' };
+  }
+
+  getRandomSurprise() {
+    const dishes = Object.keys(PAIRING_DATA);
+    const randomDish = dishes[Math.floor(Math.random() * dishes.length)];
+    const pairings = this.getPairings(randomDish);
+    
+    const result = {
+      main: randomDish,
+      pairings: {
+        appetizer: null,
+        drink: null,
+        dessert: null
+      }
+    };
+
+    if (pairings && pairings.recommended) {
+      const categories = ['appetizer', 'drink', 'dessert'];
+      for (const cat of categories) {
+        if (pairings.recommended[cat] && pairings.recommended[cat].length > 0) {
+          const options = pairings.recommended[cat];
+          result.pairings[cat] = options[Math.floor(Math.random() * options.length)];
+        }
+      }
+    }
+    return result;
+  }
+}
+
+// ── UI Controller ──────────────────────────────────
+class PairingUIController {
+  constructor() {
+    this.engine = new MealPairingEngine();
+    this.panel = document.getElementById('pairingPanel');
+    this.overlay = document.getElementById('pairingOverlay');
+    this.pairingGrid = document.getElementById('pairingGrid');
+    this.pairingAlternatives = document.getElementById('pairingAlternatives');
+    this.selectedDishName = document.getElementById('selectedDishName');
+    this.selectedDishPrice = document.getElementById('selectedDishPrice');
+    this.summaryCount = document.getElementById('summaryCount');
+    this.summaryTotal = document.getElementById('summaryTotal');
+    this.scoreStars = document.getElementById('scoreStars');
+    this.scoreText = document.getElementById('scoreText');
+
+    this.bindEvents();
+  }
+
+  bindEvents() {
+    document.getElementById('pairingClose').addEventListener('click', () => this.close());
+    this.overlay.addEventListener('click', (e) => {
+      if (e.target === this.overlay) this.close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.overlay.classList.contains('active')) {
+        this.close();
+      }
+    });
+
+    document.querySelectorAll('.pairing-trigger').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const dishName = btn.dataset.dish;
+        const price = btn.dataset.price;
+        this.open(dishName, price);
+      });
+    });
+
+    document.getElementById('surpriseMeBtn').addEventListener('click', () => this.surpriseMe());
+    document.getElementById('resetPairingBtn').addEventListener('click', () => this.reset());
+    document.getElementById('reserveMealBtn').addEventListener('click', () => this.reserveMeal());
+    document.getElementById('saveMealBtn').addEventListener('click', () => this.saveMeal());
+  }
+
+  open(dishName, price) {
+    this.overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    this.loadPairings(dishName, price);
+  }
+
+  close() {
+    this.overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  loadPairings(dishName, price) {
+    const pairings = this.engine.selectMain(dishName);
+    this.selectedDishName.textContent = dishName;
+    this.selectedDishPrice.textContent = `₹${price}`;
+
+    if (!pairings) {
+      this.showEmptyState();
+      return;
+    }
+
+    this.renderRecommended(pairings.recommended);
+    this.renderAlternatives(pairings.alternatives);
+    this.updateSummary();
+    this.updateScore();
+  }
+
+  renderRecommended(recommended) {
+    if (!recommended || Object.keys(recommended).length === 0) {
+      this.pairingGrid.innerHTML = `
+        <div class="pairing-empty">
+          <span class="pairing-empty-icon">🍽️</span>
+          <p>This dish is perfect on its own!</p>
+        </div>
+      `;
+      return;
+    }
+
+    const categories = {
+      appetizer: '🍽️ Appetizer',
+      drink: '🥤 Drink',
+      dessert: '🍮 Dessert'
+    };
+
+    let html = '';
+    for (const [cat, items] of Object.entries(recommended)) {
+      if (items && items.length > 0) {
+        const displayName = categories[cat] || cat;
+        html += `
+          <div class="pairing-item" data-category="${cat}" data-item="${items[0]}">
+            <div class="pairing-item-info">
+              <span class="pairing-item-name">${displayName}: ${items[0]}</span>
+              <span class="pairing-item-desc">✨ Perfect match</span>
+            </div>
+            <span class="pairing-item-badge badge-perfect">Perfect</span>
+            <span class="pairing-item-price">₹${this.engine.getDishPrice(items[0])}</span>
+          </div>
+        `;
+      }
+    }
+
+    this.pairingGrid.innerHTML = html;
+
+    this.pairingGrid.querySelectorAll('.pairing-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const category = el.dataset.category;
+        const itemName = el.dataset.item;
+        this.selectPairing(category, itemName, el);
+      });
+    });
+  }
+
+  renderAlternatives(alternatives) {
+    if (!alternatives || Object.keys(alternatives).length === 0) {
+      this.pairingAlternatives.innerHTML = `
+        <div class="pairing-empty" style="grid-column: 1 / -1;">
+          <p>No alternatives available</p>
+        </div>
+      `;
+      return;
+    }
+
+    let html = '';
+    for (const [cat, items] of Object.entries(alternatives)) {
+      if (items && items.length > 0) {
+        const displayNames = {
+          appetizer: '🍽️',
+          drink: '🥤',
+          dessert: '🍮'
+        };
+        const icon = displayNames[cat] || '📌';
+        html += `
+          <div class="pairing-alt-item" data-category="${cat}" data-item="${items[0]}">
+            <div class="pairing-alt-name">${icon} ${items[0]}</div>
+            <div class="pairing-alt-price">₹${this.engine.getDishPrice(items[0])}</div>
+          </div>
+        `;
+      }
+    }
+
+    this.pairingAlternatives.innerHTML = html;
+
+    this.pairingAlternatives.querySelectorAll('.pairing-alt-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const category = el.dataset.category;
+        const itemName = el.dataset.item;
+        this.selectPairing(category, itemName, el);
+      });
+    });
+  }
+
+  selectPairing(category, itemName, element) {
+    const siblings = element.parentElement.querySelectorAll('.selected');
+    siblings.forEach(el => el.classList.remove('selected'));
+    element.classList.add('selected');
+
+    this.engine.addItem(category, itemName, this.engine.getDishPrice(itemName));
+    this.updateSummary();
+    this.updateScore();
+  }
+
+  updateSummary() {
+    const count = this.engine.mealItems.length;
+    const total = this.engine.calculateTotal();
+    this.summaryCount.textContent = `${count} items`;
+    this.summaryTotal.textContent = `₹${total}`;
+  }
+
+  updateScore() {
+    const score = this.engine.getCompatibilityScore();
+    this.scoreStars.textContent = '★'.repeat(score.stars) + '☆'.repeat(5 - score.stars);
+    this.scoreText.textContent = score.text;
+  }
+
+  showEmptyState() {
+    this.pairingGrid.innerHTML = `
+      <div class="pairing-empty">
+        <span class="pairing-empty-icon">🔍</span>
+        <p>No pairing data available for this dish yet.</p>
+      </div>
+    `;
+    this.pairingAlternatives.innerHTML = '';
+  }
+
+  surpriseMe() {
+    const surprise = this.engine.getRandomSurprise();
+    const price = this.engine.getDishPrice(surprise.main);
+    this.loadPairings(surprise.main, price);
+
+    setTimeout(() => {
+      for (const [cat, item] of Object.entries(surprise.pairings)) {
+        if (item) {
+          const altItems = this.pairingAlternatives.querySelectorAll('.pairing-alt-item');
+          const recommendItems = this.pairingGrid.querySelectorAll('.pairing-item');
+          
+          let found = false;
+          recommendItems.forEach(el => {
+            if (el.dataset.category === cat && el.dataset.item === item) {
+              this.selectPairing(cat, item, el);
+              found = true;
+            }
+          });
+
+          if (!found) {
+            altItems.forEach(el => {
+              if (el.dataset.category === cat && el.dataset.item === item) {
+                this.selectPairing(cat, item, el);
+              }
+            });
+          }
+        }
+      }
+    }, 300);
+  }
+
+  reset() {
+    const main = this.engine.selectedMain;
+    if (main) {
+      const price = this.engine.getDishPrice(main);
+      this.loadPairings(main, price);
+    } else {
+      this.selectedDishName.textContent = 'No dish selected';
+      this.selectedDishPrice.textContent = '';
+      this.pairingGrid.innerHTML = '';
+      this.pairingAlternatives.innerHTML = '';
+      this.updateSummary();
+      this.updateScore();
+    }
+  }
+
+  reserveMeal() {
+    const items = this.engine.mealItems;
+    if (items.length === 0) {
+      alert('Please select at least one dish first!');
+      return;
+    }
+    alert(`🍽️ Your Meal:\n${items.join('\n')}\n\nTotal: ₹${this.engine.calculateTotal()}\n\nProceed to reservation?`);
+  }
+
+  saveMeal() {
+    const items = this.engine.mealItems;
+    if (items.length === 0) {
+      alert('Please select at least one dish first!');
+      return;
+    }
+    const savedMeals = JSON.parse(localStorage.getItem('savedMeals') || '[]');
+    savedMeals.push({
+      date: new Date().toISOString(),
+      items: items,
+      total: this.engine.calculateTotal()
+    });
+    localStorage.setItem('savedMeals', JSON.stringify(savedMeals));
+    alert('✅ Meal saved to favorites!');
+  }
+}
+
+// ── Initialize Pairing Controller ──────────────────
+let pairingController;
+
+document.addEventListener('DOMContentLoaded', () => {
+  pairingController = new PairingUIController();
+});
