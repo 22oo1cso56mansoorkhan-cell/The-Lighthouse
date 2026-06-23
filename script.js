@@ -1,34 +1,19 @@
-// DOM Elements
+// =============================================
+// DOM ELEMENTS
+// =============================================
 const nav = document.getElementById("nav");
 const navToggle = document.getElementById("navToggle");
 const navMenu = document.getElementById("navMenu");
 const navLinks = document.querySelectorAll(".nav-link");
-// Menu tabs/panels removed — menu uses filter buttons and data-category items
 const heroBg = document.getElementById("heroBg");
 const reservationBg = document.getElementById("reservationBg");
 const reservationForm = document.getElementById("reservationForm");
 const dateInput = document.getElementById("reservation-date");
 const timeSelect = document.getElementById("time");
 const themeToggle = document.getElementById("themeToggle");
-if (dateInput) {
-  const tomorrow = new Date(Date.now() + 86400000);
-  const maxDate  = new Date(Date.now() + 90 * 86400000);
 
-  dateInput.setAttribute("min", tomorrow.toISOString().split("T")[0]);
-  dateInput.setAttribute("max", maxDate.toISOString().split("T")[0]);
-// ── Device detection (used by FIX #9 and FIX #14) ───
+// ── Device detection ───
 const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-//DOM ELEMENT
-const nav            = document.getElementById('nav');
-const navToggle      = document.getElementById('navToggle');
-const navMenu        = document.getElementById('navMenu');
-const navLinks       = document.querySelectorAll('.nav-link');
-const heroBg         = document.getElementById('heroBg');
-const reservationBg  = document.getElementById('reservationBg');
-const reservationForm= document.getElementById('reservationForm');
-const dateInput      = document.getElementById('date');
-const timeSelect     = document.getElementById('time');
-const themeToggle    = document.getElementById('themeToggle');
 
 // ── FIX #9 — show correct scroll hint based on input type ────────
 const scrollHintMouse = document.querySelector('.scroll-hint-mouse');
@@ -42,7 +27,7 @@ if (scrollHintMouse && scrollHintTouch) {
 // ── FIX #13 — Date validation: min = tomorrow, max = 90 days out ─────
 if (dateInput) {
   const tomorrow = new Date(Date.now() + 86400000);
-  const maxDate  = new Date(Date.now() + 90 * 86400000);
+  const maxDate = new Date(Date.now() + 90 * 86400000);
 
   dateInput.setAttribute('min', tomorrow.toISOString().split('T')[0]);
   dateInput.setAttribute('max', maxDate.toISOString().split('T')[0]);
@@ -50,16 +35,15 @@ if (dateInput) {
   dateInput.addEventListener('change', updateAvailableTimes);
 }
 
-// ── FIX #11 — Disable past time slots when today is selected.
-// Original had no handler for this — users could pick 7AM at 10PM.
+// ── FIX #11 — Disable past time slots when today is selected ─────
 function updateAvailableTimes() {
   if (!dateInput || !timeSelect) return;
 
   const selectedDate = dateInput.value;
-  const todayStr     = new Date().toISOString().split('T')[0];
-  const now          = new Date();
+  const todayStr = new Date().toISOString().split('T')[0];
+  const now = new Date();
   const currentHours = now.getHours();
-  const currentMins  = now.getMinutes();
+  const currentMins = now.getMinutes();
 
   timeSelect.querySelectorAll('option').forEach((option) => {
     if (!option.value) return;
@@ -67,7 +51,6 @@ function updateAvailableTimes() {
     const [optHours, optMins] = option.value.split(':').map(Number);
 
     if (selectedDate === todayStr) {
-      // Disable times already passed (30-min buffer for travel/prep)
       const isPast =
         optHours < currentHours ||
         (optHours === currentHours && optMins <= currentMins + 30);
@@ -106,9 +89,7 @@ function handleScroll() {
   // Sticky nav background
   nav.classList.toggle('scrolled', currentScroll > 50);
 
-  // FIX #14 — Parallax completely skipped on touch/iOS
-  // background-attachment:fixed doesn't work on iOS Safari and the JS
-  // translateY parallax causes severe jank on touch devices.
+  // Parallax skipped on touch devices
   if (!isTouchDevice) {
     if (heroBg) {
       heroBg.style.transform = `translateY(${currentScroll * 0.5}px)`;
@@ -125,13 +106,13 @@ function handleScroll() {
 
 // ── Active nav link on scroll ───
 function updateActiveNavLink() {
-  const sections       = document.querySelectorAll('section[id]');
+  const sections = document.querySelectorAll('section[id]');
   const scrollPosition = window.scrollY + 150;
 
   sections.forEach((section) => {
-    const sectionTop    = section.offsetTop;
+    const sectionTop = section.offsetTop;
     const sectionHeight = section.offsetHeight;
-    const sectionId     = section.getAttribute('id');
+    const sectionId = section.getAttribute('id');
 
     if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
       navLinks.forEach((link) => {
@@ -166,31 +147,10 @@ function filterMenuItems(filter = 'all', searchText = '') {
   let visibleCount = 0;
 
   menuItems.forEach((item) => {
-    const itemName      = item.querySelector('h3').textContent.toLowerCase();
-    const category      = item.dataset.category;
+    const itemName = item.querySelector('h3')?.textContent?.toLowerCase() || '';
+    const category = item.dataset.category;
     const matchesSearch = itemName.includes(searchText.toLowerCase());
-
-
-    const foodTag = item.querySelector(".food-tag");
-
-    const isVeg = foodTag.classList.contains("veg");
-    
-    const isNonVeg = foodTag.classList.contains("nonveg");
-
-    let matchesFilter = false;
-
-    if (filter === "all") {
-      matchesFilter = true;
-    } else if (
-      ["breakfast", "lunch", "dinner", "desserts", "drinks"].includes(filter)
-    ) {
-      matchesFilter = category === filter;
-    } else if (filter === "veg") {
-      matchesFilter = isVeg;
-    } else if (filter === "nonveg") {
-      matchesFilter = isNonVeg;
-    }
-
+    const matchesFilter = filter === 'all' || category === filter;
 
     if (matchesSearch && matchesFilter) {
       item.classList.remove('hidden-item');
@@ -206,7 +166,7 @@ function filterMenuItems(filter = 'all', searchText = '') {
       noResults = document.createElement('p');
       noResults.className = 'no-results';
       noResults.textContent = 'No menu items found.';
-      document.querySelector('.menu-content').appendChild(noResults);
+      document.querySelector('.menu-content')?.appendChild(noResults);
     }
   } else if (noResults) {
     noResults.remove();
@@ -223,7 +183,7 @@ filterBtns.forEach((btn) => {
 
 if (menuSearch) {
   menuSearch.addEventListener('input', () => {
-    const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+    const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
     filterMenuItems(activeFilter, menuSearch.value);
   });
 }
@@ -231,16 +191,10 @@ if (menuSearch) {
 // ── Smooth scroll ──
 function smoothScroll(e) {
   e.preventDefault();
-  const targetId      = this.getAttribute('href');
+  const targetId = this.getAttribute('href');
   const targetSection = document.querySelector(targetId);
 
   if (targetSection) {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const offsetTop = targetSection.offsetTop - 80;
-    window.scrollTo({
-      top: offsetTop,
-      behavior: prefersReduced ? "auto" : "smooth",
-    // FIX #15 partial — respect reduced motion in smooth scroll too
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({
       top: targetSection.offsetTop - 80,
@@ -254,8 +208,8 @@ function smoothScroll(e) {
 function handleFormSubmit(e) {
   e.preventDefault();
 
-  const inputs  = reservationForm.querySelectorAll('input, select, textarea');
-  let isValid   = true;
+  const inputs = reservationForm.querySelectorAll('input, select, textarea');
+  let isValid = true;
 
   inputs.forEach((input) => {
     if (input.required && !input.value) {
@@ -265,48 +219,41 @@ function handleFormSubmit(e) {
       input.style.borderColor = '';
     }
   });
+
   const emailInput = document.getElementById('email');
-const phoneInput = document.getElementById('phone');
+  const phoneInput = document.getElementById('phone');
 
-// Remove old error messages if already present
-document.querySelectorAll('.error-message').forEach(el => el.remove());
+  // Remove old error messages
+  document.querySelectorAll('.error-message').forEach(el => el.remove());
 
-// Email validation
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-if (emailInput && !emailRegex.test(emailInput.value.trim())) {
-  emailInput.style.borderColor = '#c94a4a';
-
-  const emailError = document.createElement('small');
-  emailError.className = 'error-message';
-  emailError.style.color = '#c94a4a';
-  emailError.textContent = 'Please enter a valid email address.';
-
-  emailInput.parentElement.appendChild(emailError);
-
-  isValid = false;
-}
-
-// Phone validation
-if (phoneInput) {
-  const phoneValue = phoneInput.value.replace(/\D/g, '');
-
-  if (phoneValue.length !== 10) {
-    phoneInput.style.borderColor = '#c94a4a';
-
-    const phoneError = document.createElement('small');
-    phoneError.className = 'error-message';
-    phoneError.style.color = '#c94a4a';
-    phoneError.textContent = 'Phone number must contain exactly 10 digits.';
-
-    phoneInput.parentElement.appendChild(phoneError);
-
+  // Email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (emailInput && !emailRegex.test(emailInput.value.trim())) {
+    emailInput.style.borderColor = '#c94a4a';
+    const emailError = document.createElement('small');
+    emailError.className = 'error-message';
+    emailError.style.color = '#c94a4a';
+    emailError.textContent = 'Please enter a valid email address.';
+    emailInput.parentElement.appendChild(emailError);
     isValid = false;
   }
-}
-  
+
+  // Phone validation
+  if (phoneInput) {
+    const phoneValue = phoneInput.value.replace(/\D/g, '');
+    if (phoneValue.length !== 10) {
+      phoneInput.style.borderColor = '#c94a4a';
+      const phoneError = document.createElement('small');
+      phoneError.className = 'error-message';
+      phoneError.style.color = '#c94a4a';
+      phoneError.textContent = 'Phone number must contain exactly 10 digits.';
+      phoneInput.parentElement.appendChild(phoneError);
+      isValid = false;
+    }
+  }
+
   if (isValid) {
-    const submitBtn  = reservationForm.querySelector('button[type="submit"]');
+    const submitBtn = reservationForm.querySelector('button[type="submit"]');
     const originalText = submitBtn.textContent;
     submitBtn.textContent = 'Reservation Requested!';
     submitBtn.style.backgroundColor = '#4a9c6a';
@@ -318,13 +265,12 @@ if (phoneInput) {
       submitBtn.textContent = originalText;
       submitBtn.style.backgroundColor = '';
       submitBtn.disabled = false;
-      // Re-run time filter after form reset in case date was today
       updateAvailableTimes();
     }, 3000);
   }
 }
 
-// ── FIX #15 — Intersection Observer with prefers-reduced-motion ──────
+// ── Intersection Observer with prefers-reduced-motion ──────
 function setupIntersectionObserver() {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -333,7 +279,6 @@ function setupIntersectionObserver() {
   );
 
   if (prefersReduced) {
-    // Skip animation entirely — just show everything immediately
     animatedElements.forEach((el) => {
       el.style.opacity = '1';
       el.style.transform = 'none';
@@ -346,11 +291,10 @@ function setupIntersectionObserver() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
         }
       });
     },
-    { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0 }
+    { root: null, rootMargin: '0px', threshold: 0.1 }
   );
 
   animatedElements.forEach((el) => {
@@ -366,8 +310,6 @@ const style = document.createElement('style');
 style.textContent = `.visible { opacity: 1 !important; transform: translateY(0) !important; }`;
 document.head.appendChild(style);
 
-// Scroll to Discover - Auto slow scroll
-const heroScroll = document.querySelector(".hero-scroll");
 // ── Auto-scroll on hero "Scroll To Discover" click ───
 const heroScroll = document.querySelector('.hero-scroll');
 let autoScrollInterval = null;
@@ -403,7 +345,6 @@ if (heroScroll) {
 const backToTopBtn = document.getElementById('backToTop');
 
 if (backToTopBtn) {
-  // Two scroll listeners in original were duplicated — merged into one
   window.addEventListener('scroll', () => {
     const past = window.scrollY > 300;
     backToTopBtn.style.display = past ? 'block' : 'none';
@@ -411,7 +352,6 @@ if (backToTopBtn) {
   });
 
   backToTopBtn.addEventListener('click', () => {
-    // FIX #15 partial — respect reduced motion on back-to-top too
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
   });
@@ -423,7 +363,6 @@ navToggle.addEventListener('click', toggleMobileMenu);
 
 navLinks.forEach((link) => link.addEventListener('click', smoothScroll));
 
-// Menu tab listeners removed — menu uses filter buttons
 document.querySelectorAll('.nav-cta, .nav-cta-mobile, .hero-buttons a').forEach((link) => {
   link.addEventListener('click', smoothScroll);
 });
@@ -462,52 +401,8 @@ function renderReviews() {
   if (!grid) return;
 
   const userReviews = getReviews();
-  const allReviews  = [pinnedReview, ...userReviews];
+  const allReviews = [pinnedReview, ...userReviews];
 
-  grid.innerHTML = "";
-
-  allReviews.forEach((r) => {
-    const card = document.createElement("div");
-    card.className = "review-card";
-
-    const stars = document.createElement("div");
-    stars.className = "review-stars";
-    stars.textContent =
-      "★".repeat(r.rating) + "☆".repeat(5 - r.rating);
-
-    const text = document.createElement("p");
-    text.className = "review-text";
-    text.textContent = r.text;
-
-    const author = document.createElement("div");
-    author.className = "review-author";
-
-    const avatar = document.createElement("div");
-    avatar.className = "review-avatar";
-    avatar.textContent = r.name.slice(0, 2).toUpperCase();
-
-    const info = document.createElement("div");
-
-    const name = document.createElement("span");
-    name.className = "review-name";
-    name.textContent = r.name;
-
-    const date = document.createElement("span");
-    date.className = "review-date";
-    date.textContent = r.date;
-
-    info.appendChild(name);
-    info.appendChild(date);
-
-    author.appendChild(avatar);
-    author.appendChild(info);
-
-    card.appendChild(stars);
-    card.appendChild(text);
-    card.appendChild(author);
-
-    grid.appendChild(card);
-  });
   grid.innerHTML = allReviews
     .map(
       (r) => `
@@ -558,13 +453,13 @@ function isValidName(name) {
 }
 
 const reviewForm = document.getElementById('review-form');
-const reviewMsg  = document.getElementById('review-msg');
+const reviewMsg = document.getElementById('review-msg');
 
 if (reviewForm) {
   reviewForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const name       = document.getElementById('review-name').value.trim();
+    const name = document.getElementById('review-name').value.trim();
     const reviewText = document.getElementById('review-text').value.trim();
 
     reviewMsg.style.display = 'block';
@@ -591,11 +486,19 @@ if (reviewForm) {
     }
 
     const dateStr = new Date().toLocaleDateString('en-IN', {
-      day: '2-digit', month: 'short', year: 'numeric',
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
     });
 
-    const newReview = { id: Date.now(), name, rating: selectedRating, text: reviewText, date: dateStr };
-    const reviews   = getReviews();
+    const newReview = {
+      id: Date.now(),
+      name,
+      rating: selectedRating,
+      text: reviewText,
+      date: dateStr,
+    };
+    const reviews = getReviews();
     reviews.unshift(newReview);
     saveReviews(reviews);
     renderReviews();
@@ -607,302 +510,106 @@ if (reviewForm) {
 
     reviewMsg.textContent = 'Review submitted successfully!';
     reviewMsg.style.color = '#4a9c6a';
-    setTimeout(() => { reviewMsg.style.display = 'none'; }, 3000);
+    setTimeout(() => {
+      reviewMsg.style.display = 'none';
+    }, 3000);
   });
 }
-
-// ── Initialise ───
-document.addEventListener('DOMContentLoaded', () => {
-  handleScroll();
-  setupIntersectionObserver();
-  updateAvailableTimes();
-  renderReviews();
-});
 
 // ── Veg / Non-Veg Filter ──────────────────────────────
 (function () {
-  const filterBtns = document.querySelectorAll('.diet-btn');
-  if (!filterBtns.length) return;
+  const dietFilterBtns = document.querySelectorAll('.diet-btn');
+  if (!dietFilterBtns.length) return;
 
   function applyDietFilter(diet) {
-    // Filter within whichever panel is currently active
     const activePanels = document.querySelectorAll('.menu-panel.active');
 
-// Init
-renderReviews();
-
-// BackToTop
-const backToTopBtn = document.getElementById("backToTop");
-
-if (backToTopBtn) {
-  window.addEventListener("scroll", () => {
-    const past = window.scrollY > 300;
-    backToTopBtn.style.display = past ? "block" : "none";
-    backToTopBtn.classList.toggle("visible", past);
-  });
-
-  backToTopBtn.addEventListener("click", () => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.scrollTo({
-      top: 0,
-      behavior: prefersReduced ? "auto" : "smooth",
-    });
-  });
-}
-    activePanels.forEach(panel => {
+    activePanels.forEach((panel) => {
       const items = panel.querySelectorAll('.menu-item');
       let visibleCount = 0;
 
-      items.forEach(item => {
+      items.forEach((item) => {
         const itemDiet = item.dataset.diet || 'all';
         const show = diet === 'all' || itemDiet === diet;
         item.classList.toggle('diet-hidden', !show);
         if (show) visibleCount++;
       });
 
-      // Show/hide no-results message
       let noResults = panel.querySelector('.diet-no-results');
       if (!noResults) {
         noResults = document.createElement('p');
         noResults.className = 'diet-no-results';
         noResults.textContent = 'No items match the selected filter.';
-        panel.querySelector('.menu-items').appendChild(noResults);
+        const menuItems = panel.querySelector('.menu-items');
+        if (menuItems) {
+          menuItems.appendChild(noResults);
+        }
       }
       noResults.classList.toggle('visible', visibleCount === 0);
     });
   }
 
-  filterBtns.forEach(btn => {
+  dietFilterBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
+      dietFilterBtns.forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
       applyDietFilter(btn.dataset.diet);
     });
   });
 
-  // Re-apply filter when menu tab changes
-  document.querySelectorAll('.menu-tab').forEach(tab => {
+  document.querySelectorAll('.menu-tab').forEach((tab) => {
     tab.addEventListener('click', () => {
       const activeDiet = document.querySelector('.diet-btn.active')?.dataset.diet || 'all';
-      // slight delay to let the panel become active
       setTimeout(() => applyDietFilter(activeDiet), 50);
     });
   });
 })();
 
-// ── Skeleton Loader Initialization ─────────────────────────────────────
-function createCardSkeleton() {
-  const sk = document.createElement('div');
-  sk.className = 'skeleton-card skeleton';
+// =============================================
+// 3D CARD FLIP ENHANCEMENTS
+// =============================================
 
-  const left = document.createElement('div');
-  left.className = 'skeleton-img';
+function handleCardFlip() {
+  const cards = document.querySelectorAll('.food-card-3d');
+  const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-  const right = document.createElement('div');
-  right.className = 'skeleton-lines';
-
-  const line1 = document.createElement('div');
-  line1.className = 'skeleton-line long';
-  const line2 = document.createElement('div');
-  line2.className = 'skeleton-line medium';
-  const line3 = document.createElement('div');
-  line3.className = 'skeleton-line short';
-
-  right.appendChild(line1);
-  right.appendChild(line2);
-  right.appendChild(line3);
-
-  sk.appendChild(left);
-  sk.appendChild(right);
-
-  return sk;
-}
-
-function attachSkeletonToCard(card) {
-  if (card.__skeletonAttached) return;
-  const wrapper = document.createElement('div');
-  wrapper.className = 'skeleton-wrapper';
-
-  // Move existing children into wrapper
-  while (card.firstChild) {
-    wrapper.appendChild(card.firstChild);
-  }
-
-  card.appendChild(wrapper);
-
-  const skeleton = createCardSkeleton();
-  wrapper.appendChild(skeleton);
-
-  // Hide native images inside the card while loading
-  const imgs = wrapper.querySelectorAll('img');
-  imgs.forEach((img) => {
-    img.classList.add('image-hidden');
-    // lazy-load optimization: set loading attribute where supported
-    try { if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy'); } catch (e) {}
-
-    if (img.complete && img.naturalWidth > 0) {
-      // Already loaded from cache - reveal immediately
-      img.classList.add('image-loaded');
-      img.classList.remove('image-hidden');
-      skeleton.remove();
-    } else {
-      // Wait for load or error
-      img.addEventListener('load', function onLoad() {
-        img.classList.add('image-loaded');
-        img.classList.remove('image-hidden');
-        // fade out skeleton then remove
-        skeleton.style.transition = 'opacity 0.45s ease';
-        skeleton.style.opacity = '0';
-        setTimeout(() => skeleton.remove(), 500);
-        img.removeEventListener('load', onLoad);
+  if (isTouch) {
+    cards.forEach((card) => {
+      card.addEventListener('click', function (e) {
+        if (e.target.closest('a') || e.target.closest('button')) return;
+        this.classList.toggle('flipped');
       });
-
-      img.addEventListener('error', function onError() {
-        // remove skeleton even if image fails to avoid permanent overlays
-        skeleton.style.transition = 'opacity 0.25s ease';
-        skeleton.style.opacity = '0';
-        setTimeout(() => skeleton.remove(), 300);
-        img.classList.remove('image-hidden');
-        img.removeEventListener('error', onError);
-      });
-    }
-  });
-
-  card.__skeletonAttached = true;
-}
-
-function attachSkeletonToSimpleImage(container, minHeight = 180) {
-  // container is element that contains a single img as background or child
-  const img = container.querySelector('img');
-  if (!img) return;
-  if (container.__skeletonAttached) return;
-
-  const sk = document.createElement('div');
-  sk.className = 'skeleton-img skeleton';
-  sk.style.height = minHeight + 'px';
-  sk.style.width = '100%';
-  sk.style.borderRadius = getComputedStyle(container).borderRadius || '4px';
-  sk.style.position = 'absolute';
-  sk.style.inset = '0';
-  sk.style.zIndex = '2';
-
-  // ensure container is positioned to allow absolute overlay
-  const prevPos = getComputedStyle(container).position;
-  if (prevPos === 'static') container.style.position = 'relative';
-
-  container.appendChild(sk);
-
-  img.classList.add('image-hidden');
-
-  if (img.complete && img.naturalWidth > 0) {
-    img.classList.add('image-loaded');
-    img.classList.remove('image-hidden');
-    sk.remove();
-  } else {
-    try { if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy'); } catch (e) {}
-
-    img.addEventListener('load', function onLoad() {
-      img.classList.add('image-loaded');
-      img.classList.remove('image-hidden');
-      sk.style.transition = 'opacity 0.45s ease';
-      sk.style.opacity = '0';
-      setTimeout(() => sk.remove(), 500);
-      img.removeEventListener('load', onLoad);
-    });
-    img.addEventListener('error', function onError() {
-      sk.style.opacity = '0';
-      setTimeout(() => sk.remove(), 300);
-      img.classList.remove('image-hidden');
-      img.removeEventListener('error', onError);
     });
   }
-
-  container.__skeletonAttached = true;
 }
 
-// Text skeletons
-function createTextSkeleton(lines = 3) {
-  const wrapper = document.createElement('div');
-  wrapper.className = 'skeleton skeleton-overlay skeleton-fade';
-  wrapper.setAttribute('aria-hidden', 'true');
-
-  const block = document.createElement('div');
-  block.className = 'skeleton-lines';
-
-  for (let i = 0; i < lines; i++) {
-    const line = document.createElement('div');
-    line.className = 'skeleton-line';
-    // vary width for realism
-    if (i === 0) line.classList.add('long');
-    else if (i === lines - 1) line.classList.add('short');
-    else line.classList.add('medium');
-    block.appendChild(line);
+// Reset mobile flip when clicking elsewhere
+document.addEventListener('click', function (e) {
+  if (!e.target.closest('.food-card-3d')) {
+    document.querySelectorAll('.food-card-3d.flipped').forEach((card) => {
+      card.classList.remove('flipped');
+    });
   }
-
-  wrapper.appendChild(block);
-  return wrapper;
-}
-
-function attachSkeletonToTextBlock(el, lines = 3) {
-  if (!el || el.__skeletonAttached) return;
-
-  // ensure wrapper for absolute overlay
-  el.classList.add('skeleton-wrapper');
-  const sk = createTextSkeleton(lines);
-
-  // hide content until revealed
-  el.classList.add('content-hidden');
-
-  // insert skeleton overlay
-  sk.style.position = 'absolute';
-  sk.style.top = 0;
-  sk.style.left = 0;
-  sk.style.right = 0;
-  sk.style.bottom = 0;
-  sk.style.zIndex = 2;
-  el.appendChild(sk);
-
-  // Reveal content after microtask or when images inside have loaded
-  // For static text, unhide quickly to avoid long overlays
-  requestAnimationFrame(() => {
-    // small delay to allow shimmer to show slightly
-    setTimeout(() => {
-      el.classList.remove('content-hidden');
-      el.classList.add('content-visible');
-      // fade out skeleton
-      sk.style.opacity = '0';
-      setTimeout(() => sk.remove(), 500);
-    }, 300);
-  });
-
-  el.__skeletonAttached = true;
-}
-
-// Updated init to attach text skeletons
-function initSkeletonLoaders() {
-  // Menu card skeletons
-  const cards = document.querySelectorAll('.food-card');
-  cards.forEach((card) => attachSkeletonToCard(card));
-
-  // Large section images: hero, about image, reservation bg
-  const largeContainers = [
-    document.querySelector('.hero-bg'),
-    document.querySelector('.about-image'),
-    document.querySelector('.reservation-bg'),
-  ];
-
-  largeContainers.forEach((c) => {
-    if (c) attachSkeletonToSimpleImage(c, 360);
-  });
-
-  // Text blocks (about, reservation info, first paragraph areas)
-  const textTargets = document.querySelectorAll('.about-content, .reservation-info, .review-form-heading');
-  textTargets.forEach((t) => attachSkeletonToTextBlock(t, 3));
-}
-
-// Initialize skeletons once DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  // existing DOMContentLoaded handlers already call init functions earlier,
-  // but ensure skeletons are attached after render
-  initSkeletonLoaders();
 });
+
+// ── Initialise ───
+document.addEventListener('DOMContentLoaded', function () {
+  handleScroll();
+  setupIntersectionObserver();
+  updateAvailableTimes();
+  renderReviews();
+  handleCardFlip();
+});
+
+// Mobile flip style
+const styleForMobile = `
+  @media (max-width: 768px) {
+    .food-card-3d.flipped .food-card-inner {
+      transform: rotateY(180deg) scale(1.01);
+    }
+  }
+`;
+
+const mobileStyle = document.createElement('style');
+mobileStyle.textContent = styleForMobile;
+document.head.appendChild(mobileStyle);

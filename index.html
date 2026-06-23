@@ -183,324 +183,542 @@
 </section>
 
     <!-- Menu Section -->
-    <section class="menu-section" id="menu">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label">Culinary Offerings</span>
-          <h2 class="section-title">Our Menu</h2>
-        </div>
-        <!-- Menu Search + Filters -->
-        <div class="menu-controls">
-          <input
-            type="text"
-            id="menu-search"
-            placeholder="Search dishes..."
-            class="menu-search"
-          />
-
-          <div class="menu-filters">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="breakfast">
-              Breakfast
-            </button>
-            <button class="filter-btn" data-filter="lunch">Lunch</button>
-            <button class="filter-btn" data-filter="dinner">Dinner</button>
-            <button class="filter-btn" data-filter="desserts">Desserts</button>
-            <button class="filter-btn" data-filter="drinks">Drinks</button>
-            <button class="filter-btn" data-filter="veg">Veg</button>
-            <button class="filter-btn" data-filter="nonveg">Non-Veg</button>
-          </div>
-        </div>
-
-        <!-- Veg / Non-Veg Filter Toggle -->
-        <div class="diet-filter" id="dietFilter">
-          <button class="diet-btn active" data-diet="all">All Items</button>
-          <button class="diet-btn veg" data-diet="veg">
-            <span class="diet-dot veg-dot"></span> Veg
-          </button>
-          <button class="diet-btn non-veg" data-diet="non-veg">
-            <span class="diet-dot non-veg-dot"></span> Non-Veg
-          </button>
-        </div>
-
-        <!-- Menu Content -->
-        <div class="menu-content menu-panel active">
-          <div class="menu-items">
-          <!-- breakfast -->
-          <div class="menu-item" data-category="breakfast" data-diet="veg">
-            <div class="food-card">
-              <img
-                src="./images/MasalaDosa.jpg"
-                alt="Masala Dosa"
-                class="food-image"
-                loading="lazy"
-              />
-
-              <div class="food-content">
-                <div class="menu-item-header">
-                  <h3>Masala Dosa</h3>
-                  <span class="menu-price">₹180</span>
-                </div>
-
-                <span class="food-tag veg">Veg</span>
-
-                <p>Crispy dosa served with chutney and sambar</p>
-              </div>
-            </div>
-          </div>
-          <div class="menu-item" data-category="breakfast" data-diet="veg">
-            <div class="food-card">
-              <img
-                src="./images/Idli_Sambar.jpg"
-                alt="Idli Sambar"
-                class="food-image"
-                loading="lazy"
-              />
-
-              <div class="food-content">
-                <div class="menu-item-header">
-                  <h3>Idli Sambar</h3>
-                  <span class="menu-price">₹120</span>
-                </div>
-
-                <span class="food-tag veg">Veg</span>
-
-                <p>
-                  Soft steamed idlis served with hot sambar and coconut chutney
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="menu-item" data-category="breakfast" data-diet="non-veg">
-            <div class="food-card">
-              <img
-                src="./images/Chicken_Keema_Dosa.jpg"
-                alt="Chicken Keema Dosa"
-                class="food-image"
-                loading="lazy"
-              />
-
-              <div class="food-content">
-                <div class="menu-item-header">
-                  <h3>Chicken Keema Dosa</h3>
-                  <span class="menu-price">₹240</span>
-                </div>
-
-                <span class="food-tag nonveg">Non-Veg</span>
-
-                <p>Crispy dosa stuffed with spicy chicken keema masala</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- lunch -->
-          <div class="menu-item" data-category="lunch" data-diet="veg">
-            <div class="food-card">
-              <img
-                src="./images/Paneer_Butter_Masala.jpg"
-                alt="Paneer Butter Masala"
-                class="food-image"
-                loading="lazy"
-              />
-
-              <div class="food-content">
-                <div class="menu-item-header">
-                  <h3>Truffle Burger</h3>
-                  <span class="menu-price">Rs.26</span>
-                  <h3>Paneer Butter Masala</h3>
-                  <span class="menu-price">₹280</span>
-                </div>
-
-                <span class="food-tag veg">Veg</span>
-
-                <p>Rich creamy paneer curry served with butter naan</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- dinner -->
-          <div class="menu-item" data-category="dinner" data-diet="non-veg">
-            <div class="food-card">
-              <img
-                src="./images/Hyderabadi_Chicken_Biryani.jpg"
-                alt="Hyderabadi Chicken Biryani"
-                class="food-image"
-                loading="lazy"
-              />
-
-              <div class="food-content">
-                <div class="menu-item-header">
-                  <h3>Hyderabadi Chicken Biryani</h3>
-                  <span class="menu-price">₹320</span>
-                </div>
-
-                <span class="food-tag nonveg">Non-Veg</span>
-
-                <p>
-                  Aromatic dum biryani layered with spicy chicken and basmati
-                  rice
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="menu-item" data-category="dinner" data-diet="non-veg">
-            <div class="food-card">
-              <img
-                src="./images/Butter_Chicken.jpg"
-                alt="Butter Chicken"
-                class="food-image"
-                loading="lazy"
-              />
-
-              <div class="food-content">
-                <div class="menu-item-header">
-                  <h3>Butter Chicken</h3>
-                  <span class="menu-price">₹340</span>
-                </div>
-
-                <span class="food-tag nonveg">Non-Veg</span>
-
-                <p>Creamy tomato-based chicken curry with naan</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Drinks -->
-          <div class="menu-item" data-category="drinks" data-diet="veg">
-            <div class="food-card">
-              <img
-                src="./images/Mango_Lassi.jpg"
-                alt="Mango Lassi"
-                class="food-image"
-                loading="lazy"
-              />
-
-              <div class="food-content">
-                <div class="menu-item-header">
-                  <h3>Mango Lassi</h3>
-                  <span class="menu-price">₹110</span>
-                </div>
-
-                <span class="food-tag veg">Veg</span>
-
-                <p>
-                  Refreshing chilled yogurt drink blended with sweet mango pulp
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="menu-item" data-category="drinks" data-diet="veg">
-            <div class="food-card">
-              <img
-                src="./images/Masala_Chai.jpg"
-                alt="Masala Chai"
-                class="food-image"
-                loading="lazy"
-              />
-
-              <div class="food-content">
-                <div class="menu-item-header">
-                  <h3>Masala Chai</h3>
-                  <span class="menu-price">₹70</span>
-                </div>
-
-                <span class="food-tag veg">Veg</span>
-
-                <p>
-                  Traditional Indian tea brewed with aromatic spices and milk
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="menu-item" data-category="drinks" data-diet="veg">
-            <div class="food-card">
-              <img
-                src="./images/Fresh_Lime_Soda.jpg"
-                alt="Fresh Lime Soda"
-                class="food-image"
-                loading="lazy"
-              />
-
-              <div class="food-content">
-                <div class="menu-item-header">
-                  <h3>Fresh Lime Soda</h3>
-                  <span class="menu-price">₹90</span>
-                </div>
-
-                <span class="food-tag veg">Veg</span>
-
-                <p>Fizzy lime soda served sweet, salted, or mixed style</p>
-              </div>
-            </div>
-          </div>
-          <!-- Desserts -->
-          <div class="menu-item" data-category="desserts" data-diet="veg">
-            <div class="food-card">
-              <img
-                src="./images/Gulab_Jamun.jpg"
-                alt="Gulab Jamun"
-                class="food-image"
-                loading="lazy"
-              />
-
-              <div class="food-content">
-                <div class="menu-item-header">
-                  <h3>Gulab Jamun</h3>
-                  <span class="menu-price">₹120</span>
-                </div>
-
-                <span class="food-tag veg">Veg</span>
-
-                <p>Soft milk-solid dumplings soaked in warm sugar syrup</p>
-              </div>
-            </div>
-          </div>
-          <div class="menu-item" data-category="desserts" data-diet="veg">
-            <div class="food-card">
-              <img
-                src="./images/Rasmalai.jpg"
-                alt="Rasmalai"
-                class="food-image"
-                loading="lazy"
-              />
-
-              <div class="food-content">
-                <div class="menu-item-header">
-                  <h3>Rasmalai</h3>
-                  <span class="menu-price">₹140</span>
-                </div>
-
-                <span class="food-tag veg">Veg</span>
-
-                <p>Soft paneer discs soaked in creamy saffron-flavored milk</p>
-              </div>
-            </div>
-          </div>
-          <div class="menu-item" data-category="desserts" data-diet="veg">
-            <div class="food-card">
-              <img src="./images/Kulfi.jpg" alt="Kulfi" class="food-image" loading="lazy"/>
-
-              <div class="food-content">
-                <div class="menu-item-header">
-                  <h3>Kesar Pista Kulfi</h3>
-                  <span class="menu-price">₹130</span>
-                </div>
-
-                <span class="food-tag veg">Veg</span>
-
-                <p>
-                  Traditional Indian frozen dessert flavored with saffron and
-                  pistachios
-                </p>
-              </div>
-            </div>
-          </div>
-          </div>
-        </div>
+<section class="menu-section" id="menu">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Culinary Offerings</span>
+      <h2 class="section-title">Our Menu</h2>
+    </div>
+    
+    <!-- Menu Search + Filters -->
+    <div class="menu-controls">
+      <input
+        type="text"
+        id="menu-search"
+        placeholder="Search dishes..."
+        class="menu-search"
+      />
+      <div class="menu-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="breakfast">Breakfast</button>
+        <button class="filter-btn" data-filter="lunch">Lunch</button>
+        <button class="filter-btn" data-filter="dinner">Dinner</button>
+        <button class="filter-btn" data-filter="desserts">Desserts</button>
+        <button class="filter-btn" data-filter="drinks">Drinks</button>
       </div>
-    </section>
+    </div>
+
+    <!-- Veg / Non-Veg Filter Toggle -->
+    <div class="diet-filter" id="dietFilter">
+      <button class="diet-btn active" data-diet="all">All Items</button>
+      <button class="diet-btn veg" data-diet="veg">
+        <span class="diet-dot veg-dot"></span> Veg
+      </button>
+      <button class="diet-btn non-veg" data-diet="non-veg">
+        <span class="diet-dot non-veg-dot"></span> Non-Veg
+      </button>
+    </div>
+
+    <!-- Menu Content -->
+    <div class="menu-content menu-panel active">
+      <div class="menu-items">
+        
+        <!-- ===== BREAKFAST ITEMS ===== -->
+        
+        <!-- Masala Dosa - 3D Flip Card -->
+        <div class="menu-item" data-category="breakfast" data-diet="veg">
+          <div class="food-card-3d">
+            <div class="food-card-inner">
+              <!-- Front Face -->
+              <div class="food-card-front">
+                <div class="polaroid">
+                  <div class="polaroid-image-wrapper">
+                    <img src="./images/MasalaDosa.jpg" alt="Masala Dosa" loading="lazy" />
+                    <div class="polaroid-tape"></div>
+                    <div class="polaroid-badge popular">🔥 Popular</div>
+                  </div>
+                  <div class="polaroid-caption">
+                    <h3>Masala Dosa</h3>
+                    <div class="polaroid-price">₹180</div>
+                    <span class="food-tag veg">Veg</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Back Face -->
+              <div class="food-card-back">
+                <div class="back-content">
+                  <h4>👨‍🍳 Chef's Notes</h4>
+                  <p>Golden crispy dosa made from fermented rice and lentil batter, filled with spiced potato masala. Served with fresh coconut chutney and sambar.</p>
+                  <div class="back-details">
+                    <span>🌶️ Medium Spicy</span>
+                    <span>⏱️ 15 mins</span>
+                    <span>🍽️ Serves 1</span>
+                  </div>
+                  <div class="back-ingredients">
+                    <strong>Key Ingredients:</strong>
+                    <span>Rice, Urad Dal, Potato, Onion, Curry Leaves</span>
+                  </div>
+                  <div class="back-allergens">
+                    <span>⚠️ Contains: Gluten</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Idli Sambar - 3D Flip Card -->
+        <div class="menu-item" data-category="breakfast" data-diet="veg">
+          <div class="food-card-3d">
+            <div class="food-card-inner">
+              <div class="food-card-front">
+                <div class="polaroid">
+                  <div class="polaroid-image-wrapper">
+                    <img src="./images/Idli_Sambar.jpg" alt="Idli Sambar" loading="lazy" />
+                    <div class="polaroid-tape"></div>
+                    <div class="polaroid-badge classic">⭐ Classic</div>
+                  </div>
+                  <div class="polaroid-caption">
+                    <h3>Idli Sambar</h3>
+                    <div class="polaroid-price">₹120</div>
+                    <span class="food-tag veg">Veg</span>
+                  </div>
+                </div>
+              </div>
+              <div class="food-card-back">
+                <div class="back-content">
+                  <h4>👨‍🍳 Chef's Notes</h4>
+                  <p>Soft, fluffy steamed idlis made from fermented rice and urad dal, served with hot, flavorful sambar and fresh coconut chutney.</p>
+                  <div class="back-details">
+                    <span>🌶️ Mild</span>
+                    <span>⏱️ 10 mins</span>
+                    <span>🍽️ Serves 1</span>
+                  </div>
+                  <div class="back-ingredients">
+                    <strong>Key Ingredients:</strong>
+                    <span>Rice, Urad Dal, Toor Dal, Vegetables, Coconut</span>
+                  </div>
+                  <div class="back-allergens">
+                    <span>⚠️ Contains: Gluten, Dairy</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chicken Keema Dosa - 3D Flip Card -->
+        <div class="menu-item" data-category="breakfast" data-diet="non-veg">
+          <div class="food-card-3d">
+            <div class="food-card-inner">
+              <div class="food-card-front">
+                <div class="polaroid">
+                  <div class="polaroid-image-wrapper">
+                    <img src="./images/Chicken_Keema_Dosa.jpg" alt="Chicken Keema Dosa" loading="lazy" />
+                    <div class="polaroid-tape"></div>
+                    <div class="polaroid-badge chef">👨‍🍳 Chef's Pick</div>
+                  </div>
+                  <div class="polaroid-caption">
+                    <h3>Chicken Keema Dosa</h3>
+                    <div class="polaroid-price">₹240</div>
+                    <span class="food-tag nonveg">Non-Veg</span>
+                  </div>
+                </div>
+              </div>
+              <div class="food-card-back">
+                <div class="back-content">
+                  <h4>👨‍🍳 Chef's Notes</h4>
+                  <p>Crispy golden dosa generously stuffed with spicy minced chicken masala, perfectly seasoned with aromatic spices and herbs.</p>
+                  <div class="back-details">
+                    <span>🌶️ Hot</span>
+                    <span>⏱️ 20 mins</span>
+                    <span>🍽️ Serves 1</span>
+                  </div>
+                  <div class="back-ingredients">
+                    <strong>Key Ingredients:</strong>
+                    <span>Chicken, Rice Batter, Onion, Ginger, Garlic, Spices</span>
+                  </div>
+                  <div class="back-allergens">
+                    <span>⚠️ Contains: Gluten, Dairy</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== LUNCH ITEMS ===== -->
+        
+        <!-- Paneer Butter Masala - 3D Flip Card -->
+        <div class="menu-item" data-category="lunch" data-diet="veg">
+          <div class="food-card-3d">
+            <div class="food-card-inner">
+              <div class="food-card-front">
+                <div class="polaroid">
+                  <div class="polaroid-image-wrapper">
+                    <img src="./images/Paneer_Butter_Masala.jpg" alt="Paneer Butter Masala" loading="lazy" />
+                    <div class="polaroid-tape"></div>
+                    <div class="polaroid-badge popular">🔥 Popular</div>
+                  </div>
+                  <div class="polaroid-caption">
+                    <h3>Paneer Butter Masala</h3>
+                    <div class="polaroid-price">₹280</div>
+                    <span class="food-tag veg">Veg</span>
+                  </div>
+                </div>
+              </div>
+              <div class="food-card-back">
+                <div class="back-content">
+                  <h4>👨‍🍳 Chef's Notes</h4>
+                  <p>Rich and creamy paneer curry cooked in a buttery tomato gravy with a blend of aromatic spices. Best enjoyed with butter naan.</p>
+                  <div class="back-details">
+                    <span>🌶️ Medium</span>
+                    <span>⏱️ 25 mins</span>
+                    <span>🍽️ Serves 2</span>
+                  </div>
+                  <div class="back-ingredients">
+                    <strong>Key Ingredients:</strong>
+                    <span>Paneer, Tomato, Butter, Cream, Kasuri Methi</span>
+                  </div>
+                  <div class="back-allergens">
+                    <span>⚠️ Contains: Dairy, Gluten</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== DINNER ITEMS ===== -->
+        
+        <!-- Hyderabadi Chicken Biryani - 3D Flip Card -->
+        <div class="menu-item" data-category="dinner" data-diet="non-veg">
+          <div class="food-card-3d">
+            <div class="food-card-inner">
+              <div class="food-card-front">
+                <div class="polaroid">
+                  <div class="polaroid-image-wrapper">
+                    <img src="./images/Hyderabadi_Chicken_Biryani.jpg" alt="Hyderabadi Chicken Biryani" loading="lazy" />
+                    <div class="polaroid-tape"></div>
+                    <div class="polaroid-badge signature">👑 Signature</div>
+                  </div>
+                  <div class="polaroid-caption">
+                    <h3>Hyderabadi Chicken Biryani</h3>
+                    <div class="polaroid-price">₹320</div>
+                    <span class="food-tag nonveg">Non-Veg</span>
+                  </div>
+                </div>
+              </div>
+              <div class="food-card-back">
+                <div class="back-content">
+                  <h4>👨‍🍳 Chef's Notes</h4>
+                  <p>Fragrant dum biryani layered with tender chicken, basmati rice, and a secret blend of authentic Hyderabad spices. Slow-cooked to perfection.</p>
+                  <div class="back-details">
+                    <span>🌶️ Hot</span>
+                    <span>⏱️ 40 mins</span>
+                    <span>🍽️ Serves 2</span>
+                  </div>
+                  <div class="back-ingredients">
+                    <strong>Key Ingredients:</strong>
+                    <span>Chicken, Basmati Rice, Saffron, Mint, Fried Onions</span>
+                  </div>
+                  <div class="back-allergens">
+                    <span>⚠️ Contains: Dairy, Gluten</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Butter Chicken - 3D Flip Card -->
+        <div class="menu-item" data-category="dinner" data-diet="non-veg">
+          <div class="food-card-3d">
+            <div class="food-card-inner">
+              <div class="food-card-front">
+                <div class="polaroid">
+                  <div class="polaroid-image-wrapper">
+                    <img src="./images/Butter_Chicken.jpg" alt="Butter Chicken" loading="lazy" />
+                    <div class="polaroid-tape"></div>
+                    <div class="polaroid-badge classic">⭐ Classic</div>
+                  </div>
+                  <div class="polaroid-caption">
+                    <h3>Butter Chicken</h3>
+                    <div class="polaroid-price">₹340</div>
+                    <span class="food-tag nonveg">Non-Veg</span>
+                  </div>
+                </div>
+              </div>
+              <div class="food-card-back">
+                <div class="back-content">
+                  <h4>👨‍🍳 Chef's Notes</h4>
+                  <p>Succulent chicken cooked in a creamy tomato-based gravy with butter and aromatic spices. A timeless classic served with naan.</p>
+                  <div class="back-details">
+                    <span>🌶️ Mild</span>
+                    <span>⏱️ 30 mins</span>
+                    <span>🍽️ Serves 2</span>
+                  </div>
+                  <div class="back-ingredients">
+                    <strong>Key Ingredients:</strong>
+                    <span>Chicken, Tomato, Butter, Cream, Kasuri Methi</span>
+                  </div>
+                  <div class="back-allergens">
+                    <span>⚠️ Contains: Dairy, Gluten</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== DRINKS ===== -->
+        
+        <!-- Mango Lassi - 3D Flip Card -->
+        <div class="menu-item" data-category="drinks" data-diet="veg">
+          <div class="food-card-3d">
+            <div class="food-card-inner">
+              <div class="food-card-front">
+                <div class="polaroid">
+                  <div class="polaroid-image-wrapper">
+                    <img src="./images/Mango_Lassi.jpg" alt="Mango Lassi" loading="lazy" />
+                    <div class="polaroid-tape"></div>
+                    <div class="polaroid-badge refreshing">🥤 Refreshing</div>
+                  </div>
+                  <div class="polaroid-caption">
+                    <h3>Mango Lassi</h3>
+                    <div class="polaroid-price">₹110</div>
+                    <span class="food-tag veg">Veg</span>
+                  </div>
+                </div>
+              </div>
+              <div class="food-card-back">
+                <div class="back-content">
+                  <h4>👨‍🍳 Chef's Notes</h4>
+                  <p>Chilled, creamy yogurt drink blended with sweet mango pulp. Perfectly balanced with a hint of cardamom.</p>
+                  <div class="back-details">
+                    <span>🥤 Cold</span>
+                    <span>⏱️ 5 mins</span>
+                    <span>🍽️ Serves 1</span>
+                  </div>
+                  <div class="back-ingredients">
+                    <strong>Key Ingredients:</strong>
+                    <span>Yogurt, Mango Pulp, Sugar, Cardamom</span>
+                  </div>
+                  <div class="back-allergens">
+                    <span>⚠️ Contains: Dairy</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Masala Chai - 3D Flip Card -->
+        <div class="menu-item" data-category="drinks" data-diet="veg">
+          <div class="food-card-3d">
+            <div class="food-card-inner">
+              <div class="food-card-front">
+                <div class="polaroid">
+                  <div class="polaroid-image-wrapper">
+                    <img src="./images/Masala_Chai.jpg" alt="Masala Chai" loading="lazy" />
+                    <div class="polaroid-tape"></div>
+                    <div class="polaroid-badge classic">⭐ Classic</div>
+                  </div>
+                  <div class="polaroid-caption">
+                    <h3>Masala Chai</h3>
+                    <div class="polaroid-price">₹70</div>
+                    <span class="food-tag veg">Veg</span>
+                  </div>
+                </div>
+              </div>
+              <div class="food-card-back">
+                <div class="back-content">
+                  <h4>👨‍🍳 Chef's Notes</h4>
+                  <p>Traditional Indian tea brewed with a blend of aromatic spices - cardamom, ginger, cinnamon, and cloves. Perfect for any time of day.</p>
+                  <div class="back-details">
+                    <span>☕ Hot</span>
+                    <span>⏱️ 5 mins</span>
+                    <span>🍽️ Serves 1</span>
+                  </div>
+                  <div class="back-ingredients">
+                    <strong>Key Ingredients:</strong>
+                    <span>Tea, Milk, Ginger, Cardamom, Cinnamon</span>
+                  </div>
+                  <div class="back-allergens">
+                    <span>⚠️ Contains: Dairy</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fresh Lime Soda - 3D Flip Card -->
+        <div class="menu-item" data-category="drinks" data-diet="veg">
+          <div class="food-card-3d">
+            <div class="food-card-inner">
+              <div class="food-card-front">
+                <div class="polaroid">
+                  <div class="polaroid-image-wrapper">
+                    <img src="./images/Fresh_Lime_Soda.jpg" alt="Fresh Lime Soda" loading="lazy" />
+                    <div class="polaroid-tape"></div>
+                    <div class="polaroid-badge refreshing">🥤 Refreshing</div>
+                  </div>
+                  <div class="polaroid-caption">
+                    <h3>Fresh Lime Soda</h3>
+                    <div class="polaroid-price">₹90</div>
+                    <span class="food-tag veg">Veg</span>
+                  </div>
+                </div>
+              </div>
+              <div class="food-card-back">
+                <div class="back-content">
+                  <h4>👨‍🍳 Chef's Notes</h4>
+                  <p>Fizzy lime soda available in sweet, salted, or mixed style. The perfect thirst-quencher on a warm day.</p>
+                  <div class="back-details">
+                    <span>🥤 Cold & Fizzy</span>
+                    <span>⏱️ 5 mins</span>
+                    <span>🍽️ Serves 1</span>
+                  </div>
+                  <div class="back-ingredients">
+                    <strong>Key Ingredients:</strong>
+                    <span>Lime, Soda, Sugar, Salt (optional)</span>
+                  </div>
+                  <div class="back-allergens">
+                    <span>✅ No Allergens</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== DESSERTS ===== -->
+        
+        <!-- Gulab Jamun - 3D Flip Card -->
+        <div class="menu-item" data-category="desserts" data-diet="veg">
+          <div class="food-card-3d">
+            <div class="food-card-inner">
+              <div class="food-card-front">
+                <div class="polaroid">
+                  <div class="polaroid-image-wrapper">
+                    <img src="./images/Gulab_Jamun.jpg" alt="Gulab Jamun" loading="lazy" />
+                    <div class="polaroid-tape"></div>
+                    <div class="polaroid-badge classic">⭐ Classic</div>
+                  </div>
+                  <div class="polaroid-caption">
+                    <h3>Gulab Jamun</h3>
+                    <div class="polaroid-price">₹120</div>
+                    <span class="food-tag veg">Veg</span>
+                  </div>
+                </div>
+              </div>
+              <div class="food-card-back">
+                <div class="back-content">
+                  <h4>👨‍🍳 Chef's Notes</h4>
+                  <p>Soft, spongy milk-solid dumplings fried to golden perfection and soaked in warm, fragrant sugar syrup with cardamom and rose water.</p>
+                  <div class="back-details">
+                    <span>🍰 Sweet</span>
+                    <span>⏱️ 15 mins</span>
+                    <span>🍽️ Serves 1</span>
+                  </div>
+                  <div class="back-ingredients">
+                    <strong>Key Ingredients:</strong>
+                    <span>Milk Solids, Sugar, Cardamom, Rose Water</span>
+                  </div>
+                  <div class="back-allergens">
+                    <span>⚠️ Contains: Dairy, Gluten</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rasmalai - 3D Flip Card -->
+        <div class="menu-item" data-category="desserts" data-diet="veg">
+          <div class="food-card-3d">
+            <div class="food-card-inner">
+              <div class="food-card-front">
+                <div class="polaroid">
+                  <div class="polaroid-image-wrapper">
+                    <img src="./images/Rasmalai.jpg" alt="Rasmalai" loading="lazy" />
+                    <div class="polaroid-tape"></div>
+                    <div class="polaroid-badge popular">🔥 Popular</div>
+                  </div>
+                  <div class="polaroid-caption">
+                    <h3>Rasmalai</h3>
+                    <div class="polaroid-price">₹140</div>
+                    <span class="food-tag veg">Veg</span>
+                  </div>
+                </div>
+              </div>
+              <div class="food-card-back">
+                <div class="back-content">
+                  <h4>👨‍🍳 Chef's Notes</h4>
+                  <p>Soft, melt-in-your-mouth paneer discs soaked in creamy, saffron-infused reduced milk. Garnished with pistachios.</p>
+                  <div class="back-details">
+                    <span>🍰 Sweet & Creamy</span>
+                    <span>⏱️ 20 mins</span>
+                    <span>🍽️ Serves 1</span>
+                  </div>
+                  <div class="back-ingredients">
+                    <strong>Key Ingredients:</strong>
+                    <span>Paneer, Milk, Saffron, Sugar, Pistachios</span>
+                  </div>
+                  <div class="back-allergens">
+                    <span>⚠️ Contains: Dairy</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kesar Pista Kulfi - 3D Flip Card -->
+        <div class="menu-item" data-category="desserts" data-diet="veg">
+          <div class="food-card-3d">
+            <div class="food-card-inner">
+              <div class="food-card-front">
+                <div class="polaroid">
+                  <div class="polaroid-image-wrapper">
+                    <img src="./images/Kulfi.jpg" alt="Kesar Pista Kulfi" loading="lazy" />
+                    <div class="polaroid-tape"></div>
+                    <div class="polaroid-badge refreshing">🥄 Delight</div>
+                  </div>
+                  <div class="polaroid-caption">
+                    <h3>Kesar Pista Kulfi</h3>
+                    <div class="polaroid-price">₹130</div>
+                    <span class="food-tag veg">Veg</span>
+                  </div>
+                </div>
+              </div>
+              <div class="food-card-back">
+                <div class="back-content">
+                  <h4>👨‍🍳 Chef's Notes</h4>
+                  <p>Traditional Indian ice cream with a rich, creamy texture, infused with aromatic saffron and loaded with crunchy pistachios.</p>
+                  <div class="back-details">
+                    <span>🍰 Frozen Delight</span>
+                    <span>⏱️ 10 mins</span>
+                    <span>🍽️ Serves 1</span>
+                  </div>
+                  <div class="back-ingredients">
+                    <strong>Key Ingredients:</strong>
+                    <span>Milk, Saffron, Pistachios, Sugar, Cardamom</span>
+                  </div>
+                  <div class="back-allergens">
+                    <span>⚠️ Contains: Dairy</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- Chef's Specials Section -->
 <section class="specials" id="specials">
