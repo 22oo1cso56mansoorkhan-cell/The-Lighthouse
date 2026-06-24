@@ -2,6 +2,8 @@
 // DOM ELEMENTS
 // =============================================
 const nav = document.getElementById("nav");
+const cuisineDropdown = document.getElementById("cuisine-filter");
+const menuSearch = document.getElementById("menu-search");
 const navToggle = document.getElementById("navToggle");
 const navMenu = document.getElementById("navMenu");
 const navLinks = document.querySelectorAll(".nav-link");
@@ -65,22 +67,7 @@ function updateAvailableTimes() {
   });
 }
 
-// ── Theme Toggle ──
-const savedTheme = localStorage.getItem('theme');
 
-if (savedTheme === 'light') {
-  document.body.classList.add('light-theme');
-  themeToggle.textContent = '☀️';
-} else {
-  themeToggle.textContent = '🌙';
-}
-
-themeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('light-theme');
-  const isLight = document.body.classList.contains('light-theme');
-  localStorage.setItem('theme', isLight ? 'light' : 'dark');
-  themeToggle.textContent = isLight ? '☀️' : '🌙';
-});
 
 // ── Navigation scroll effect ──
 function handleScroll() {
@@ -138,12 +125,56 @@ function closeMobileMenu() {
   document.body.style.overflow = '';
 }
 
-// ── Menu search & filter ────
-const filterBtns = document.querySelectorAll('.filter-btn');
-const menuSearch = document.getElementById('menu-search');
+// Menu tabs functionality
+function switchMenuTab(e) {
+  const targetTab = e.target.dataset.tab;
 
-function filterMenuItems(filter = 'all', searchText = '') {
-  const menuItems = document.querySelectorAll('.menu-item');
+  // Update tab buttons
+  menuTabs.forEach((tab) => {
+    tab.classList.remove("active");
+  });
+  e.target.classList.add("active");
+
+  // Update panels
+  menuPanels.forEach((panel) => {
+    panel.classList.remove("active");
+    if (panel.id === targetTab) {
+      panel.classList.add("active");
+    }
+  });
+}
+
+//
+// Theme Toggle
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "light") {
+  document.body.classList.add("light-theme");
+  themeToggle.textContent = "☀️";
+} else {
+  themeToggle.textContent = "🌙";
+}
+
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("light-theme");
+
+  const isLight = document.body.classList.contains("light-theme");
+
+  if (isLight) {
+    localStorage.setItem("theme", "light");
+    themeToggle.textContent = "☀️";
+  } else {
+    localStorage.setItem("theme", "dark");
+    themeToggle.textContent = "🌙";
+  }
+});
+
+// ── Menu Search and Filter ─────────────────────────
+
+
+
+function filterMenuItems(timeFilter, cuisineFilter, searchText) {
+  const menuItems = document.querySelectorAll(".menu-item");
   let visibleCount = 0;
 
   menuItems.forEach((item) => {
@@ -160,8 +191,9 @@ function filterMenuItems(filter = 'all', searchText = '') {
     }
   });
 
-  let noResults = document.querySelector('.no-results');
-  if (!visibleCount) {
+  // Handle "No Results" display
+  let noResults = document.querySelector(".no-results");
+  if (visibleCount === 0) {
     if (!noResults) {
       noResults = document.createElement('p');
       noResults.className = 'no-results';
@@ -172,12 +204,30 @@ function filterMenuItems(filter = 'all', searchText = '') {
     noResults.remove();
   }
 }
+function triggerFilter() {
+  const activeBtn = document.querySelector(".filter-btn.active");
+  const timeFilter = activeBtn ? activeBtn.dataset.filter : "all";
+  const cuisineFilter = cuisineDropdown ? cuisineDropdown.value : "all";
+  const searchText = menuSearch ? menuSearch.value : "";
+  
+  filterMenuItems(timeFilter, cuisineFilter, searchText);
+}
+if (cuisineDropdown) {
+  cuisineDropdown.addEventListener("change", triggerFilter);
+}
 
+if (menuSearch) {
+  menuSearch.addEventListener("input", triggerFilter);
+}
+// Filter buttons
 filterBtns.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach((b) => b.classList.remove('active'));
-    btn.classList.add('active');
-    filterMenuItems(btn.dataset.filter, menuSearch ? menuSearch.value : '');
+  btn.addEventListener("click", () => {
+    filterBtns.forEach((b) => b.classList.remove("active"));
+
+    btn.classList.add("active");
+    triggerFilter();
+
+    
   });
 });
 
@@ -188,7 +238,9 @@ if (menuSearch) {
   });
 }
 
-// ── Smooth scroll ──
+ 
+
+// Smooth scroll for navigation links
 function smoothScroll(e) {
   e.preventDefault();
   const targetId = this.getAttribute('href');
@@ -203,7 +255,7 @@ function smoothScroll(e) {
   }
   closeMobileMenu();
 }
-
+}
 // ── Reservation form submission ──
 function handleFormSubmit(e) {
   e.preventDefault();
@@ -517,6 +569,7 @@ if (reviewForm) {
 }
 
 // ── Veg / Non-Veg Filter ──────────────────────────────
+// 1. Your filtering function, contained properly
 (function () {
   const dietFilterBtns = document.querySelectorAll('.diet-btn');
   if (!dietFilterBtns.length) return;

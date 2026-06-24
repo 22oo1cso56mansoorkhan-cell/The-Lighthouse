@@ -1289,7 +1289,7 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   color: var(--color-primary);
   transform: scale(1.1);
 }
-
+}
 @media (max-width: 1024px) {
   .reviews-grid {
     grid-template-columns: repeat(2, 1fr);
