@@ -113,8 +113,6 @@ h4 {
   box-shadow: 0 8px 20px rgba(212, 175, 55, 0.35);
 }
 
-
-
 body.light-theme .hero .btn-outline {
   color: #f5f2ed;
   border-color: #f5f2ed;
@@ -126,9 +124,8 @@ body.light-theme .hero .btn-outline:hover {
   color: #ffffff;
 }
 
-/* Improve reservation section readability in light mode */
-
 body.light-theme .reservation .section-title,
+body.light-theme .reservation .reservation-info,
 body.light-theme .reservation .reservation-info p,
 body.light-theme .reservation .detail-item strong,
 body.light-theme .reservation .detail-item span {
@@ -141,8 +138,6 @@ body.light-theme .reservation .detail-item span {
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
 }
-
-
 
 .btn-full {
   width: 100%;
@@ -178,7 +173,7 @@ body.light-theme .reservation .detail-item span {
   font-family: var(--font-serif);
   font-size: 1.5rem;
   font-weight: 500;
-  color: #c9a962; /* Golden accent color for dark mode */
+  color: var(--color-primary);
 }
 
 .nav-menu {
@@ -288,22 +283,32 @@ body.light-theme .nav-cta:hover {
   color: #fff;
 }
 
-/* Light Theme Overrides for Hero and Reservation Sections */
-body.light-theme .hero-overlay {
-  background: linear-gradient(
-    to bottom,
-    rgba(247, 242, 233, 0.45) 0%,
-    rgba(247, 242, 233, 0.7) 50%,
-    var(--color-bg) 100%
-  );
+/* Improve navbar visibility over hero image in light mode */
+body.light-theme .nav:not(.scrolled) .nav-link {
+  color: #f5f2ed;
 }
 
+body.light-theme .nav:not(.scrolled) .nav-logo {
+  color: #f5f2ed;
+}
+
+body.light-theme .nav:not(.scrolled) .nav-cta {
+  color: #f5f2ed;
+  border-color: #f5f2ed;
+}
+
+/* Fix hero text visibility in light mode */
 body.light-theme .hero-title {
-  text-shadow: 0 2px 30px rgba(255, 255, 255, 0.6);
+  color: #f5f2ed;
 }
 
-body.light-theme .reservation-overlay {
-  background: rgba(247, 242, 233, 0.9);
+body.light-theme .hero-subtitle {
+  color: rgba(245, 242, 237, 0.9);
+}
+
+body.light-theme .hero-scroll span,
+body.light-theme .clicktoscroll {
+  color: rgba(245, 242, 237, 0.85);
 }
 
 .theme-toggle {
@@ -364,7 +369,7 @@ body.light-theme .reservation-overlay {
 
 .hero-content {
   text-align: center;
-  padding: 0 24px 50px 24px;
+  padding: 0 24px;
   color: #f5f2ed; /* Enforce light text over the dark background overlay across all themes */
 }
 
@@ -383,7 +388,6 @@ body.light-theme .reservation-overlay {
   font-size: clamp(3rem, 10vw, 7rem);
   font-weight: 300;
   margin-bottom: 16px;
-  color: #f5f2ed; /* Light color for dark mode */
   text-shadow: 0 4px 18px rgba(0, 0, 0, 0.7), 0 2px 40px rgba(0, 0, 0, 0.4);
 }
 
@@ -434,7 +438,7 @@ body.light-theme .btn-outline:hover {
 }
 .hero-scroll {
   position: absolute;
-  bottom: 10px;
+  bottom: 11px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -761,13 +765,7 @@ body.light-theme .btn-outline:hover {
   z-index: 1;
   pointer-events: none;
 }
-@media (max-width: 768px) {
 
-  .food-card {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
 .food-card:hover::before {
   opacity: 1;
 }
@@ -1302,17 +1300,6 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
 /* Footer */
 
 .footer {
@@ -1584,8 +1571,6 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   }
 }
 
-
-
 /* Responsive Design */
 @media (max-width: 1024px) {
   .about-grid,
@@ -1806,186 +1791,400 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   }
 }
 
-/* ── Skeleton Loaders: polished, reusable system ───────────────────────── */
-/* Theme-aware shimmer color variables */
-:root {
-  --skeleton-base: rgba(255,255,255,0.02);
-  --skeleton-highlight: rgba(255,255,255,0.06);
-}
-body.light-theme {
-  --skeleton-base: rgba(0,0,0,0.04);
-  --skeleton-highlight: rgba(0,0,0,0.06);
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-.skeleton {
-  position: relative;
-  overflow: hidden;
-  background-color: var(--skeleton-base);
-  border-radius: 6px;
-  will-change: opacity, transform;
-}
-
-.skeleton::after {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-  background: linear-gradient(90deg,
-    rgba(255,255,255,0) 0%,
-    var(--skeleton-highlight) 40%,
-    rgba(255,255,255,0) 80%);
-  transform: translateX(-100%);
-  animation: shimmer 1.2s linear infinite;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-  opacity: 0.95;
-}
-
-/* Utility: keep layout space to avoid CLS */
-.skeleton-placeholder {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-/* Image placeholder variants */
-.skeleton-img {
-  display: block;
-  width: 100%;
-  min-height: 120px;
-  background-color: var(--skeleton-base);
-  border-radius: 8px;
-}
-
-.skeleton-gallery {
-  width: 100%;
-  height: 220px;
-  border-radius: 8px;
-  background-color: var(--skeleton-base);
-}
-
-/* Card skeleton that mirrors .food-card layout */
-.skeleton-card {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  padding: 18px;
-  border-radius: 12px;
-  background-color: transparent; /* base color comes from .skeleton */
-  border: 1px solid transparent;
-}
-
-.skeleton-card .skeleton-img {
-  width: 220px;
-  height: 160px;
-  min-height: 120px;
-  border-radius: 10px;
-  flex-shrink: 0;
-}
-
-.skeleton-lines {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.skeleton-line {
-  height: 12px;
-  background-color: rgba(0,0,0,0.08);
-  border-radius: 6px;
-}
-.skeleton-line.short { width: 30%; }
-.skeleton-line.medium { width: 60%; }
-.skeleton-line.long { width: 90%; }
-
-/* Text block placeholders (multiple lines) */
-.skeleton-block {
-  display: block;
-  width: 100%;
-  border-radius: 6px;
-  background-color: var(--skeleton-base);
-}
-.skeleton-block.lines-1 { height: 16px; }
-.skeleton-block.lines-2 { height: 36px; }
-.skeleton-block.lines-3 { height: 56px; }
-.skeleton-block.paragraph {
-  height: auto;
-  padding: 8px 0;
-}
-
-/* Overlay wrapper that preserves original DOM structure */
-.skeleton-wrapper {
-  position: relative;
-}
-.skeleton-overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 2;
-}
-
-/* Image visibility helpers */
-.image-hidden { opacity: 0; transition: opacity 0.45s ease; }
-.image-loaded { opacity: 1 !important; transition: opacity 0.45s ease; }
-
-/* Content visibility helpers for text blocks */
-.content-hidden { opacity: 0; transition: opacity 0.45s ease; }
-.content-visible { opacity: 1 !important; transition: opacity 0.45s ease; }
-
-/* Fade helper for skeleton removal */
-.skeleton-fade { transition: opacity 0.45s ease; }
-
-/* Accessibility: respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .skeleton::after { animation: none; opacity: 0.6; }
-}
-
-/* Light theme tweaks */
-body.light-theme .skeleton-line,
-body.light-theme .skeleton-img,
-body.light-theme .skeleton-gallery,
-body.light-theme .skeleton-block {
-  background-color: var(--skeleton-base);
-}
-
-/* Responsive tuning */
-@media (max-width: 1024px) {
-  .skeleton-card .skeleton-img { width: 180px; height: 140px; }
-}
-@media (max-width: 768px) {
-  .skeleton-card { flex-direction: column; }
-  .skeleton-card .skeleton-img { width: 100%; height: 200px; }
-  .skeleton-gallery { height: 160px; }
-}
-
 /* =============================================
    Veg / Non-Veg Diet Filter
    ============================================= */
 .diet-filter {
   display: flex;
-  gap: 10px;
-  margin-bottom: 1rem;
+  justify-content: center;
+  gap: 12px;
+  margin: 1.5rem 0 2rem;
+  flex-wrap: wrap;
 }
 
-.cuisine-dropdown {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  background-color: var(--bg-color);
-  color: goldenrod;
+.diet-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px 22px;
+  border: 1px solid var(--color-border);
+  background-color: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 30px;
 }
-/* Menu Category Count */
-.category-count {
+
+.diet-btn:hover,
+.diet-btn.active {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  border-color: var(--color-primary);
+}
+
+.diet-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.veg-dot {
+  background: #4caf50;
+  border: 1.5px solid #388e3c;
+}
+
+.non-veg-dot {
+  background: #e53935;
+  border: 1.5px solid #b71c1c;
+}
+
+/* Hidden menu items during filter */
+.menu-item.diet-hidden {
+  display: none;
+}
+
+/* No results message */
+.diet-no-results {
   text-align: center;
-  font-weight: 500;
+  color: var(--color-primary, #c9a962);
+  font-style: italic;
+  padding: 2rem 0;
+  font-size: 1rem;
+  display: none;
+}
+
+.diet-no-results.visible {
+  display: block;
+}
+/* =============================================
+   3D CARD FLIP WITH POLAROID STYLE
+   ============================================= */
+
+/* Container for the entire flip card */
+.menu-item {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.food-card-3d {
+  perspective: 1500px;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.food-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
+}
+
+/* Flip on hover */
+.food-card-3d:hover .food-card-inner {
+  transform: rotateY(180deg) scale(1.02);
+}
+
+/* Front and Back faces */
+.food-card-front,
+.food-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Front Face - Polaroid Style */
+.food-card-front {
+  transform: rotateY(0deg);
+  transition: transform 0.3s ease;
+}
+
+.polaroid {
+  background: var(--color-bg-card);
+  border-radius: 12px;
+  padding: 16px 16px 20px 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid var(--color-border);
+  height: 100%;
+}
+
+/* Rotation on hover - gives that polaroid tilt effect */
+.food-card-3d:hover .polaroid {
+  transform: rotate(-2deg) scale(0.98);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Alternate rotation direction for even cards */
+.menu-item:nth-child(even) .food-card-3d:hover .polaroid {
+  transform: rotate(2deg) scale(0.98);
+}
+
+/* Polaroid Image Wrapper */
+.polaroid-image-wrapper {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
   margin-bottom: 12px;
 }
 
-.category-count span {
-  font-weight: 700;
-  color: #e67e22;
+.polaroid-image-wrapper img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.polaroid-image-wrapper:hover img {
+  transform: scale(1.08);
+}
+
+/* Decorative Tape on Polaroid */
+.polaroid-tape {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 60px;
+  height: 30px;
+  background: rgba(255, 200, 100, 0.6);
+  clip-path: polygon(10% 0%, 90% 0%, 85% 100%, 15% 100%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item:nth-child(even) .polaroid-tape {
+  transform: translateX(-50%) rotate(3deg);
+}
+
+.food-card-3d:hover .polaroid-tape {
+  opacity: 0.9;
+  transform: translateX(-50%) rotate(0deg) scale(1.1);
+}
+
+/* Badges on Polaroid */
+.polaroid-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+
+.polaroid-badge.popular {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: white;
+}
+
+.polaroid-badge.classic {
+  background: linear-gradient(135deg, #f9ca24, #f0932b);
+  color: white;
+}
+
+.polaroid-badge.chef {
+  background: linear-gradient(135deg, #6ab04c, #218c53);
+  color: white;
+}
+
+.polaroid-badge.signature {
+  background: linear-gradient(135deg, #c9a962, #a88b4a);
+  color: white;
+}
+
+.polaroid-badge.refreshing {
+  background: linear-gradient(135deg, #22a6b3, #1b7b86);
+  color: white;
+}
+
+/* Polaroid Caption */
+.polaroid-caption {
+  padding: 8px 4px 4px 4px;
+}
+
+.polaroid-caption h3 {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+  color: var(--color-text);
+}
+
+.polaroid-price {
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* ===== BACK FACE STYLES ===== */
+.food-card-back {
+  transform: rotateY(180deg);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.back-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.back-content h4 {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+
+.back-content p {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.back-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 4px 0;
+}
+
+.back-details span {
+  background: var(--color-bg);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+
+.back-ingredients {
+  margin-top: 4px;
+}
+
+.back-ingredients strong {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+
+.back-ingredients span {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.back-allergens {
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border);
+}
+
+.back-allergens span {
+  font-size: 0.8rem;
+  color: #ff6b6b;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .food-card-inner {
+    min-height: 300px;
+  }
+  
+  .food-card-front,
+  .food-card-back {
+    min-height: 300px;
+  }
+  
+  .polaroid-image-wrapper img {
+    height: 160px;
+  }
+  
+  .food-card-3d:hover .food-card-inner {
+    transform: rotateY(180deg) scale(1.01);
+  }
+  
+  .back-content p {
+    font-size: 0.8rem;
+  }
+  
+  .back-details span {
+    font-size: 0.7rem;
+    padding: 2px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .polaroid {
+    padding: 12px 12px 16px 12px;
+  }
+  
+  .polaroid-image-wrapper img {
+    height: 140px;
+  }
+  
+  .polaroid-caption h3 {
+    font-size: 1rem;
+  }
+  
+  .food-card-inner {
+    min-height: 280px;
+  }
+  
+  .food-card-front,
+  .food-card-back {
+    min-height: 280px;
+  }
+  
+  .back-content {
+    gap: 8px;
+  }
+  
+  .back-content h4 {
+    font-size: 1rem;
+  }
+}
+
+/* Dark/Light theme support */
+body.light-theme .polaroid {
+  background: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .food-card-back {
+  background: #ffffff;
+}
+
+body.light-theme .back-details span {
+  background: var(--color-bg-lighter);
+}
+
+body.light-theme .polaroid-tape {
+  background: rgba(255, 200, 100, 0.8);
 }
