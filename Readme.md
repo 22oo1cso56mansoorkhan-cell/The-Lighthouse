@@ -316,6 +316,32 @@ git push origin feature-name
 
 ---
 
+## 💖 Contributors
+
+Thanks to all the amazing people who contribute to **The Lighthouse** 🚀
+
+<p align="center">
+  <a href="https://github.com/anushkasark08/The-Lighthouse/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=anushkasark08/The-Lighthouse" alt="Contributors"/>
+  </a>
+</p>
+
+---
+
+## ⭐ Project Support
+
+<p align="center">
+  <a href="https://github.com/anushkasark08/The-Lighthouse/stargazers">
+    <img src="https://img.shields.io/github/stars/anushkasark08/The-Lighthouse?style=social" alt="Stars">
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://github.com/anushkasark08/The-Lighthouse/network/members">
+    <img src="https://img.shields.io/github/forks/anushkasark08/The-Lighthouse?style=social" alt="Forks">
+  </a>
+</p>
+
+---
+
 # 📜 License
 
 This project is licensed under the **MIT License**.
