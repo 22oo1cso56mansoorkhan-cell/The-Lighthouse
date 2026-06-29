@@ -1,8 +1,873 @@
 // =============================================
+// EMBEDDED TRANSLATIONS - No external files needed
+// =============================================
+const TRANSLATIONS = {
+  en: {
+    nav: {
+      logo: "The Lighthouse",
+      home: "Home",
+      about: "About",
+      chef: "Chef's Picks",
+      menu: "Menu",
+      reservation: "Reservations",
+      reviews: "Reviews",
+      location: "Location",
+      book_table: "Book a Table"
+    },
+    hero: {
+      title: "The Lighthouse",
+      tagline: "Est. 1987",
+      subtitle: "Where culinary artistry meets timeless elegance",
+      explore_menu: "Explore Menu",
+      reserve_table: "Reserve Table",
+      scroll_discover: "Scroll To Discover",
+      click_scroll: "Click To Scroll"
+    },
+    about: {
+      story: "Our Story",
+      title: "A Legacy of Flavor",
+      text_1: "For over three decades, The Lighthouse has been a beacon of culinary excellence. Our chef combines classical techniques with modern innovation, sourcing only the finest seasonal ingredients from local farms and trusted suppliers.",
+      text_2: "Every dish tells a story, every meal creates a memory. We invite you to experience the art of fine dining in an atmosphere of warmth and sophistication."
+    },
+    chef_picks: {
+      label: "Chef's recommendations"
+    },
+    menu: {
+      label: "Culinary Offerings",
+      title: "Our Menu",
+      search_placeholder: "Search dishes...",
+      filter_all: "All",
+      filter_breakfast: "Breakfast",
+      filter_lunch: "Lunch",
+      filter_dinner: "Dinner",
+      filter_desserts: "Desserts",
+      filter_drinks: "Drinks",
+      diet_all: "All Items",
+      diet_veg: "Veg",
+      diet_nonveg: "Non-Veg",
+      diet_no_results: "No items match this diet preference",
+      no_results: "No items found",
+      showing_items: "Showing {{count}} items",
+      chef_notes: "👨‍🍳 Chef's Notes",
+      key_ingredients: "Key Ingredients:",
+      contains: "⚠️ Contains:",
+      ratings: "Ratings",
+      tags: {
+        veg: "Veg",
+        nonveg: "Non-Veg",
+        popular: "🔥 Popular",
+        classic: "⭐ Classic",
+        chef_pick: "👨‍🍳 Chef's Pick",
+        signature: "👑 Signature",
+        refreshing: "🥤 Refreshing"
+      },
+      items: {
+        chicken_keema_dosa: {
+          name: "Chicken Keema Dosa",
+          desc: "Crispy dosa stuffed with spicy chicken keema masala",
+          notes: "Crispy golden dosa generously stuffed with spicy minced chicken masala, perfectly seasoned with aromatic spices and herbs.",
+          details_spicy: "🌶️ Hot",
+          details_time: "⏱️ 20 mins",
+          details_serves: "🍽️ Serves 1",
+          ingredients: "Chicken, Rice Batter, Onion, Ginger, Garlic, Spices",
+          allergens: "Gluten, Dairy"
+        },
+        paneer_butter_masala: {
+          name: "Paneer Butter Masala",
+          desc: "Rich creamy paneer curry served with butter naan",
+          notes: "Rich and creamy paneer curry cooked in a buttery tomato gravy with a blend of aromatic spices. Best enjoyed with butter naan.",
+          details_spicy: "🌶️ Medium",
+          details_time: "⏱️ 25 mins",
+          details_serves: "🍽️ Serves 2",
+          ingredients: "Paneer, Tomato, Butter, Cream, Kasuri Methi",
+          allergens: "Dairy, Gluten"
+        },
+        masala_dosa: {
+          name: "Masala Dosa",
+          notes: "Golden crispy dosa made from fermented rice and lentil batter, filled with spiced potato masala. Served with fresh coconut chutney and sambar.",
+          details_spicy: "🌶️ Medium Spicy",
+          details_time: "⏱️ 15 mins",
+          details_serves: "🍽️ Serves 1",
+          ingredients: "Rice, Urad Dal, Potato, Onion, Curry Leaves",
+          allergens: "Gluten"
+        },
+        idli_sambar: {
+          name: "Idli Sambar",
+          notes: "Soft, fluffy steamed idlis made from fermented rice and urad dal, served with hot, flavorful sambar and fresh coconut chutney.",
+          details_spicy: "🌶️ Mild",
+          details_time: "⏱️ 10 mins",
+          details_serves: "🍽️ Serves 1",
+          ingredients: "Rice, Urad Dal, Toor Dal, Vegetables, Coconut",
+          allergens: "Gluten, Dairy"
+        },
+        hyderabadi_chicken_biryani: {
+          name: "Hyderabadi Chicken Biryani",
+          notes: "Fragrant dum biryani layered with tender chicken, basmati rice, and a secret blend of authentic Hyderabad spices. Slow-cooked to perfection.",
+          details_spicy: "🌶️ Hot",
+          details_time: "⏱️ 40 mins",
+          details_serves: "🍽️ Serves 2",
+          ingredients: "Chicken, Basmati Rice, Saffron, Mint, Fried Onions",
+          allergens: "Dairy, Gluten"
+        },
+        butter_chicken: {
+          name: "Butter Chicken",
+          notes: "Succulent chicken cooked in a creamy tomato-based gravy with butter and aromatic spices. A timeless classic served with naan.",
+          details_spicy: "🌶️ Mild",
+          details_time: "⏱️ 30 mins",
+          details_serves: "🍽️ Serves 2",
+          ingredients: "Chicken, Tomato, Butter, Cream, Kasuri Methi",
+          allergens: "Dairy, Gluten"
+        },
+        mango_lassi: {
+          name: "Mango Lassi",
+          notes: "Chilled, creamy yogurt drink blended with sweet mango pulp. Perfectly balanced with a hint of cardamom.",
+          details_spicy: "🥤 Cold",
+          details_time: "⏱️ 5 mins",
+          details_serves: "🍽️ Serves 1",
+          ingredients: "Yogurt, Mango Pulp, Sugar, Cardamom",
+          allergens: "Dairy"
+        },
+        masala_chai: {
+          name: "Masala Chai",
+          notes: "Traditional Indian tea brewed with a blend of aromatic spices — cardamom, ginger, cinnamon, and cloves. Perfect for any time of day.",
+          details_spicy: "☕ Hot",
+          details_time: "⏱️ 5 mins",
+          details_serves: "🍽️ Serves 1",
+          ingredients: "Tea, Milk, Ginger, Cardamom, Cinnamon",
+          allergens: "Dairy"
+        },
+        fresh_lime_soda: {
+          name: "Fresh Lime Soda",
+          notes: "Fizzy lime soda available in sweet, salted, or mixed style. The perfect thirst-quencher on a warm day.",
+          details_spicy: "🥤 Cold & Fizzy",
+          details_time: "⏱️ 5 mins",
+          details_serves: "🍽️ Serves 1",
+          ingredients: "Lime, Soda, Sugar, Salt (optional)",
+          allergens: "✅ No Allergens"
+        },
+        gulab_jamun: {
+          name: "Gulab Jamun",
+          notes: "Soft, spongy milk-solid dumplings fried to golden perfection and soaked in warm, fragrant sugar syrup with cardamom and rose water.",
+          details_spicy: "🍰 Sweet",
+          details_time: "⏱️ 15 mins",
+          details_serves: "🍽️ Serves 1",
+          ingredients: "Milk Solids, Sugar, Cardamom, Rose Water",
+          allergens: "Dairy, Gluten"
+        },
+        rasmalai: {
+          name: "Rasmalai",
+          notes: "Soft, melt-in-your-mouth paneer discs soaked in creamy, saffron-infused reduced milk. Garnished with pistachios.",
+          details_spicy: "🍰 Sweet & Creamy",
+          details_time: "⏱️ 20 mins",
+          details_serves: "🍽️ Serves 1",
+          ingredients: "Paneer, Milk, Saffron, Sugar, Pistachios",
+          allergens: "Dairy"
+        },
+        kesar_pista_kulfi: {
+          name: "Kesar Pista Kulfi",
+          notes: "Rich, creamy Indian ice cream infused with saffron and loaded with crunchy pistachios. A royal treat to end your meal.",
+          details_spicy: "🍰 Sweet & Nutty",
+          details_time: "⏱️ 10 mins",
+          details_serves: "🍽️ Serves 1",
+          ingredients: "Milk, Saffron, Pistachios, Sugar, Cardamom",
+          allergens: "Dairy, Nuts"
+        }
+      }
+    },
+    reservation: {
+      label: "Reservations",
+      title: "Book Your Table",
+      text: "We look forward to welcoming you to The Lighthouse. Reserve your table for an unforgettable dining experience.",
+      hours: "Opening Hours",
+      hours_text: "Mon–Sun: 7:00 AM – 11:00 PM",
+      phone: "Phone",
+      phone_number: "+1 (555) 123-4567",
+      address: "Address",
+      address_text: "123 Harbor View Drive, Coastal City, CA 90210",
+      full_name: "Full Name",
+      name_placeholder: "John Doe",
+      email: "Email",
+      email_placeholder: "john@example.com",
+      email_error: "Please enter a valid email address",
+      phone_label: "Phone",
+      phone_placeholder: "+1 555 123 4567",
+      phone_error: "Please enter a valid 10-digit phone number",
+      guests: "Number of Guests",
+      select_guests: "Select guests",
+      date: "Date",
+      time: "Time",
+      select_time: "Select time",
+      special_requests: "Special Requests",
+      special_placeholder: "Dietary restrictions, allergies, special occasions...",
+      submit: "Reserve Now",
+      submit_requested: "Submitting...",
+      note: "We'll confirm your reservation within 24 hours."
+    },
+    reviews: {
+      label: "Guest Reviews",
+      title: "What Our Guests Say",
+      pinned_review_text: "An absolutely magical dining experience! The ambiance, the service, and most importantly the food - everything was impeccable. The chef's tasting menu is a journey through culinary excellence. Will definitely be coming back!",
+      pinned_review_date: "December 2024",
+      write_review: "Share Your Experience",
+      your_name: "Your Name",
+      name_placeholder: "Enter your name",
+      name_error: "Please enter a valid name (3-30 characters, letters only)",
+      rating: "Rating",
+      rating_error: "Please select a rating",
+      review: "Your Review",
+      review_placeholder: "Tell us about your dining experience...",
+      text_length_error: "Please write at least 20 characters",
+      meaningful_error: "Please write a more meaningful review",
+      submit: "Submit Review",
+      success_msg: "Thank you for your review!",
+      review_count: "reviews"
+    },
+    location: {
+      label: "Visit Us",
+      title: "Find Us",
+      address_line1: "123 Harbor View Drive",
+      address_line2: "Coastal City, CA 90210",
+      hours_title: "Opening Hours",
+      mon_thu: "Monday – Thursday",
+      fri_sat: "Friday – Saturday",
+      sunday: "Sunday",
+      contact_title: "Contact",
+      phone_label: "Phone:",
+      phone_number: "+1 (555) 123-4567",
+      email_label: "Email:",
+      email: "hello@thelighthouse.com",
+      instagram: "Instagram",
+      facebook: "Facebook",
+      twitter: "Twitter"
+    },
+    footer: {
+      brand: "The Lighthouse",
+      tagline: "Where culinary artistry meets timeless elegance. Est. 1987",
+      quick_links: "Quick Links",
+      support: "Support",
+      faq: "FAQ",
+      privacy: "Privacy Policy",
+      terms: "Terms of Service",
+      contact: "Contact Us",
+      newsletter: "Newsletter",
+      newsletter_text: "Subscribe for exclusive offers & updates",
+      newsletter_placeholder: "Enter your email",
+      newsletter_btn: "Subscribe",
+      copyright: "© {{year}} The Lighthouse. All rights reserved.",
+      cookie: "Cookie Policy",
+      back_to_top: "Back to top"
+    }
+  },
+  hi: {
+    nav: {
+      logo: "द लाइटहाउस",
+      home: "होम",
+      about: "हमारे बारे में",
+      chef: "शेफ की पसंद",
+      menu: "मेन्यू",
+      reservation: "आरक्षण",
+      reviews: "समीक्षाएं",
+      location: "स्थान",
+      book_table: "टेबल बुक करें"
+    },
+    hero: {
+      title: "द लाइटहाउस",
+      tagline: "स्था. 1987",
+      subtitle: "जहाँ पाक कला कालजयी भव्यता से मिलती है",
+      explore_menu: "मेन्यू देखें",
+      reserve_table: "टेबल आरक्षित करें",
+      scroll_discover: "खोजने के लिए स्क्रॉल करें",
+      click_scroll: "स्क्रॉल करने के लिए क्लिक करें"
+    },
+    about: {
+      story: "हमारी कहानी",
+      title: "स्वाद की एक विरासत",
+      text_1: "तीन दशकों से अधिक समय से, द लाइटहाउस बेजोड़ पाक कला का प्रतीक रहा है। हमारे शेफ पारंपरिक तकनीकों को आधुनिक नवाचार के साथ मिलाते हैं, और केवल स्थानीय खेतों और विश्वसनीय विक्रेताओं से बेहतरीन मौसमी सामग्री मंगवाते हैं।",
+      text_2: "हर व्यंजन एक कहानी कहता है, हर भोजन एक याद बनाता है। हम आपको गर्मजोशी और परिष्कार के माहौल में बेहतरीन भोजन का अनुभव करने के लिए आमंत्रित करते हैं।"
+    },
+    chef_picks: {
+      label: "शेफ की सिफारिशें"
+    },
+    menu: {
+      label: "पाक पेशकश",
+      title: "हमारा मेन्यू",
+      search_placeholder: "व्यंजन खोजें...",
+      filter_all: "सभी",
+      filter_breakfast: "नाश्ता",
+      filter_lunch: "दोपहर का भोजन",
+      filter_dinner: "रात का भोजन",
+      filter_desserts: "मीठा",
+      filter_drinks: "पेय पदार्थ",
+      diet_all: "सभी व्यंजन",
+      diet_veg: "शाकाहारी",
+      diet_nonveg: "मांसाहारी",
+      diet_no_results: "चुने गए फ़िल्टर से कोई व्यंजन मेल नहीं खाता",
+      no_results: "कोई व्यंजन नहीं मिला",
+      showing_items: "{{count}} आइटम दिखा रहे हैं",
+      chef_notes: "👨‍🍳 शेफ के नोट्स",
+      key_ingredients: "मुख्य सामग्री:",
+      contains: "⚠️ शामिल है:",
+      ratings: "रेटिंग",
+      tags: {
+        veg: "शाकाहारी",
+        nonveg: "मांसाहारी",
+        popular: "🔥 लोकप्रिय",
+        classic: "⭐ क्लासिक",
+        chef_pick: "👨‍🍳 शेफ की पसंद",
+        signature: "👑 सिग्नेचर",
+        refreshing: "🥤 ताज़गी भरा"
+      },
+      items: {
+        chicken_keema_dosa: {
+          name: "चिकन कीमा डोसा",
+          desc: "मसालेदार चिकन कीमा मसाला से भरा हुआ कुरकुरा डोसा",
+          notes: "मसालेदार कीमा चिकन से भरपूर सुनहरा कुरकुरा डोसा, सुगंधित मसालों और जड़ी-बूटियों के साथ पूरी तरह से स्वादिष्ट।",
+          details_spicy: "🌶️ तीखा",
+          details_time: "⏱️ 20 मिनट",
+          details_serves: "🍽️ 1 व्यक्ति",
+          ingredients: "चिकन, चावल का घोल, प्याज, अदरक, लहसुन, मसाले",
+          allergens: "ग्लूटेन, डेयरी"
+        },
+        paneer_butter_masala: {
+          name: "पनीर बटर मसाला",
+          desc: "बटर नान के साथ परोसी जाने वाली मलाईदार पनीर करी",
+          notes: "मक्खन और टमाटर की ग्रेवी में सुगंधित मसालों के मिश्रण के साथ पकाई गई मलाईदार पनीर करी। बटर नान के साथ इसका सबसे अच्छा आनंद लिया जाता है।",
+          details_spicy: "🌶️ मध्यम",
+          details_time: "⏱️ 25 मिनट",
+          details_serves: "🍽️ 2 व्यक्ति",
+          ingredients: "पनीर, टमाटर, मक्खन, क्रीम, कसूरी मेथी",
+          allergens: "डेयरी, ग्लूटेन"
+        },
+        masala_dosa: {
+          name: "मासाला डोसा",
+          notes: "किण्वित चावल और दाल के घोल से बना सुनहरा कुरकुरा डोसा, जिसमें मसालेदार आलू का मसाला भरा होता है। ताज़ा नारियल की चटनी और सांभर के साथ परोसा जाता है।",
+          details_spicy: "🌶️ मध्यम मसालेदार",
+          details_time: "⏱️ 15 मिनट",
+          details_serves: "🍽️ 1 व्यक्ति",
+          ingredients: "चावल, उड़द दाल, आलू, प्याज, करी पत्ता",
+          allergens: "ग्लूटेन"
+        },
+        idli_sambar: {
+          name: "इडली सांभर",
+          notes: "किण्वित चावल और उड़द दाल से बनी नरम, फूली हुई उबली हुई इडली, जिसे गरमागरम, स्वादिष्ट सांभर और ताज़ा नारियल की चटनी के साथ परोसा जाता है।",
+          details_spicy: "🌶️ हल्का",
+          details_time: "⏱️ 10 मिनट",
+          details_serves: "🍽️ 1 व्यक्ति",
+          ingredients: "चावल, उड़द दाल, तूर दाल, सब्जियां, नारियल",
+          allergens: "ग्लूटेन, डेयरी"
+        },
+        hyderabadi_chicken_biryani: {
+          name: "हैदराबादी चिकन बिरयानी",
+          notes: "नरम चिकन, बासमती चावल और प्रामाणिक हैदराबादी मसालों के गुप्त मिश्रण के साथ परतदार सुगंधित दम बिरयानी। धीमी आंच पर पकाई गई।",
+          details_spicy: "🌶️ तीखा",
+          details_time: "⏱️ 40 मिनट",
+          details_serves: "🍽️ 2 व्यक्ति",
+          ingredients: "चिकन, बासमती चावल, केसर, पुदीना, तली हुई प्याज",
+          allergens: "डेयरी, ग्लूटेन"
+        },
+        butter_chicken: {
+          name: "बटर चिकन",
+          notes: "मक्खन और सुगंधित मसालों के साथ मलाईदार टमाटर आधारित ग्रेवी में पकाया गया रसीला चिकन। नान के साथ परोसा जाने वाला एक सदाबहार व्यंजन।",
+          details_spicy: "🌶️ हल्का",
+          details_time: "⏱️ 30 मिनट",
+          details_serves: "🍽️ 2 व्यक्ति",
+          ingredients: "चिकन, टमाटर, मक्खन, क्रीम, कसूरी मेथी",
+          allergens: "डेयरी, ग्लूटेन"
+        },
+        mango_lassi: {
+          name: "मैंगो लस्सी",
+          notes: "मीठे आम के गूदे के साथ मिलाया गया ठंडा, मलाईदार दही का पेय। इलायची के संकेत के साथ पूरी तरह से संतुलित।",
+          details_spicy: "🥤 ठंडा",
+          details_time: "⏱️ 5 मिनट",
+          details_serves: "🍽️ 1 व्यक्ति",
+          ingredients: "दही, आम का गूदा, चीनी, इलायची",
+          allergens: "डेयरी"
+        },
+        masala_chai: {
+          name: "मसाला चाय",
+          notes: "सुगंधित मसालों — इलायची, अदरक, दालचीनी और लौंग के मिश्रण से बनी पारंपरिक भारतीय चाय। दिन के किसी भी समय के लिए आदर्श।",
+          details_spicy: "☕ गर्म",
+          details_time: "⏱️ 5 मिनट",
+          details_serves: "🍽️ 1 व्यक्ति",
+          ingredients: "चाय पत्ती, दूध, अदरक, इलायची, दालचीनी",
+          allergens: "डेयरी"
+        },
+        fresh_lime_soda: {
+          name: "फ्रेश लाइम सोडा",
+          notes: "मीठा, नमकीन या मिश्रित शैली में उपलब्ध फ़िज़ी नींबू सोडा। गर्मी के दिनों में प्यास बुझाने का सबसे अच्छा तरीका।",
+          details_spicy: "🥤 ठंडा और फ़िज़ी",
+          details_time: "⏱️ 5 मिनट",
+          details_serves: "🍽️ 1 व्यक्ति",
+          ingredients: "नींबू, सोडा, चीनी, नमक (वैकल्पिक)",
+          allergens: "✅ कोई एलर्जी कारक नहीं"
+        },
+        gulab_jamun: {
+          name: "गुलाब जामुन",
+          notes: "नरम, स्पंजी मावा के गोले सुनहरे भूरे होने तक तले हुए और इलायची और गुलाब जल की खुशबू वाली गर्म चाशनी में डूबे हुए।",
+          details_spicy: "🍰 मीठा",
+          details_time: "⏱️ 15 मिनट",
+          details_serves: "🍽️ 1 व्यक्ति",
+          ingredients: "खोया/मावा, चीनी, इलायची, गुलाब जल",
+          allergens: "डेयरी, ग्लूटेन"
+        },
+        rasmalai: {
+          name: "रसमलाई",
+          notes: "मलाईदार, केसर युक्त दूध में डूबी हुई नरम, मुँह में घुल जाने वाली छेने की टिकिया। पिस्ते से सजाई गई।",
+          details_spicy: "🍰 मीठा और मलाईदार",
+          details_time: "⏱️ 20 मिनट",
+          details_serves: "🍽️ 1 व्यक्ति",
+          ingredients: "पनीर/छेना, दूध, केसर, चीनी, पिस्ता",
+          allergens: "डेयरी"
+        },
+        kesar_pista_kulfi: {
+          name: "केसर पिस्ता कुल्फी",
+          notes: "एक समृद्ध, मलाईदार बनावट वाली पारंपरिक भारतीय आइसक्रीम, केसर से भरपूर और कड़क पिस्ते के टुकड़ों के साथ।",
+          details_spicy: "🍰 मीठा और नटी",
+          details_time: "⏱️ 10 मिनट",
+          details_serves: "🍽️ 1 व्यक्ति",
+          ingredients: "दूध, केसर, पिस्ता, चीनी, इलायची",
+          allergens: "डेयरी, नट्स"
+        }
+      }
+    },
+    reservation: {
+      label: "आरक्षण",
+      title: "अपनी टेबल बुक करें",
+      text: "हम द लाइटहाउस में आपका स्वागत करने के लिए उत्सुक हैं। एक अविस्मरणीय भोजन अनुभव के लिए अपनी टेबल आरक्षित करें।",
+      hours: "खुलने का समय",
+      hours_text: "सोम–रवि: सुबह 7:00 बजे – रात 11:00 बजे",
+      phone: "फ़ोन",
+      phone_number: "+1 (555) 123-4567",
+      address: "पता",
+      address_text: "123 हार्बर व्यू ड्राइव, कोस्टल सिटी, सीए 90210",
+      full_name: "पूरा नाम",
+      name_placeholder: "जॉन डो",
+      email: "ईमेल",
+      email_placeholder: "john@example.com",
+      email_error: "कृपया एक वैध ईमेल पता दर्ज करें",
+      phone_label: "फ़ोन",
+      phone_placeholder: "+1 555 123 4567",
+      phone_error: "कृपया 10 अंकों का वैध फ़ोन नंबर दर्ज करें",
+      guests: "मेहमानों की संख्या",
+      select_guests: "मेहमान चुनें",
+      date: "तारीख",
+      time: "समय",
+      select_time: "समय चुनें",
+      special_requests: "विशेष अनुरोध",
+      special_placeholder: "आहार प्रतिबंध, एलर्जी, विशेष अवसर...",
+      submit: "अभी आरक्षित करें",
+      submit_requested: "सबमिट हो रहा है...",
+      note: "हम 24 घंटे के भीतर आपके आरक्षण की पुष्टि करेंगे।"
+    },
+    reviews: {
+      label: "अतिथि समीक्षाएं",
+      title: "हमारे मेहमान क्या कहते हैं",
+      pinned_review_text: "एक बिल्कुल जादुई भोजन अनुभव! माहौल, सेवा, और सबसे महत्वपूर्ण रूप से भोजन - सब कुछ दोषरहित था। शेफ का टेस्टिंग मेनू पाक उत्कृष्टता की एक यात्रा है। निश्चित रूप से फिर से आऊंगा!",
+      pinned_review_date: "दिसंबर 2024",
+      write_review: "अपना अनुभव साझा करें",
+      your_name: "आपका नाम",
+      name_placeholder: "अपना नाम दर्ज करें",
+      name_error: "कृपया एक वैध नाम दर्ज करें (3-30 वर्ण, केवल अक्षर)",
+      rating: "रेटिंग",
+      rating_error: "कृपया एक रेटिंग चुनें",
+      review: "आपकी समीक्षा",
+      review_placeholder: "हमें अपने भोजन अनुभव के बारे में बताएं...",
+      text_length_error: "कृपया कम से कम 20 वर्ण लिखें",
+      meaningful_error: "कृपया अधिक अर्थपूर्ण समीक्षा लिखें",
+      submit: "समीक्षा सबमिट करें",
+      success_msg: "आपकी समीक्षा के लिए धन्यवाद!",
+      review_count: "समीक्षाएं"
+    },
+    location: {
+      label: "हमसे मिलें",
+      title: "हमें खोजें",
+      address_line1: "123 हार्बर व्यू ड्राइव",
+      address_line2: "कोस्टल सिटी, सीए 90210",
+      hours_title: "खुलने का समय",
+      mon_thu: "सोमवार – गुरुवार",
+      fri_sat: "शुक्रवार – शनिवार",
+      sunday: "रविवार",
+      contact_title: "संपर्क",
+      phone_label: "फ़ोन:",
+      phone_number: "+1 (555) 123-4567",
+      email_label: "ईमेल:",
+      email: "hello@thelighthouse.com",
+      instagram: "इंस्टाग्राम",
+      facebook: "फेसबुक",
+      twitter: "ट्विटर"
+    },
+    footer: {
+      brand: "द लाइटहाउस",
+      tagline: "जहाँ पाक कला कालजयी भव्यता से मिलती है। स्था. 1987",
+      quick_links: "त्वरित लिंक",
+      support: "सहायता",
+      faq: "सामान्य प्रश्न",
+      privacy: "गोपनीयता नीति",
+      terms: "सेवा की शर्तें",
+      contact: "संपर्क करें",
+      newsletter: "न्यूज़लेटर",
+      newsletter_text: "विशेष ऑफर और अपडेट के लिए सदस्यता लें",
+      newsletter_placeholder: "अपना ईमेल दर्ज करें",
+      newsletter_btn: "सदस्यता लें",
+      copyright: "© {{year}} द लाइटहाउस। सभी अधिकार सुरक्षित।",
+      cookie: "कुकी नीति",
+      back_to_top: "ऊपर जाएं"
+    }
+  },
+  gu: {
+    nav: {
+      logo: "ધ લાઇટહાઉસ",
+      home: "હોમ",
+      about: "અમારા વિશે",
+      chef: "શેફની પસંદગી",
+      menu: "મેનુ",
+      reservation: "આરક્ષણ",
+      reviews: "સમીક્ષાઓ",
+      location: "સ્થાન",
+      book_table: "ટેબલ બુક કરો"
+    },
+    hero: {
+      title: "ધ લાઇટહાઉસ",
+      tagline: "સ્થા. 1987",
+      subtitle: "જ્યાં પાક કળા કાલાતીત ભવ્યતાને મળે છે",
+      explore_menu: "મેનુ જુઓ",
+      reserve_table: "ટેબલ આરક્ષિત કરો",
+      scroll_discover: "શોધવા માટે સ્ક્રોલ કરો",
+      click_scroll: "સ્ક્રોલ કરવા માટે ક્લિક કરો"
+    },
+    about: {
+      story: "અમારી વાર્તા",
+      title: "સ્વાદનો વારસો",
+      text_1: "ત્રણ દાયકાથી વધુ સમયથી, ધ લાઇટહાઉસ ઉત્કૃષ્ટ પાક કળાનું પ્રતીક રહ્યું છે. અમારા શેફ પરંપરાગત પદ્ધતિઓને આધુનિક નવીનતા સાથે જોડે છે, અને સ્થાનિક ખેતરો અને વિશ્વસનીય વિક્રેતાઓ પાસેથી માત્ર શ્રેષ્ઠ મોસમી સામગ્રી જ મેળવે છે.",
+      text_2: "દરેક વાનગી એક વાર્તા કહે છે, દરેક ભોજન એક સ્મૃતિ બનાવે છે. અમે આપને હૂંફ અને સુસંસ્કૃત વાતાવરણમાં ઉત્તમ ભોજનનો અનુભવ કરવા માટે આમંત્રિત કરીએ છીએ।"
+    },
+    chef_picks: {
+      label: "શેફની ભલામણો"
+    },
+    menu: {
+      label: "વાનગીઓ",
+      title: "અમારું મેનુ",
+      search_placeholder: "વાનગી શોધો...",
+      filter_all: "બધા",
+      filter_breakfast: "નાસ્તો",
+      filter_lunch: "બપોરનું ભોજન",
+      filter_dinner: "સાંજનું ભોજન",
+      filter_desserts: "મીઠાઈ",
+      filter_drinks: "પીણાં",
+      diet_all: "બધી વાનગીઓ",
+      diet_veg: "શાકાહારી",
+      diet_nonveg: "માંસાહારી",
+      diet_no_results: "આ ડાયટ ફિલ્ટર સાથે કોઈ વાનગી મેળ ખાતી નથી",
+      no_results: "કોઈ વાનગી મળી નથી",
+      showing_items: "{{count}} આઇટમ્સ બતાવી રહ્યા છીએ",
+      chef_notes: "👨‍🍳 શેફની નોંધો",
+      key_ingredients: "મુખ્ય સામગ્રી:",
+      contains: "⚠️ સમાવે છે:",
+      ratings: "રેટિંગ્સ",
+      tags: {
+        veg: "શાકાહારી",
+        nonveg: "માંસાહારી",
+        popular: "🔥 લોકપ્રિય",
+        classic: "⭐ ક્લાસિક",
+        chef_pick: "👨‍🍳 શેફની પસંદ",
+        signature: "👑 સિગ્નેચર",
+        refreshing: "🥤 તાજગી આપનારું"
+      },
+      items: {
+        chicken_keema_dosa: {
+          name: "ચિકન ખીમા ઢોસા",
+          desc: "મસાલેદાર ચિકન ખીમા મસાલાથી ભરેલા કડક ઢોસા",
+          notes: "મસાલેદાર ખીમા ચિકનથી ભરપૂર સોનેરી કડક ઢોસા, સુગંધિત મસાલા અને જડીબુટ્ટીઓ સાથે સ્વાદિષ્ટ.",
+          details_spicy: "🌶️ તીખું",
+          details_time: "⏱️ ૨૦ મિનિટ",
+          details_serves: "🍽️ ૧ વ્યક્તિ",
+          ingredients: "ચિકન, ચોખાનું ખીરું, ડુંગળી, આદુ, લસણ, મસાલા",
+          allergens: "ગ્લુટેન, ડેરી"
+        },
+        paneer_butter_masala: {
+          name: "પનીર બટર મસાલા",
+          desc: "બટર નાન સાથે પીરસવામાં આવતી ક્રીમી પનીર કરી",
+          notes: "માખણ અને ટામેટાની ગ્રેવીમાં સુગંધિત મસાલાના મિશ્રણ સાથે રાંધેલી ક્રીમી પનીર કરી. બટર નાન સાથે આનો શ્રેષ્ઠ આનંદ માણી શકાય છે.",
+          details_spicy: "🌶️ મધ્યમ",
+          details_time: "⏱️ ૨૫ મિનિટ",
+          details_serves: "🍽️ ૨ વ્યક્તિ",
+          ingredients: "પનીર, ટામેટા, માખણ, ક્રીમ, કસૂરી મેથી",
+          allergens: "ડેરી, ગ્લુટેન"
+        },
+        masala_dosa: {
+          name: "મસાલા ઢોસા",
+          notes: "આથો આપેલા ચોખા અને અડદના ખીરામાંથી બનાવેલા સોનેરી કડક ઢોસા, જેમાં મસાલેદાર બટાકાનો મસાલો ભરેલો હોય છે. તાજા નાળિયેરની ચટણી અને સંભાર સાથે પીરસવામાં આવે છે.",
+          details_spicy: "🌶️ મધ્યમ મસાલેદાર",
+          details_time: "⏱️ ૧૫ મિનિટ",
+          details_serves: "🍽️ ૧ વ્યક્તિ",
+          ingredients: "ચોખા, અડદ દાળ, બટાકા, ડુંગળી, મીઠો લીમડો",
+          allergens: "ગ્લુટેન"
+        },
+        idli_sambar: {
+          name: "ઇડલી સંભાર",
+          notes: "આથો આપેલા ચોખા અને અડદની દાળમાંથી બનાવેલી નરમ, ફૂલેલી બાફેલી ઇડલી, જેને ગરમાગરમ, સ્વાદિષ્ટ સંભાર અને તાજી નાળિયેરની ચટણી સાથે પીરસવામાં આવે છે.",
+          details_spicy: "🌶️ મોળું",
+          details_time: "⏱️ ૧૦ મિનિટ",
+          details_serves: "🍽️ ૧ વ્યક્તિ",
+          ingredients: "ચોખા, અડદ દાળ, તુવેર દાળ, શાકભાજી, નાળિયેર",
+          allergens: "ગ્લુટેન, ડેરી"
+        },
+        hyderabadi_chicken_biryani: {
+          name: "હૈદરાબાદી ચિકન બિરયાની",
+          notes: "નરમ ચિકન, બાસમતી ચોખા અને અસલી હૈદરાબાદી મસાલાના ગુપ્ત મિશ્રણ સાથેની સુગંધિત દમ બિરયાની. ધીમી આંચે પકાવેલી.",
+          details_spicy: "🌶️ તીખું",
+          details_time: "⏱️ ૪૦ મિનિટ",
+          details_serves: "🍽️ ૨ વ્યક્તિ",
+          ingredients: "ચિકન, બાસમતી ચોખા, કેસર, ફુદીનો, તળેલી ડુંગળી",
+          allergens: "ડેરી, ગ્લુટેન"
+        },
+        butter_chicken: {
+          name: "બટર ચિકન",
+          notes: "માખણ અને સુગંધિત મસાલા સાથે ક્રીમી ટામેટા આધારિત ગ્રેવીમાં રાંધેલું નરમ ચિકન. નાન સાથે પીરસવામાં આવતી એક સદાબહાર વાનગી.",
+          details_spicy: "🌶️ મોળું",
+          details_time: "⏱️ ૩૦ મિનિટ",
+          details_serves: "🍽️ ૨ વ્યક્તિ",
+          ingredients: "ચિકન, ટામેટા, માખણ, ક્રીમ, કસૂરી મેથી",
+          allergens: "ડેરી, ગ્લુટેન"
+        },
+        mango_lassi: {
+          name: "મેંગો લસ્સી",
+          notes: "મીઠા કેરીના પલ્પ સાથે બ્લેન્ડ કરેલું ઠંડુ, ક્રીમી દહીંનું પીણું. એલચીના સહેજ સ્વાદ સાથે સંતુલિત.",
+          details_spicy: "🥤 ઠંડુ",
+          details_time: "⏱️ ૫ મિનિટ",
+          details_serves: "🍽️ ૧ વ્યક્તિ",
+          ingredients: "દહીં, કેરીનો પલ્પ, ખાંડ, એલચી",
+          allergens: "ડેરી"
+        },
+        masala_chai: {
+          name: "મસાલા ચાય",
+          notes: "એલચી, આદુ, તજ અને લવિંગ જેવા સુગંધિત મસાલાના મિશ્રણથી બનેલી પરંપરાગત ભારતીય ચા. દિવસના કોઈપણ સમયે ઉત્તમ.",
+          details_spicy: "☕ ગરમ",
+          details_time: "⏱️ ૫ મિનિટ",
+          details_serves: "🍽️ ૧ વ્યક્તિ",
+          ingredients: "ચા પત્તી, દૂધ, આદુ, એલચી, તજ",
+          allergens: "ડેરી"
+        },
+        fresh_lime_soda: {
+          name: "ફ્રેશ લાઈમ સોડા",
+          notes: "મીઠી, ખારી અથવા મિશ્રિત શૈલીમાં ઉપલબ્ધ ફિઝી લીંબુ સોડા. ગરમીના દિવસોમાં તરસ છિપાવવાનો શ્રેષ્ઠ માર્ગ.",
+          details_spicy: "🥤 ઠંડુ અને ફિઝી",
+          details_time: "⏱️ ૫ મિનિટ",
+          details_serves: "🍽️ ૧ વ્યક્તિ",
+          ingredients: "લીંબુ, સોડા, ખાંડ, મીઠું (વૈકલ્પિક)",
+          allergens: "✅ કોઈ એલર્જી કારક નથી"
+        },
+        gulab_jamun: {
+          name: "ગુલાબ જાંબુ",
+          notes: "નરમ, સ્પોન્જી માવાના ગોળા સોનેરી તળેલા અને એલચી તેમજ ગુલાબજળની સુગંધવાળી ગરમ ચાસણીમાં ડૂબેલા.",
+          details_spicy: "🍰 મીઠું",
+          details_time: "⏱️ ૧૫ મિનિટ",
+          details_serves: "🍽️ ૧ વ્યક્તિ",
+          ingredients: "માવો, ખાંડ, એલચી, ગુલાબજળ",
+          allergens: "ડેરી, ગ્લુટેન"
+        },
+        rasmalai: {
+          name: "રસમલાઈ",
+          notes: "ક્રીમી, કેસરવાળા દૂધમાં પલાળેલી નરમ, મોંમાં ઓગળી જાય તેવી છેનાની ટીકીઓ. પિસ્તાથી સજાવેલી.",
+          details_spicy: "🍰 મીઠું અને ક્રીમી",
+          details_time: "⏱️ ૨૦ મિનિટ",
+          details_serves: "🍽️ ૧ વ્યક્તિ",
+          ingredients: "પનીર/છેના, દૂધ, કેસર, ખાંડ, પિસ્તા",
+          allergens: "ડેરી"
+        },
+        kesar_pista_kulfi: {
+          name: "કેસર પિસ્તા કુલ્ફી",
+          notes: "એક સમૃદ્ધ, ક્રીમી રચનાવાળી પરંપરાગત ભારતીય આઈસ્ક્રીમ, કેસરથી ભરપૂર અને કડક પિસ્તાના ટુકડાઓ સાથે.",
+          details_spicy: "🍰 મીઠું અને નટી",
+          details_time: "⏱️ ૧૦ મિનિટ",
+          details_serves: "🍽️ ૧ વ્યક્તિ",
+          ingredients: "દૂધ, કેસર, પિસ્તા, ખાંડ, એલચી",
+          allergens: "ડેરી, નટ્સ"
+        }
+      }
+    },
+    reservation: {
+      label: "આરક્ષણ",
+      title: "તમારી ટેબલ બુક કરો",
+      text: "અમે ધ લાઇટહાઉસમાં તમારું સ્વાગત કરવા માટે ઉત્સુક છીએ. એક અવિસ્મરણીય ભોજન અનુભવ માટે તમારી ટેબલ આરક્ષિત કરો.",
+      hours: "ખુલવાનો સમય",
+      hours_text: "સોમ–રવિ: સવારે 7:00 – રાત્રે 11:00",
+      phone: "ફોન",
+      phone_number: "+1 (555) 123-4567",
+      address: "સરનામું",
+      address_text: "123 હાર્બર વ્યૂ ડ્રાઇવ, કોસ્ટલ સિટી, સીએ 90210",
+      full_name: "પૂરું નામ",
+      name_placeholder: "જોન ડો",
+      email: "ઈમેલ",
+      email_placeholder: "john@example.com",
+      email_error: "કૃપા કરીને માન્ય ઈમેલ સરનામું દાખલ કરો",
+      phone_label: "ફોન",
+      phone_placeholder: "+1 555 123 4567",
+      phone_error: "કૃપા કરીને 10 આંકડાનો માન્ય ફોન નંબર દાખલ કરો",
+      guests: "મહેમાનોની સંખ્યા",
+      select_guests: "મહેમાનો પસંદ કરો",
+      date: "તારીખ",
+      time: "સમય",
+      select_time: "સમય પસંદ કરો",
+      special_requests: "વિશેષ વિનંતીઓ",
+      special_placeholder: "આહાર પ્રતિબંધો, એલર્જી, વિશેષ પ્રસંગો...",
+      submit: "હમણાં આરક્ષિત કરો",
+      submit_requested: "સબમિટ થઈ રહ્યું છે...",
+      note: "અમે 24 કલાકની અંદર તમારા આરક્ષણની પુષ્ટિ કરીશું."
+    },
+    reviews: {
+      label: "મહેમાન સમીક્ષાઓ",
+      title: "અમારા મહેમાનો શું કહે છે",
+      pinned_review_text: "એક સંપૂર્ણ જાદુઈ ભોજન અનુભવ! વાતાવરણ, સેવા, અને સૌથી મહત્વપૂર્ણ રીતે ભોજન - બધું જ નિર્દોષ હતું. શેફનું ટેસ્ટિંગ મેનુ પાક ઉત્કૃષ્ટતાની એક યાત્રા છે. ચોક્કસપણે ફરી આવીશ!",
+      pinned_review_date: "ડિસેમ્બર 2024",
+      write_review: "તમારો અનુભવ શેર કરો",
+      your_name: "તમારું નામ",
+      name_placeholder: "તમારું નામ દાખલ કરો",
+      name_error: "કૃપા કરીને માન્ય નામ દાખલ કરો (3-30 અક્ષરો, ફક્ત અક્ષરો)",
+      rating: "રેટિંગ",
+      rating_error: "કૃપા કરીને રેટિંગ પસંદ કરો",
+      review: "તમારી સમીક્ષા",
+      review_placeholder: "અમને તમારા ભોજન અનુભવ વિશે જણાવો...",
+      text_length_error: "કૃપા કરીને ઓછામાં ઓછા 20 અક્ષરો લખો",
+      meaningful_error: "કૃપા કરીને વધુ અર્થપૂર્ણ સમીક્ષા લખો",
+      submit: "સમીક્ષા સબમિટ કરો",
+      success_msg: "તમારી સમીક્ષા માટે આભાર!",
+      review_count: "સમીક્ષાઓ"
+    },
+    location: {
+      label: "અમને મળો",
+      title: "અમને શોધો",
+      address_line1: "123 હાર્બર વ્યૂ ડ્રાઇવ",
+      address_line2: "કોસ્ટલ સિટી, સીએ 90210",
+      hours_title: "ખુલવાનો સમય",
+      mon_thu: "સોમવાર – ગુરુવાર",
+      fri_sat: "શુક્રવાર – શનિવાર",
+      sunday: "રવિવાર",
+      contact_title: "સંપર્ક",
+      phone_label: "ફોન:",
+      phone_number: "+1 (555) 123-4567",
+      email_label: "ઈમેલ:",
+      email: "hello@thelighthouse.com",
+      instagram: "ઇન્સ્ટાગ્રામ",
+      facebook: "ફેસબુક",
+      twitter: "ટ્વિટર"
+    },
+    footer: {
+      brand: "ધ લાઇટહાઉસ",
+      tagline: "જ્યાં પાક કળા કાલાતીત ભવ્યતાને મળે છે. સ્થા. 1987",
+      quick_links: "ઝડપી લિંક્સ",
+      support: "સહાય",
+      faq: "વારંવાર પૂછાતા પ્રશ્નો",
+      privacy: "ગોપનીયતા નીતિ",
+      terms: "સેવાની શરતો",
+      contact: "સંપર્ક કરો",
+      newsletter: "ન્યૂઝલેટર",
+      newsletter_text: "વિશેષ ઑફર્સ અને અપડેટ્સ માટે સબ્સ્ક્રાઇબ કરો",
+      newsletter_placeholder: "તમારો ઈમેલ દાખલ કરો",
+      newsletter_btn: "સબ્સ્ક્રાઇબ કરો",
+      copyright: "© {{year}} ધ લાઇટહાઉસ. સર્વાધિકાર સુરક્ષિત.",
+      cookie: "કુકી નીતિ",
+      back_to_top: "ઉપર જાઓ"
+    }
+  }
+};
+
+// =============================================
+// SIMPLE I18N - No external dependencies
+// =============================================
+let currentLanguage = localStorage.getItem('lighthouse_lang') || 'en';
+
+function t(key, params = {}) {
+  const keys = key.split('.');
+  let value = TRANSLATIONS[currentLanguage];
+  
+  for (const k of keys) {
+    if (value && value[k] !== undefined) {
+      value = value[k];
+    } else {
+      // Fallback to English
+      let fallback = TRANSLATIONS.en;
+      for (const fk of keys) {
+        if (fallback && fallback[fk] !== undefined) {
+          fallback = fallback[fk];
+        } else {
+          return key;
+        }
+      }
+      value = fallback;
+      break;
+    }
+  }
+  
+  // Replace {{placeholders}}
+  if (typeof value === 'string') {
+    for (const [pKey, pVal] of Object.entries(params)) {
+      value = value.replace(new RegExp(`{{${pKey}}}`, 'g'), pVal);
+    }
+  }
+  
+  return value || key;
+}
+
+function updateContent() {
+  // Translate data-i18n elements
+  document.querySelectorAll("[data-i18n]").forEach((elem) => {
+    const key = elem.getAttribute("data-i18n");
+    elem.textContent = t(key);
+  });
+
+  // Translate placeholders
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((elem) => {
+    const key = elem.getAttribute("data-i18n-placeholder");
+    elem.setAttribute("placeholder", t(key));
+  });
+
+  // Translate titles
+  document.querySelectorAll("[data-i18n-title]").forEach((elem) => {
+    const key = elem.getAttribute("data-i18n-title");
+    elem.setAttribute("title", t(key));
+  });
+
+  // Update dynamic content
+  const noResults = document.querySelector(".no-results");
+  if (noResults) {
+    noResults.textContent = t('menu.no_results');
+  }
+
+  const dietNoResults = document.querySelectorAll(".diet-no-results");
+  dietNoResults.forEach((el) => {
+    el.textContent = t('menu.diet_no_results');
+  });
+
+  const countEl = document.getElementById('menu-category-count');
+  if (countEl) {
+    const totalItems = document.querySelectorAll('.menu-item:not(.hidden-item)').length;
+    countEl.textContent = t('menu.showing_items', { count: totalItems });
+  }
+
+  // Update reviews
+  renderReviews();
+}
+
+function changeLanguage(lang) {
+  if (TRANSLATIONS[lang]) {
+    currentLanguage = lang;
+    localStorage.setItem('lighthouse_lang', lang);
+    
+    // Update all selectors
+    document.querySelectorAll('.language-select').forEach((sel) => {
+      sel.value = lang;
+    });
+    
+    updateContent();
+    console.log('Language changed to:', lang);
+  }
+}
+
+// =============================================
 // DOM ELEMENTS
 // =============================================
 const nav = document.getElementById("nav");
-const cuisineDropdown = document.getElementById("cuisine-filter");
 const menuSearch = document.getElementById("menu-search");
 const navToggle = document.getElementById("navToggle");
 const navMenu = document.getElementById("navMenu");
@@ -14,23 +879,16 @@ const dateInput = document.getElementById("reservation-date");
 const timeSelect = document.getElementById("time");
 const themeToggle = document.getElementById("themeToggle");
 const filterBtns = document.querySelectorAll(".filter-btn");
-const menuContent = document.querySelector(".menu-content");
-const menuTabs = document.querySelectorAll(".menu-tab");
-const menuPanels = document.querySelectorAll(".menu-panel");
+const backToTopBtn = document.getElementById('backToTop');
+const downloadBtn = document.getElementById('downloadMenuPDF');
 
-// ── Device detection (used by FIX #9 and FIX #14) ───
+// ── Language selectors ───
+const langSelectors = document.querySelectorAll('.language-select');
+
+// ── Device detection ───
 const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
-// ── FIX #9 — show correct scroll hint based on input type ────────
-const scrollHintMouse = document.querySelector('.scroll-hint-mouse');
-const scrollHintTouch = document.querySelector('.scroll-hint-touch');
-
-if (scrollHintMouse && scrollHintTouch) {
-  scrollHintMouse.style.display = isTouchDevice ? 'none' : '';
-  scrollHintTouch.style.display = isTouchDevice ? '' : 'none';
-}
-
-// ── FIX #13 — Date validation: min = tomorrow, max = 90 days out ─────
+// ── Date validation ─────
 if (dateInput) {
   const tomorrow = new Date(Date.now() + 86400000);
   const maxDate = new Date(Date.now() + 90 * 86400000);
@@ -41,7 +899,6 @@ if (dateInput) {
   dateInput.addEventListener('change', updateAvailableTimes);
 }
 
-// ── FIX #11 — Disable past time slots when today is selected ─────
 function updateAvailableTimes() {
   if (!dateInput || !timeSelect) return;
 
@@ -75,10 +932,8 @@ function updateAvailableTimes() {
 function handleScroll() {
   const currentScroll = window.scrollY;
 
-  // Sticky nav background
   nav.classList.toggle('scrolled', currentScroll > 50);
 
-  // Parallax skipped on touch devices
   if (!isTouchDevice) {
     if (heroBg) {
       heroBg.style.transform = `translateY(${currentScroll * 0.5}px)`;
@@ -93,7 +948,6 @@ function handleScroll() {
   updateActiveNavLink();
 }
 
-// ── Active nav link on scroll ───
 function updateActiveNavLink() {
   const sections = document.querySelectorAll('section[id]');
   const scrollPosition = window.scrollY + 150;
@@ -127,48 +981,23 @@ function closeMobileMenu() {
   document.body.style.overflow = '';
 }
 
-// Menu tabs functionality
-function switchMenuTab(e) {
-  const targetTab = e.target.dataset.tab;
-
-  // Update tab buttons
-  menuTabs.forEach((tab) => {
-    tab.classList.remove("active");
-  });
-  e.target.classList.add("active");
-
-  // Update panels
-  menuPanels.forEach((panel) => {
-    panel.classList.remove("active");
-    if (panel.id === targetTab) {
-      panel.classList.add("active");
-    }
-  });
-}
-
-// Theme Toggle
+// ── Theme Toggle ───
 const savedTheme = localStorage.getItem("theme");
 
 if (savedTheme === "light") {
   document.body.classList.add("light-theme");
 }
 
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("light-theme");
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("light-theme");
+    const isLight = document.body.classList.contains("light-theme");
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+  });
+}
 
-  const isLight = document.body.classList.contains("light-theme");
-
-  if (isLight) {
-    localStorage.setItem("theme", "light");
-  } else {
-    localStorage.setItem("theme", "dark");
-  }
-});
-
-// ── Menu Search and Filter ─────────────────────────
-
-// FIX #1 — Use the correct parameter names (timeFilter, cuisineFilter) instead of undefined 'filter'
-function filterMenuItems(timeFilter, cuisineFilter, searchText) {
+// ── Menu Filter ─────────────────────────
+function filterMenuItems(timeFilter, searchText) {
   const menuItems = document.querySelectorAll(".menu-item");
   let visibleCount = 0;
 
@@ -177,9 +1006,8 @@ function filterMenuItems(timeFilter, cuisineFilter, searchText) {
     const category = item.dataset.category;
     const matchesSearch = !searchText || itemName.includes(searchText.toLowerCase());
     const matchesTime = timeFilter === 'all' || category === timeFilter;
-    const matchesCuisine = !cuisineFilter || cuisineFilter === 'all' || item.dataset.cuisine === cuisineFilter;
 
-    if (matchesSearch && matchesTime && matchesCuisine) {
+    if (matchesSearch && matchesTime) {
       item.classList.remove('hidden-item');
       visibleCount++;
     } else {
@@ -187,38 +1015,35 @@ function filterMenuItems(timeFilter, cuisineFilter, searchText) {
     }
   });
 
-  // Handle "No Results" display
   let noResults = document.querySelector(".no-results");
   if (visibleCount === 0) {
     if (!noResults) {
       noResults = document.createElement('p');
       noResults.className = 'no-results';
-      noResults.textContent = i18next.t('menu.no_results');
+      noResults.textContent = t('menu.no_results');
       document.querySelector('.menu-content')?.appendChild(noResults);
     }
   } else if (noResults) {
     noResults.remove();
+  }
+
+  const countEl = document.getElementById('menu-category-count');
+  if (countEl) {
+    countEl.textContent = t('menu.showing_items', { count: visibleCount });
   }
 }
 
 function triggerFilter() {
   const activeBtn = document.querySelector(".filter-btn.active");
   const timeFilter = activeBtn ? activeBtn.dataset.filter : "all";
-  const cuisineFilter = cuisineDropdown ? cuisineDropdown.value : "all";
   const searchText = menuSearch ? menuSearch.value : "";
-  
-  filterMenuItems(timeFilter, cuisineFilter, searchText);
-}
-
-if (cuisineDropdown) {
-  cuisineDropdown.addEventListener("change", triggerFilter);
+  filterMenuItems(timeFilter, searchText);
 }
 
 if (menuSearch) {
   menuSearch.addEventListener("input", triggerFilter);
 }
 
-// Filter buttons
 filterBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     filterBtns.forEach((b) => b.classList.remove("active"));
@@ -227,9 +1052,7 @@ filterBtns.forEach((btn) => {
   });
 });
 
-// FIX #2 — Removed duplicate menuSearch 'input' listener (was calling filterMenuItems with wrong/missing args)
-
-// Smooth scroll for navigation links
+// ── Smooth scroll ───
 function smoothScroll(e) {
   e.preventDefault();
   const targetId = this.getAttribute('href');
@@ -264,22 +1087,19 @@ function handleFormSubmit(e) {
   const emailInput = document.getElementById('email');
   const phoneInput = document.getElementById('phone');
 
-  // Remove old error messages
   document.querySelectorAll('.error-message').forEach(el => el.remove());
 
-  // Email validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (emailInput && !emailRegex.test(emailInput.value.trim())) {
     emailInput.style.borderColor = '#c94a4a';
     const emailError = document.createElement('small');
     emailError.className = 'error-message';
     emailError.style.color = '#c94a4a';
-    emailError.textContent = i18next.t('reservation.email_error');
+    emailError.textContent = t('reservation.email_error');
     emailInput.parentElement.appendChild(emailError);
     isValid = false;
   }
 
-  // Phone validation
   if (phoneInput) {
     const phoneValue = phoneInput.value.replace(/\D/g, '');
     if (phoneValue.length !== 10) {
@@ -287,7 +1107,7 @@ function handleFormSubmit(e) {
       const phoneError = document.createElement('small');
       phoneError.className = 'error-message';
       phoneError.style.color = '#c94a4a';
-      phoneError.textContent = i18next.t('reservation.phone_error');
+      phoneError.textContent = t('reservation.phone_error');
       phoneInput.parentElement.appendChild(phoneError);
       isValid = false;
     }
@@ -295,22 +1115,22 @@ function handleFormSubmit(e) {
 
   if (isValid) {
     const submitBtn = reservationForm.querySelector('button[type="submit"]');
-    submitBtn.textContent = i18next.t('reservation.submit_requested');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = t('reservation.submit_requested');
     submitBtn.style.backgroundColor = '#4a9c6a';
     submitBtn.disabled = true;
 
     setTimeout(() => {
       reservationForm.reset();
       updateAvailableTimes();
-      submitBtn.textContent = i18next.t('reservation.submit');
+      submitBtn.textContent = originalText;
       submitBtn.style.backgroundColor = '';
       submitBtn.disabled = false;
-      updateAvailableTimes();
     }, 3000);
   }
 }
 
-// ── Intersection Observer with prefers-reduced-motion ──────
+// ── Intersection Observer ──────
 function setupIntersectionObserver() {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -345,12 +1165,11 @@ function setupIntersectionObserver() {
   });
 }
 
-// Inject .visible class styles
 const style = document.createElement('style');
 style.textContent = `.visible { opacity: 1 !important; transform: translateY(0) !important; }`;
 document.head.appendChild(style);
 
-// ── Auto-scroll on hero "Scroll To Discover" click ───
+// ── Auto-scroll on hero click ───
 const heroScroll = document.querySelector('.hero-scroll');
 let autoScrollInterval = null;
 
@@ -382,8 +1201,6 @@ if (heroScroll) {
 });
 
 // ── Back To Top ──
-const backToTopBtn = document.getElementById('backToTop');
-
 if (backToTopBtn) {
   window.addEventListener('scroll', () => {
     const past = window.scrollY > 300;
@@ -400,11 +1217,13 @@ if (backToTopBtn) {
 // ── Event Listeners ──
 window.addEventListener('scroll', handleScroll);
 
-navToggle.addEventListener('click', toggleMobileMenu);
+if (navToggle) {
+  navToggle.addEventListener('click', toggleMobileMenu);
+}
 
 navLinks.forEach((link) => link.addEventListener('click', smoothScroll));
 
-document.querySelectorAll('.nav-cta, .nav-cta-mobile, .hero-buttons a').forEach((link) => {
+document.querySelectorAll('.nav-cta, .hero-buttons a').forEach((link) => {
   link.addEventListener('click', smoothScroll);
 });
 
@@ -416,14 +1235,26 @@ window.addEventListener('resize', () => {
   if (window.innerWidth > 768) closeMobileMenu();
 });
 
+// ── Language Selector Events ──
+langSelectors.forEach((selector) => {
+  selector.addEventListener('change', (e) => {
+    const lang = e.target.value;
+    // Sync all selectors
+    langSelectors.forEach((sel) => {
+      sel.value = lang;
+    });
+    changeLanguage(lang);
+  });
+});
+
 // ── Reviews (localStorage) ──
 const STORAGE_KEY = 'lighthouse_reviews';
 
 const pinnedReview = {
   name: 'Rasshi Srivastav',
   rating: 5,
-  text: 'reviews.pinned_review_text',
-  date: 'reviews.pinned_review_date',
+  text: t('reviews.pinned_review_text'),
+  date: t('reviews.pinned_review_date'),
 };
 
 function getReviews() {
@@ -436,6 +1267,7 @@ function getReviews() {
 function saveReviews(reviews) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(reviews));
 }
+
 function updateAverageRating() {
   const averageRating = document.getElementById("average-rating");
   if (!averageRating) return;
@@ -443,26 +1275,22 @@ function updateAverageRating() {
   const userReviews = getReviews();
   const allReviews = [pinnedReview, ...userReviews];
 
-  const totalRating = allReviews.reduce(
-    (sum, review) => sum + review.rating,
-    0
-  );
-
+  const totalRating = allReviews.reduce((sum, review) => sum + review.rating, 0);
   const average = (totalRating / allReviews.length).toFixed(1);
 
-  averageRating.textContent = `⭐ ${average}/5 from ${allReviews.length} review${
-    allReviews.length > 1 ? "s" : ""
-  }`;
+  averageRating.textContent = `⭐ ${average}/5 from ${allReviews.length} ${t('reviews.review_count')}`;
 }
+
 function renderReviews() {
   const grid = document.getElementById('reviews-grid');
   if (!grid) return;
 
   const userReviews = getReviews();
+  
   const activePinnedReview = {
     ...pinnedReview,
-    text: typeof i18next !== 'undefined' && i18next.t ? i18next.t(pinnedReview.text) : pinnedReview.text,
-    date: typeof i18next !== 'undefined' && i18next.t ? i18next.t(pinnedReview.date) : pinnedReview.date,
+    text: t('reviews.pinned_review_text'),
+    date: t('reviews.pinned_review_date'),
   };
   const allReviews = [activePinnedReview, ...userReviews];
 
@@ -482,7 +1310,7 @@ function renderReviews() {
       </div>`
     )
     .join('');
-    updateAverageRating();
+  updateAverageRating();
 }
 
 // Star rating widget
@@ -504,7 +1332,6 @@ starBtns.forEach((btn) => {
   });
 });
 
-// Review validation helpers
 function isMeaningfulReview(text) {
   const words = text.trim().split(/\s+/);
   const randomPattern = /^(.)\1+$|^[a-zA-Z]{1,6}$/;
@@ -529,22 +1356,22 @@ if (reviewForm) {
     reviewMsg.style.display = 'block';
 
     if (!selectedRating) {
-      reviewMsg.textContent = i18next.t('reviews.rating_error');
+      reviewMsg.textContent = t('reviews.rating_error');
       reviewMsg.style.color = '#c94a4a';
       return;
     }
     if (!isValidName(name)) {
-      reviewMsg.textContent = i18next.t('reviews.name_error');
+      reviewMsg.textContent = t('reviews.name_error');
       reviewMsg.style.color = '#c94a4a';
       return;
     }
     if (reviewText.length < 20) {
-      reviewMsg.textContent = i18next.t('reviews.text_length_error');
+      reviewMsg.textContent = t('reviews.text_length_error');
       reviewMsg.style.color = '#c94a4a';
       return;
     }
     if (!isMeaningfulReview(reviewText)) {
-      reviewMsg.textContent = i18next.t('reviews.meaningful_error');
+      reviewMsg.textContent = t('reviews.meaningful_error');
       reviewMsg.style.color = '#c94a4a';
       return;
     }
@@ -572,7 +1399,7 @@ if (reviewForm) {
     document.getElementById('review-rating').value = 0;
     starBtns.forEach((s) => s.classList.remove('active'));
 
-    reviewMsg.textContent = i18next.t('reviews.success_msg');
+    reviewMsg.textContent = t('reviews.success_msg');
     reviewMsg.style.color = '#4a9c6a';
     setTimeout(() => {
       reviewMsg.style.display = 'none';
@@ -581,7 +1408,6 @@ if (reviewForm) {
 }
 
 // ── Veg / Non-Veg Filter ──────────────────────────────
-// 1. Your filtering function, contained properly
 (function () {
   const dietFilterBtns = document.querySelectorAll('.diet-btn');
   if (!dietFilterBtns.length) return;
@@ -604,7 +1430,7 @@ if (reviewForm) {
       if (!noResults) {
         noResults = document.createElement('p');
         noResults.className = 'diet-no-results';
-        noResults.textContent = i18next.t('menu.diet_no_results');
+        noResults.textContent = t('menu.diet_no_results');
         const menuItems = panel.querySelector('.menu-items');
         if (menuItems) {
           menuItems.appendChild(noResults);
@@ -621,19 +1447,9 @@ if (reviewForm) {
       applyDietFilter(btn.dataset.diet);
     });
   });
-
-  document.querySelectorAll('.menu-tab').forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const activeDiet = document.querySelector('.diet-btn.active')?.dataset.diet || 'all';
-      setTimeout(() => applyDietFilter(activeDiet), 50);
-    });
-  });
 })();
 
-// =============================================
-// 3D CARD FLIP ENHANCEMENTS
-// =============================================
-
+// ── 3D CARD FLIP ─────────────────────────────────────────────
 function handleCardFlip() {
   const cards = document.querySelectorAll('.food-card-3d');
   const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -648,7 +1464,6 @@ function handleCardFlip() {
   }
 }
 
-// Reset mobile flip when clicking elsewhere
 document.addEventListener('click', function (e) {
   if (!e.target.closest('.food-card-3d')) {
     document.querySelectorAll('.food-card-3d.flipped').forEach((card) => {
@@ -656,118 +1471,20 @@ document.addEventListener('click', function (e) {
     });
   }
 });
-// Random Chef's Recommendation
+
+// ── Chef's Recommendation ──────────────────────────────────
 function displayChefsRecommendation() {
   const recommendation = document.getElementById("chefRecommendation");
   if (!recommendation) return;
 
   const menuItems = Array.from(document.querySelectorAll(".menu-item h3"));
-
   if (menuItems.length === 0) return;
 
-  const randomItem =
-    menuItems[Math.floor(Math.random() * menuItems.length)];
-
+  const randomItem = menuItems[Math.floor(Math.random() * menuItems.length)];
   recommendation.textContent = randomItem.textContent;
 }
 
-// Translate UI Content
-function updateContent() {
-  if (typeof i18next === 'undefined' || !i18next.t) return;
-  
-  // Translate standard data-i18n elements
-  document.querySelectorAll("[data-i18n]").forEach((elem) => {
-    const key = elem.getAttribute("data-i18n");
-    elem.textContent = i18next.t(key);
-  });
-
-  // Translate placeholders
-  document.querySelectorAll("[data-i18n-placeholder]").forEach((elem) => {
-    const key = elem.getAttribute("data-i18n-placeholder");
-    elem.setAttribute("placeholder", i18next.t(key));
-  });
-
-  // Translate titles
-  document.querySelectorAll("[data-i18n-title]").forEach((elem) => {
-    const key = elem.getAttribute("data-i18n-title");
-    elem.setAttribute("title", i18next.t(key));
-  });
-
-  // Dynamic Elements
-  const noResults = document.querySelector(".no-results");
-  if (noResults) {
-    noResults.textContent = i18next.t('menu.no_results');
-  }
-
-  const dietNoResults = document.querySelectorAll(".diet-no-results");
-  dietNoResults.forEach((el) => {
-    el.textContent = i18next.t('menu.diet_no_results');
-  });
-
-  // Update reviews
-  renderReviews();
-}
-
-// ── Initialise ───
-document.addEventListener('DOMContentLoaded', function () {
-  handleScroll();
-  setupIntersectionObserver();
-  updateAvailableTimes();
-  handleCardFlip();
-
-  // Initialize i18next
-  if (typeof i18next !== 'undefined') {
-    i18next
-      .use(i18nextHttpBackend)
-      .use(i18nextBrowserLanguageDetector)
-      .init({
-        fallbackLng: 'en',
-        supportedLngs: ['en', 'hi', 'gu'],
-        load: 'languageOnly',
-        backend: {
-          loadPath: '/locales/{{lng}}/translation.json'
-        },
-        detection: {
-          order: ['localStorage', 'navigator'],
-          caches: ['localStorage']
-        }
-      }, function (err, t) {
-        if (err) return console.error(err);
-
-        const activeLang = i18next.resolvedLanguage || 'en';
-        const langSelectors = document.querySelectorAll('.language-select');
-        langSelectors.forEach((langSelector) => {
-          langSelector.value = activeLang;
-          langSelector.addEventListener('change', (e) => {
-            const selectedVal = e.target.value;
-            // Update all language dropdowns on the page to match
-            document.querySelectorAll('.language-select').forEach((sel) => {
-              sel.value = selectedVal;
-            });
-            i18next.changeLanguage(selectedVal, (err, t) => {
-              if (err) return console.error(err);
-              updateContent();
-            });
-          });
-        });
-
-        updateContent();
-      });
-  } else {
-    renderReviews();
-  }
-});
-
-// Mobile flip style
-const styleForMobile = `
-  @media (max-width: 768px) {
-    .food-card-3d.flipped .food-card-inner {
-      transform: rotateY(180deg) scale(1.01);
-    }
-  }
-`;
-
-// ── Skeleton Loader Initialization ─────────────────────────────────────
+// ── Skeleton Loader ──────────────────────────────────────────
 function createCardSkeleton() {
   const sk = document.createElement('div');
   sk.className = 'skeleton-card skeleton';
@@ -800,7 +1517,6 @@ function attachSkeletonToCard(card) {
   const wrapper = document.createElement('div');
   wrapper.className = 'skeleton-wrapper';
 
-  // Move existing children into wrapper
   while (card.firstChild) {
     wrapper.appendChild(card.firstChild);
   }
@@ -810,24 +1526,19 @@ function attachSkeletonToCard(card) {
   const skeleton = createCardSkeleton();
   wrapper.appendChild(skeleton);
 
-  // Hide native images inside the card while loading
   const imgs = wrapper.querySelectorAll('img');
   imgs.forEach((img) => {
     img.classList.add('image-hidden');
-    // lazy-load optimization: set loading attribute where supported
     try { if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy'); } catch (e) {}
 
     if (img.complete && img.naturalWidth > 0) {
-      // Already loaded from cache - reveal immediately
       img.classList.add('image-loaded');
       img.classList.remove('image-hidden');
       skeleton.remove();
     } else {
-      // Wait for load or error
       img.addEventListener('load', function onLoad() {
         img.classList.add('image-loaded');
         img.classList.remove('image-hidden');
-        // fade out skeleton then remove
         skeleton.style.transition = 'opacity 0.45s ease';
         skeleton.style.opacity = '0';
         setTimeout(() => skeleton.remove(), 500);
@@ -835,7 +1546,6 @@ function attachSkeletonToCard(card) {
       });
 
       img.addEventListener('error', function onError() {
-        // remove skeleton even if image fails to avoid permanent overlays
         skeleton.style.transition = 'opacity 0.25s ease';
         skeleton.style.opacity = '0';
         setTimeout(() => skeleton.remove(), 300);
@@ -849,7 +1559,6 @@ function attachSkeletonToCard(card) {
 }
 
 function attachSkeletonToSimpleImage(container, minHeight = 180) {
-  // container is element that contains a single img as background or child
   const img = container.querySelector('img');
   if (!img) return;
   if (container.__skeletonAttached) return;
@@ -863,7 +1572,6 @@ function attachSkeletonToSimpleImage(container, minHeight = 180) {
   sk.style.inset = '0';
   sk.style.zIndex = '2';
 
-  // ensure container is positioned to allow absolute overlay
   const prevPos = getComputedStyle(container).position;
   if (prevPos === 'static') container.style.position = 'relative';
 
@@ -897,7 +1605,6 @@ function attachSkeletonToSimpleImage(container, minHeight = 180) {
   container.__skeletonAttached = true;
 }
 
-// Text skeletons
 function createTextSkeleton(lines = 3) {
   const wrapper = document.createElement('div');
   wrapper.className = 'skeleton skeleton-overlay skeleton-fade';
@@ -909,7 +1616,6 @@ function createTextSkeleton(lines = 3) {
   for (let i = 0; i < lines; i++) {
     const line = document.createElement('div');
     line.className = 'skeleton-line';
-    // vary width for realism
     if (i === 0) line.classList.add('long');
     else if (i === lines - 1) line.classList.add('short');
     else line.classList.add('medium');
@@ -923,14 +1629,10 @@ function createTextSkeleton(lines = 3) {
 function attachSkeletonToTextBlock(el, lines = 3) {
   if (!el || el.__skeletonAttached) return;
 
-  // ensure wrapper for absolute overlay
   el.classList.add('skeleton-wrapper');
   const sk = createTextSkeleton(lines);
-
-  // hide content until revealed
   el.classList.add('content-hidden');
 
-  // insert skeleton overlay
   sk.style.position = 'absolute';
   sk.style.top = 0;
   sk.style.left = 0;
@@ -939,14 +1641,10 @@ function attachSkeletonToTextBlock(el, lines = 3) {
   sk.style.zIndex = 2;
   el.appendChild(sk);
 
-  // Reveal content after microtask or when images inside have loaded
-  // For static text, unhide quickly to avoid long overlays
   requestAnimationFrame(() => {
-    // small delay to allow shimmer to show slightly
     setTimeout(() => {
       el.classList.remove('content-hidden');
       el.classList.add('content-visible');
-      // fade out skeleton
       sk.style.opacity = '0';
       setTimeout(() => sk.remove(), 500);
     }, 300);
@@ -955,13 +1653,10 @@ function attachSkeletonToTextBlock(el, lines = 3) {
   el.__skeletonAttached = true;
 }
 
-// Updated init to attach text skeletons
 function initSkeletonLoaders() {
-  // Menu card skeletons
   const cards = document.querySelectorAll('.food-card');
   cards.forEach((card) => attachSkeletonToCard(card));
 
-  // Large section images: hero, about image, reservation bg
   const largeContainers = [
     document.querySelector('.hero-bg'),
     document.querySelector('.about-image'),
@@ -972,42 +1667,18 @@ function initSkeletonLoaders() {
     if (c) attachSkeletonToSimpleImage(c, 360);
   });
 
-  // Text blocks (about, reservation info, first paragraph areas)
   const textTargets = document.querySelectorAll('.about-content, .reservation-info, .review-form-heading');
   textTargets.forEach((t) => attachSkeletonToTextBlock(t, 3));
 }
 
-// Initialize skeletons once DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  // existing DOMContentLoaded handlers already call init functions earlier,
-  // but ensure skeletons are attached after render
-  initSkeletonLoaders();
-});
-
-const mobileStyle = document.createElement('style');
-mobileStyle.textContent = styleForMobile;
-document.head.appendChild(mobileStyle);
-
-// Automatically update copyright year
-const currentYear = document.getElementById("current-year");
-
-if (currentYear) {
-  currentYear.textContent = new Date().getFullYear();
-}
-
-
-// =============================================
-// PDF MENU DOWNLOAD
-// =============================================
-
-// Load html2pdf library dynamically
+// ── PDF MENU DOWNLOAD ──────────────────────────────────────
 function loadHtml2Pdf() {
   return new Promise((resolve, reject) => {
     if (typeof html2pdf !== 'undefined') {
       resolve();
       return;
     }
-    
+
     const script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
     script.onload = resolve;
@@ -1016,7 +1687,6 @@ function loadHtml2Pdf() {
   });
 }
 
-// Create loading overlay
 function showLoadingOverlay() {
   const overlay = document.createElement('div');
   overlay.className = 'pdf-loading';
@@ -1036,25 +1706,19 @@ function hideLoadingOverlay() {
   }
 }
 
-// Generate PDF Menu
 async function generateMenuPDF() {
   try {
-    // Show loading
     showLoadingOverlay();
-
-    // Load html2pdf library if not loaded
     await loadHtml2Pdf();
 
-    // Get menu items
     const menuItems = document.querySelectorAll('.menu-item:not(.hidden-item)');
-    
+
     if (menuItems.length === 0) {
       alert('No menu items available to download.');
       hideLoadingOverlay();
       return;
     }
 
-    // Build PDF content
     const pdfContent = document.createElement('div');
     pdfContent.style.cssText = `
       padding: 40px;
@@ -1065,7 +1729,6 @@ async function generateMenuPDF() {
       color: #1a1714;
     `;
 
-    // Header
     const header = document.createElement('div');
     header.style.cssText = `
       text-align: center;
@@ -1092,7 +1755,6 @@ async function generateMenuPDF() {
     `;
     pdfContent.appendChild(header);
 
-    // Group items by category
     const categories = {
       breakfast: { title: 'Breakfast', items: [] },
       lunch: { title: 'Lunch', items: [] },
@@ -1105,19 +1767,18 @@ async function generateMenuPDF() {
       const category = item.dataset.category;
       if (categories[category]) {
         const name = item.querySelector('h3')?.textContent || 'Unknown';
-        const price = item.querySelector('.polaroid-price')?.textContent || 
-                      item.querySelector('.menu-price')?.textContent || 
-                      'Price on Request';
+        const price = item.querySelector('.polaroid-price')?.textContent ||
+          item.querySelector('.menu-price')?.textContent ||
+          'Price on Request';
         const diet = item.dataset.diet || 'veg';
-        const description = item.querySelector('.back-content p')?.textContent || 
-                           item.querySelector('.food-content p')?.textContent || 
-                           '';
-        
+        const description = item.querySelector('.back-content p')?.textContent ||
+          item.querySelector('.food-content p')?.textContent ||
+          '';
+
         categories[category].items.push({ name, price, diet, description });
       }
     });
 
-    // Add categories to PDF
     Object.values(categories).forEach((category) => {
       if (category.items.length === 0) return;
 
@@ -1183,7 +1844,6 @@ async function generateMenuPDF() {
         namePrice.appendChild(priceEl);
         card.appendChild(namePrice);
 
-        // Diet tag
         const dietTag = document.createElement('span');
         dietTag.style.cssText = `
           display: inline-block;
@@ -1218,7 +1878,6 @@ async function generateMenuPDF() {
       pdfContent.appendChild(section);
     });
 
-    // Footer
     const footer = document.createElement('div');
     footer.style.cssText = `
       margin-top: 40px;
@@ -1232,39 +1891,36 @@ async function generateMenuPDF() {
       <p>Thank you for dining with us at The Lighthouse</p>
       <p style="margin-top: 5px;">We look forward to serving you!</p>
       <p style="margin-top: 10px; font-size: 11px;">
-        Menu generated on ${new Date().toLocaleDateString('en-US', { 
-          weekday: 'long', 
-          year: 'numeric', 
-          month: 'long', 
-          day: 'numeric' 
+        Menu generated on ${new Date().toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
         })}
       </p>
     `;
     pdfContent.appendChild(footer);
 
-    // Generate PDF
     const opt = {
       margin: [15, 15, 15, 15],
       filename: `The_Lighthouse_Menu_${new Date().toISOString().split('T')[0]}.pdf`,
       image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { 
+      html2canvas: {
         scale: 2,
         useCORS: true,
         letterRendering: true,
         scrollY: 0,
         windowHeight: pdfContent.scrollHeight
       },
-      jsPDF: { 
-        unit: 'mm', 
-        format: 'a4', 
-        orientation: 'portrait' 
+      jsPDF: {
+        unit: 'mm',
+        format: 'a4',
+        orientation: 'portrait'
       },
       pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
     };
 
     await html2pdf().set(opt).from(pdfContent).save();
-
-    // Hide loading
     hideLoadingOverlay();
 
   } catch (error) {
@@ -1274,13 +1930,11 @@ async function generateMenuPDF() {
   }
 }
 
-// ── PDF Download Button ──
-const downloadBtn = document.getElementById('downloadMenuPDF');
 if (downloadBtn) {
   downloadBtn.addEventListener('click', generateMenuPDF);
 }
 
-// ── Also add a floating download button for quick access ──
+// ── Floating PDF Button ──
 const floatingDownloadBtn = document.createElement('button');
 floatingDownloadBtn.id = 'floatingPdfBtn';
 floatingDownloadBtn.innerHTML = '📄 Menu PDF';
@@ -1315,11 +1969,10 @@ floatingDownloadBtn.addEventListener('mouseleave', () => {
 floatingDownloadBtn.addEventListener('click', generateMenuPDF);
 document.body.appendChild(floatingDownloadBtn);
 
-// Show/hide floating button based on scroll position
 window.addEventListener('scroll', () => {
   const menuSection = document.getElementById('menu');
   if (!menuSection) return;
-  
+
   const rect = menuSection.getBoundingClientRect();
   if (rect.top < window.innerHeight && rect.bottom > 0) {
     floatingDownloadBtn.style.display = 'block';
@@ -1328,4 +1981,52 @@ window.addEventListener('scroll', () => {
   }
 });
 
-console.log('PDF Menu Download feature loaded!');
+// ── Copyright year ──
+const currentYearEl = document.getElementById("current-year");
+if (currentYearEl) {
+  currentYearEl.textContent = new Date().getFullYear();
+}
+
+// ── Mobile flip style ──
+const styleForMobile = `
+  @media (max-width: 768px) {
+    .food-card-3d.flipped .food-card-inner {
+      transform: rotateY(180deg) scale(1.01);
+    }
+  }
+`;
+
+const mobileStyle = document.createElement('style');
+mobileStyle.textContent = styleForMobile;
+document.head.appendChild(mobileStyle);
+
+// ── Initialization ──────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function () {
+  // Set initial language
+  const savedLang = localStorage.getItem('lighthouse_lang') || 'en';
+  if (TRANSLATIONS[savedLang]) {
+    currentLanguage = savedLang;
+  }
+  
+  // Update language selectors
+  langSelectors.forEach((sel) => {
+    sel.value = currentLanguage;
+  });
+
+  // Update content
+  updateContent();
+  
+  // Initialize other features
+  handleScroll();
+  setupIntersectionObserver();
+  updateAvailableTimes();
+  handleCardFlip();
+  displayChefsRecommendation();
+  initSkeletonLoaders();
+  
+  // Initial filter trigger
+  setTimeout(triggerFilter, 100);
+
+  console.log('🌍 Current language:', currentLanguage);
+  console.log('🏮 The Lighthouse website initialized successfully!');
+});
