@@ -647,10 +647,287 @@ document.addEventListener("DOMContentLoaded", () => {
     const item = cart.find((cartItem) => cartItem.id === id);
     if (!item) return;
 
+
+  // Large section images: hero, about image, reservation bg
+  const largeContainers = [
+    document.querySelector('.hero-bg'),
+    document.querySelector('.about-image'),
+    document.querySelector('.reservation-bg'),
+  ];
+
+  largeContainers.forEach((c) => {
+    if (c) attachSkeletonToSimpleImage(c, 360);
+  });
+
+  // Text blocks (about, reservation info, first paragraph areas)
+  const textTargets = document.querySelectorAll('.about-content, .reservation-info, .review-form-heading');
+  textTargets.forEach((t) => attachSkeletonToTextBlock(t, 3));
+}
+
+// Initialize skeletons once DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  // existing DOMContentLoaded handlers already call init functions earlier,
+  // but ensure skeletons are attached after render
+  initSkeletonLoaders();
+});
+
+const mobileStyle = document.createElement('style');
+mobileStyle.textContent = styleForMobile;
+document.head.appendChild(mobileStyle);
+
+// Automatically update copyright year
+const currentYear = document.getElementById("current-year");
+
+if (currentYear) {
+  currentYear.textContent = new Date().getFullYear();
+}
+
+// ============= RESERVATION API INTEGRATION =============
+
+class ReservationAPI {
+  constructor() {
+    this.baseURL = 'http://localhost:5000/api';
+    this.token = localStorage.getItem('token');
+  }
+
+  setToken(token) {
+    this.token = token;
+    if (token) {
+      localStorage.setItem('token', token);
+    } else {
+      localStorage.removeItem('token');
+    }
+  }
+
+  getHeaders() {
+    const headers = {
+      'Content-Type': 'application/json'
+    };
+    if (this.token) {
+      headers['Authorization'] = `Bearer ${this.token}`;
+    }
+    return headers;
+  }
+
+  async getAvailableSlots(date, guests) {
+    const response = await fetch(
+      `${this.baseURL}/reservations/slots?date=${date}&guests=${guests}`,
+      { headers: this.getHeaders() }
+    );
+    return response.json();
+  }
+
+  async createReservation(data) {
+    const response = await fetch(`${this.baseURL}/reservations`, {
+      method: 'POST',
+      headers: this.getHeaders(),
+      body: JSON.stringify(data)
+    });
+    return response.json();
+  }
+
+  async getMyReservations() {
+    const response = await fetch(`${this.baseURL}/reservations`, {
+      headers: this.getHeaders()
+    });
+    return response.json();
+  }
+
+  async cancelReservation(id) {
+    const response = await fetch(`${this.baseURL}/reservations/${id}`, {
+      method: 'DELETE',
+      headers: this.getHeaders()
+    });
+    return response.json();
+  }
+
+  async login(email, password) {
+    const response = await fetch(`${this.baseURL}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await response.json();
+    if (data.success && data.token) {
+      this.setToken(data.token);
+    }
+    return data;
+  }
+
+  async register(name, email, password, phone) {
+    const response = await fetch(`${this.baseURL}/auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, password, phone })
+    });
+    const data = await response.json();
+    if (data.success && data.token) {
+      this.setToken(data.token);
+    }
+    return data;
+  }
+}
+
+// Initialize Reservation API
+const reservationAPI = new ReservationAPI();
+
+// ============= UPDATE RESERVATION FORM =============
+
+// Update the existing reservation form submit handler
+const originalReservationSubmit = reservationForm?.onsubmit;
+
+reservationForm.addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  // Check if user is logged in
+  if (!reservationAPI.token) {
+    alert('Please login or register to make a reservation');
+    // Show login modal or redirect to login
+    return;
+  }
+
+  const formData = new FormData(this);
+  const data = {
+    date: formData.get('date'),
+    time: formData.get('time'),
+    guests: formData.get('guests'),
+    specialRequests: formData.get('specialRequests') || ''
+  };
+
+  // Validate
+  if (!data.date || !data.time || !data.guests) {
+    alert('Please fill in all required fields');
+    return;
+  }
+
+  // Show loading state
+  const submitBtn = this.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Booking...';
+  submitBtn.disabled = true;
+
+  try {
+    const result = await reservationAPI.createReservation(data);
+    
+    if (result.success) {
+      alert('✅ Reservation confirmed! Check your email for details.');
+      this.reset();
+    } else {
+      alert('❌ ' + result.error);
+    }
+  } catch (error) {
+    alert('❌ Something went wrong. Please try again.');
+    console.error(error);
+  } finally {
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  }
+});
+
+// ============= ADD REAL-TIME AVAILABILITY =============
+
+// Update time slot dropdown dynamically
+const dateInput = document.querySelector('#reservation input[type="date"]');
+const guestsInput = document.querySelector('#reservation input[type="number"]');
+const timeSelect = document.querySelector('#reservation select');
+
+async function updateAvailableSlots() {
+  const date = dateInput?.value;
+  const guests = guestsInput?.value;
+
+  if (!date || !guests || guests < 1) {
+    return;
+  }
+
+  try {
+    const result = await reservationAPI.getAvailableSlots(date, guests);
+    
+    if (result.success && result.data.slots) {
+      // Clear existing options
+      timeSelect.innerHTML = '<option value="">Select Time</option>';
+      
+      // Add available slots
+      result.data.slots.forEach(slot => {
+        const option = document.createElement('option');
+        option.value = slot.time;
+        option.textContent = slot.time + (slot.available ? ' ✅' : ' ❌');
+        option.disabled = !slot.available;
+        timeSelect.appendChild(option);
+      });
+
+      // Show availability message
+      const availableCount = result.data.slots.filter(s => s.available).length;
+      if (availableCount === 0) {
+        const msg = document.createElement('p');
+        msg.id = 'availability-msg';
+        msg.style.color = '#c9a962';
+        msg.textContent = '⚠️ No tables available for this date and party size';
+        timeSelect.parentNode.appendChild(msg);
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching availability:', error);
+  }
+}
+
+// Add event listeners for real-time availability
+dateInput?.addEventListener('change', updateAvailableSlots);
+guestsInput?.addEventListener('change', updateAvailableSlots);
+
+// ============= AUTO-LOGIN FOR TESTING =============
+
+// Uncomment for testing
+// (async function autoLogin() {
+//   const result = await reservationAPI.login('test@example.com', 'password123');
+//   if (result.success) {
+//     console.log('Auto-login successful');
+//   }
+// })();
+
+
+// =============================================
+// PDF MENU DOWNLOAD
+// =============================================
+
+// Load html2pdf library dynamically
+function loadHtml2Pdf() {
+  return new Promise((resolve, reject) => {
+    if (typeof html2pdf !== 'undefined') {
+      resolve();
+      return;
+    }
+    
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
+// Create loading overlay
+function showLoadingOverlay() {
+  const overlay = document.createElement('div');
+  overlay.className = 'pdf-loading';
+  overlay.id = 'pdfLoading';
+  overlay.innerHTML = `
+    <div class="spinner"></div>
+    <p>Generating your menu PDF...</p>
+    <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-top: 10px;">Please wait</p>
+  `;
+  document.body.appendChild(overlay);
+}
+
+function hideLoadingOverlay() {
+  const overlay = document.getElementById('pdfLoading');
+  if (overlay) {
+    overlay.remove();
+
     item.qty += delta;
     cart = cart.filter((cartItem) => cartItem.qty > 0);
     saveStoredList("lighthouse_cart", cart);
     renderOrderState();
+
   }
 
   function toggleFavorite(item) {
@@ -723,3 +1000,8 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo({ top: 0, behavior: prefersReduced ? "auto" : "smooth" });
   });
 });
+
+
+console.log('PDF Menu Download feature loaded!');
+
+
